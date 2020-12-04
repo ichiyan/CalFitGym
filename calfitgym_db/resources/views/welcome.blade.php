@@ -31,6 +31,6 @@
                 </div>
             @endif
         </div>
-        <h1>BONA HALOOO </h1>
+        <h1>BONA was here EHE </h1>
     </body>
 </html>
