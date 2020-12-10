@@ -2,7 +2,7 @@
     <div class="card text-white bg-gradient-danger">
         <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
             <div>
-                <div class="text-value-lg">9.823</div>
+                <div class="text-value-lg">3213</div>
                 <div>BONA WAS HERE EHE</div>
             </div>
         </div>
