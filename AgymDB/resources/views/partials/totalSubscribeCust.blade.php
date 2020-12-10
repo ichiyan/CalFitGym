@@ -16,7 +16,6 @@
                     <div class=""></div>
                 </div>
             </div>
-            <canvas class="chart chartjs-render-monitor" id="card-chart3" height="70" width="236" style="display: block; width: 236px; height: 70px;"></canvas>
         </div>
     </div>
 </div>
