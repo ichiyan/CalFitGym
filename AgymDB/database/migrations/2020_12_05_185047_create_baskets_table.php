@@ -17,10 +17,10 @@ class CreateBasketsTable extends Migration
             $table->id('basketID');
             $table->integer('quantity');
             $table->foreignId('orderID');
-            $table->foreignId('itemID');
-            $table->foreignId('batchID');
-            $table->foreignId('customizeID');
-            $table->foreignId('membershipID');
+            $table->foreignId('itemID')->nullable();
+            $table->foreignId('batchID')->nullable();
+            $table->foreignId('customizeID')->nullable();
+            $table->foreignId('membershipID')->nullable();
         });
     }
 

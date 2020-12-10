@@ -16,7 +16,7 @@ class CreateEntryLogsTable extends Migration
         Schema::create('entry_logs', function (Blueprint $table) {
             $table->id('logID');
             $table->dateTime('entry');
-            $table->dateTime('exit');
+            $table->dateTime('exit')->nullable()->default(null);
             $table->foreignId('personID');
             $table->foreignId('loggerID');
         });

@@ -16,11 +16,11 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id('customerID');
             $table->timestamps();
-            $table->string('emergencyContactName', 50);
-            $table->integer('emergencyContactNumber');
-            $table->integer('height');
-            $table->integer('weight');
-            $table->string('preExistingConditions', 200);
+            $table->string('emergencyContactName', 50)->nullable();
+            $table->integer('emergencyContactNumber')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('weight')->nullable();
+            $table->string('preExistingConditions', 200)->nullable();
             $table->foreignId('memberTypeID');
             $table->foreignId('assignedEmployeeID');
             $table->foreignId('personID');

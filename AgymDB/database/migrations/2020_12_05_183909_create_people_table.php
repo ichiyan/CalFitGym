@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use  Illuminate\Database\QueryException ;
 
 class CreatePeopleTable extends Migration
 {
@@ -18,15 +19,16 @@ class CreatePeopleTable extends Migration
             $table->timestamps();
             $table->string('fname', 30);
             $table->string('lname', 30);
-            $table->date('birthday');
-            $table->string('streetAddress', 50);
-            $table->string('city', 20);
-            $table->string('emailAddress', 50);
-            $table->integer('phoneNumber');
+            $table->date('birthday')->nullable();
+            $table->string('streetAddress', 50)->nullable();
+            $table->string('city', 20)->nullable();
+            $table->string('emailAddress', 50)->nullable();
+            $table->integer('phoneNumber')->nullable();
             $table->string('username', 50);
             $table->string('password', 50);
             $table->enum('userType', ['admin', 'employee', 'customer']);
-            $table->string('photo', 50);
+            $table->string('photo', 50)->nullable();
+            $table->foreignId('userID');
         });
     }
 
