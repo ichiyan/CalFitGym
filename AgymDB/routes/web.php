@@ -15,7 +15,7 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -27,7 +27,7 @@ Route::get('/admin/home', function(){
 });
 
 //Route::resource('/admin/employeeList', EmployeeController::class);
-Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll']);
+Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
 //Route::get('/admin/employeeList/{$id}', [App\Http\Controllers\EmployeeController::class, show($id)]);
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
@@ -44,5 +44,13 @@ Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\Employe
 Route::get('/admin/customerList/premium', [App\Http\Controllers\EmployeeController::class, 'showPremium']);
 Route::get('/admin/customerList/premium/active', [App\Http\Controllers\EmployeeController::class, 'showPremiumA']);
 Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\EmployeeController::class, 'showPremiumI']);
+
+Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'show']);
+
+Route::get('/admin/order', [App\Http\Controllers\OrderController::class, 'show']);
+
+Route::get('/admin/rates', [App\Http\Controllers\MemberTypeController::class, 'show']);
+
+Route::get('/admin/events', [App\Http\Controllers\EventController::class, 'show']);
 
 ?>

@@ -12,7 +12,7 @@
  </head>
  <body class="c-app">
 
- @include('partials.menu')
+ @include('partials.adminmenu')
  
 <div class="c-wrapper">
     <header class="c-header c-header-light c-header-fixed">

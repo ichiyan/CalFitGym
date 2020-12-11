@@ -43,6 +43,29 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+        $person = new person;
+
+        $person->fname = $fname;
+        $person->lname = $lname;
+        $person->birthday = $bday;
+        $person->streetAddress = $streetAddress;
+        $person->city = $city;
+        $person->emailAddress = $emailAddress;
+        $person->phoneNumber = $phoneNumber;
+        $person->username = $username;
+        $person->password = $password;
+        $person->userType = 'employee';
+        $person->photo = $photo;
+        $person->save();
+
+        
+        $employee = new employee;
+
+        $employee->employeeID = $person->$personID;
+        $employee->dateHired = now();
+        $employee->monthlySalary = $salary;
+        $employee->save();
+
         return 'creating part';
     }
 
