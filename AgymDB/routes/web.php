@@ -15,7 +15,7 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return view('admin.home');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -50,12 +50,12 @@ Route::get('/admin/customerList/premium', [App\Http\Controllers\CustomerControll
 Route::get('/admin/customerList/premium/active', [App\Http\Controllers\CustomerController::class, 'showPremiumA']);
 Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\CustomerController::class, 'showPremiumI']);
 
-Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'show']);
+Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
 
-Route::get('/admin/order', [App\Http\Controllers\OrderController::class, 'show']);
+Route::get('/admin/order', [App\Http\Controllers\OrderController::class, 'showAll']);
 
-Route::get('/admin/rates', [App\Http\Controllers\MemberTypeController::class, 'show']);
+Route::get('/admin/rates', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 
-Route::get('/admin/events', [App\Http\Controllers\EventController::class, 'show']);
+Route::get('/admin/events', [App\Http\Controllers\EventController::class, 'showAll']);
 
 ?>

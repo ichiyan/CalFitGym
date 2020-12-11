@@ -48,6 +48,12 @@ class EventController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        //
+        return view('admin.events');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

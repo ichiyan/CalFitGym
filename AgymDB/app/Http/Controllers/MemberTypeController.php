@@ -48,6 +48,12 @@ class MemberTypeController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        //
+        return view('admin.rates');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

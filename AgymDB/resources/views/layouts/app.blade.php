@@ -13,7 +13,7 @@
  <body class="c-app">
 
  @yield('menu')
- 
+
 <div class="c-wrapper">
     <header class="c-header c-header-light c-header-fixed">
 

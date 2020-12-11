@@ -48,6 +48,12 @@ class OrderController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        //
+        return view('admin.orderList');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

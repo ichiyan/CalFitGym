@@ -76,6 +76,10 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
+            <!-- space to separate Logout from other menu items -->
+            <p class="c-sidebar-nav-link"></p>
+        </li>
+        <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">

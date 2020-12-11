@@ -48,6 +48,12 @@ class InventoryLogController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        //
+        return view('admin.inventory');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
