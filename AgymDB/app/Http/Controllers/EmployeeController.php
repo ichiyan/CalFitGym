@@ -31,7 +31,7 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employeeList', compact('employees', 'bday', 'count'));
+        return view('admin.employeeList', compact('employees', 'bday', 'count'));
         
     }
 
@@ -58,7 +58,7 @@ class EmployeeController extends Controller
         $person->photo = $photo;
         $person->save();
 
-        
+
         $employee = new employee;
 
         $employee->employeeID = $person->$personID;
@@ -98,7 +98,7 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employeeList', compact('employees', 'bday'));
+        return view('admin.employeeList', compact('employees', 'bday'));
     }
 
 
@@ -116,7 +116,7 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employeeList', compact('employees', 'bday', 'count'));
+        return view('admin.employeeList', compact('employees', 'bday', 'count'));
     }
 
 
@@ -136,7 +136,7 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employeeList', compact('employees', 'bday', 'count'));
+        return view('admin.employeeList', compact('employees', 'bday', 'count'));
     }
 
 
@@ -156,7 +156,7 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employeeList', compact('employees', 'bday', 'count'));
+        return view('admin.employeeList', compact('employees', 'bday', 'count'));
     }
 
     /**

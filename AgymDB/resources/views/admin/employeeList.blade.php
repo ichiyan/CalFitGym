@@ -1,22 +1,33 @@
 @extends('layouts.app')
 
+@section('menu')
+    @include('admin.adminmenu')
+@endsection
+
 @section('content')
 <div class="card">
-    <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="card-header">{{ __('EMPLOYEES') }}</div>
     <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">
                 <div class="fade-in">
                     <div class="card">
                         <div class="card-header">
-                            <a href='/admin/employeeList'>All</a>
-                            <a href='/admin/employeeList/current'>Current</a>
-                            <a href='/admin/employeeList/previous'>Previous</a>
-                             <form>
-                                <div>
-                                    <label>Search: <input type="text" name="search" placeholder="find employee name"></label>
-                                </div>
+                            <form>
+                                <label>Search: <input type="text" name="search" placeholder="find employee name"></label>
                             </form>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href='/admin/employeeList'>All</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='/admin/employeeList/current'>Current</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='/admin/employeeList/previous'>Previous</a>
+                                </li>
+                            </ul>
+                             
                         </div>
                         <div class="card-header">
                             No. of Employees:  {{$count}}

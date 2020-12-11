@@ -4,7 +4,7 @@
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/">
+            <a class="c-sidebar-nav-link" href="/home">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/home">
+            <a class="c-sidebar-nav-link" href="/dashboard">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>

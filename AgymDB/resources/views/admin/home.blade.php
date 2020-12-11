@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-
+@section('menu')
+    @include('admin.adminmenu')
+@endsection
 
 @section('content')
 <div class="card">
-    <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="card-header">{{ __('HOME') }}</div>
     <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">

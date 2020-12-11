@@ -15,15 +15,19 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('admin.home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/home', function(){
-    return view('home');
+Route::get('/home', function(){
+    return view('admin.home');
+});
+
+Route::get('/dashboard', function(){
+    return view('admin.dashboard');
 });
 
 //Route::resource('/admin/employeeList', EmployeeController::class);
@@ -34,16 +38,17 @@ Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeControl
 Route::get('/admin/employeeList/create', [App\Http\Controllers\EmployeeController::class, 'create']);
 
 
-Route::resource('/admin/customerList', CustomerController::class);
-Route::get('/admin/customerList/walk_in', [App\Http\Controllers\EmployeeController::class, 'showWalk_in']);
-Route::get('/admin/customerList/walk_in/active', [App\Http\Controllers\EmployeeController::class, 'showWalk_inA']);
-Route::get('/admin/customerList/walk_in/inactive', [App\Http\Controllers\EmployeeController::class, 'showWalk_inI']);
-Route::get('/admin/customerList/monthly', [App\Http\Controllers\EmployeeController::class, 'showMonthly']);
-Route::get('/admin/customerList/monthly/active', [App\Http\Controllers\EmployeeController::class, 'showMonthlyA']);
-Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\EmployeeController::class, 'showMonthlyI']);
-Route::get('/admin/customerList/premium', [App\Http\Controllers\EmployeeController::class, 'showPremium']);
-Route::get('/admin/customerList/premium/active', [App\Http\Controllers\EmployeeController::class, 'showPremiumA']);
-Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\EmployeeController::class, 'showPremiumI']);
+//Route::resource('/admin/customerList', CustomerController::class);
+Route::get('/admin/customerList/', [App\Http\Controllers\CustomerController::class, 'showAll']);
+Route::get('/admin/customerList/walk_in', [App\Http\Controllers\CustomerController::class, 'showWalk_in']);
+Route::get('/admin/customerList/walk_in/active', [App\Http\Controllers\CustomerController::class, 'showWalk_inA']);
+Route::get('/admin/customerList/walk_in/inactive', [App\Http\Controllers\CustomerController::class, 'showWalk_inI']);
+Route::get('/admin/customerList/monthly', [App\Http\Controllers\CustomerController::class, 'showMonthly']);
+Route::get('/admin/customerList/monthly/active', [App\Http\Controllers\CustomerController::class, 'showMonthlyA']);
+Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\CustomerController::class, 'showMonthlyI']);
+Route::get('/admin/customerList/premium', [App\Http\Controllers\CustomerController::class, 'showPremium']);
+Route::get('/admin/customerList/premium/active', [App\Http\Controllers\CustomerController::class, 'showPremiumA']);
+Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\CustomerController::class, 'showPremiumI']);
 
 Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'show']);
 

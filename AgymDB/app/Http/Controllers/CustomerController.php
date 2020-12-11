@@ -46,6 +46,67 @@ class CustomerController extends Controller
     public function show($id)
     {
         //
+        return view('admin.customerList');
+    }
+
+    public function showAll()
+    {
+        //
+        return view('admin.customerList');
+    }
+
+    public function showWalk_in()
+    {
+        //
+        return view('admin.walkinCustomerList');
+    }
+
+    public function showWalk_inA()
+    {
+        //
+        return view('admin.walkinCustomerList');
+    }
+
+    public function showWalk_inI()
+    {
+        //
+        return view('admin.walkinCustomerList');
+    }
+
+    public function showMonthly()
+    {
+        //
+        return view('admin.monthlyCustomerList');
+    }
+
+    public function showMonthlyA()
+    {
+        //
+        return view('admin.monthlyCustomerList');
+    }
+
+    public function showMonthlyI()
+    {
+        //
+        return view('admin.monthlyCustomerList');
+    }
+
+    public function showPremium()
+    {
+        //
+        return view('admin.premiumCustomerList');
+    }
+
+    public function showPremiumA()
+    {
+        //
+        return view('admin.premiumCustomerList');
+    }
+
+    public function showPremiumI()
+    {
+        //
+        return view('admin.premiumCustomerList');
     }
 
     /**
