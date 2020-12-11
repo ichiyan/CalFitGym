@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class batch extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'batchID';
 }

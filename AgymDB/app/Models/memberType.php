@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class memberType extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'memberTypeID';
 }

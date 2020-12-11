@@ -28,6 +28,7 @@ Route::get('/admin/home', function(){
 
 //Route::resource('/admin/employeeList', EmployeeController::class);
 Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll']);
+//Route::get('/admin/employeeList/{$id}', [App\Http\Controllers\EmployeeController::class, show($id)]);
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
 Route::get('/admin/employeeList/create', [App\Http\Controllers\EmployeeController::class, 'create']);

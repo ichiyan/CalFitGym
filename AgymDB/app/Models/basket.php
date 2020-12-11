@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class basket extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'basketID';
 }

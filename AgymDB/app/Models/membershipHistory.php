@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class membershipHistory extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'membershipHistoryID';
 }

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class customize extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'customizeID';
 }

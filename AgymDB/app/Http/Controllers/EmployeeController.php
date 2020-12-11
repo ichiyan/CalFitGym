@@ -23,12 +23,15 @@ class EmployeeController extends Controller
                         ->leftJoin('people', 'employees.employeeID', '=', 'people.personID')
                         ->get();
 
+        $count = DB::table('employees')
+                        ->count();
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employee', compact('employees', 'bday'));
+        return view('employeeList', compact('employees', 'bday', 'count'));
         
     }
 
@@ -65,13 +68,14 @@ class EmployeeController extends Controller
         //
         $employees = DB::table('employees')
                         ->leftJoin('people', 'employees.employeeID', '=', 'people.personID')
+                        ->where('employeeID', $id)
                         ->get();
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employee', compact('employees', 'bday'));
+        return view('employeeList', compact('employees', 'bday'));
     }
 
 
@@ -81,12 +85,15 @@ class EmployeeController extends Controller
                         ->join('people', 'employees.employeeID', '=', 'people.personID')
                         ->get();
 
+        $count = DB::table('employees')
+                        ->count();
+        
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employee', compact('employees', 'bday'));
+        return view('employeeList', compact('employees', 'bday', 'count'));
     }
 
 
@@ -97,12 +104,16 @@ class EmployeeController extends Controller
                         ->whereNull('dateSeparated')
                         ->get();
 
+        $count = DB::table('employees')
+                        ->whereNull('dateSeparated')
+                        ->count();
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employee', compact('employees', 'bday'));
+        return view('employeeList', compact('employees', 'bday', 'count'));
     }
 
 
@@ -112,12 +123,17 @@ class EmployeeController extends Controller
                         ->join('people', 'employees.employeeID', '=', 'people.personID')
                         ->whereNotNull('dateSeparated')
                         ->get();
+
+        $count = DB::table('employees')
+                        ->whereNotNull('dateSeparated')
+                        ->count();
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('employee', compact('employees', 'bday'));
+        return view('employeeList', compact('employees', 'bday', 'count'));
     }
 
     /**

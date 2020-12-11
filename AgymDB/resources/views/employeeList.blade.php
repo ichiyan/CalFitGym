@@ -15,8 +15,10 @@
 			<label>Search: <input type="text" name="search" placeholder="find employee name"></label>
 		</div>
     </form>
+    <div> No. of Employees:  {{$count}} </div>
     <table class='employeeList'>
         <tr>
+            <td>#</td>
             <td>Name</td>
             <td>Age</td>
             <td>Address</td>
@@ -28,6 +30,7 @@
         </tr>        
         @forEach ($employees as $value => $employee)
             <tr>
+                <td> {{$employee->employeeID}} </td>
                 <td> {{$employee->fname}}   {{$employee->lname}} </td>
                 <td> {{$bday[$value]}} </td>
                 <td> {{$employee->streetAddress}} ,  {{$employee->city}}  City </td>
