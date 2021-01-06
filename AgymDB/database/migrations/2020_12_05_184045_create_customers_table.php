@@ -14,16 +14,14 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id('customerID');
+            $table->id();
             $table->timestamps();
-            $table->string('emergencyContactName', 50)->nullable();
-            $table->integer('emergencyContactNumber')->nullable();
             $table->integer('height')->nullable();
             $table->integer('weight')->nullable();
-            $table->string('preExistingConditions', 200)->nullable();
-            $table->foreignId('memberTypeID');
-            $table->foreignId('assignedEmployeeID');
-            $table->foreignId('personID');
+            $table->string('pre_existing_conditions', 200)->nullable();
+            $table->foreignId('member_type_id');
+            $table->foreignId('assigned_employee_id');
+            $table->foreignId('person_id');
         });
     }
 

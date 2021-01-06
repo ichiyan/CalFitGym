@@ -15,20 +15,20 @@ class CreatePeopleTable extends Migration
     public function up()
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->id('personID');
+            $table->id();
             $table->timestamps();
             $table->string('fname', 30);
             $table->string('lname', 30);
             $table->date('birthday')->nullable();
-            $table->string('streetAddress', 50)->nullable();
+            $table->string('street_address', 50)->nullable();
             $table->string('city', 20)->nullable();
-            $table->string('emailAddress', 50)->nullable();
-            $table->integer('phoneNumber')->nullable();
-            $table->string('username', 50);
-            $table->string('password', 50);
-            $table->enum('userType', ['admin', 'employee', 'customer']);
+            $table->string('email_address', 50)->nullable();
+            $table->integer('phone_number')->nullable();
+            $table->string('emergency_contact_name', 50)->nullable();
+            $table->integer('emergency_contact_number')->nullable();
+            $table->string('emergency_contact_relationship', 50)->nullable();
             $table->string('photo', 50)->nullable();
-            $table->foreignId('userID');
+            $table->foreignId('user_id');
         });
     }
 

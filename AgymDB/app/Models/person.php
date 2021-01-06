@@ -5,9 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class person extends Model
+class Person extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'personID';
+    protected $fillable = [
+        'fname',
+        'lname', 
+        'birthday', 
+        'street_address', 
+        'city', 
+        'email_address', 
+        'phone_number', 
+        'emergency_contact_name', 
+        'emergency_contact_number', 
+        'emergency_contact_relationship', 
+        'photo', 
+        'user_id'
+    ];
 }

@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class inventoryLog extends Model
+class InventoryLog extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'inventoryLogID';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'checking_date', 'amount_left', 'amount_sold', 'item_id'
+    ];
 }

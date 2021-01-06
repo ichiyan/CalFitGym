@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class remark extends Model
+class Remark extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'remarkID';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'content', 'remark_date', 'employee_id', 'customer_id'
+    ];
 }

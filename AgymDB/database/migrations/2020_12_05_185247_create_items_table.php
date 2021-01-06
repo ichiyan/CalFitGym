@@ -14,11 +14,11 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id('itemID');
-            $table->string('itemName', 100);
+            $table->id();
+            $table->string('item_name', 100);
             $table->integer('price');
             $table->string('description', 200);
-            $table->string('itemPic', 100);
+            $table->string('item_pic', 100);
         });
     }
 

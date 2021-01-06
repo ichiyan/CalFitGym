@@ -14,9 +14,9 @@ class CreateMemberTypesTable extends Migration
     public function up()
     {
         Schema::create('member_types', function (Blueprint $table) {
-            $table->id('memberTypeID');
-            $table->string('memberTypeName', 20);
-            $table->integer('memPrice');
+            $table->id();
+            $table->string('member_type_name', 20);
+            $table->integer('member_type_price');
         });
     }
 

@@ -14,11 +14,11 @@ class CreateEntryLogsTable extends Migration
     public function up()
     {
         Schema::create('entry_logs', function (Blueprint $table) {
-            $table->id('logID');
+            $table->id();
             $table->dateTime('entry');
             $table->dateTime('exit')->nullable()->default(null);
-            $table->foreignId('personID');
-            $table->foreignId('loggerID');
+            $table->foreignId('person_id');
+            $table->foreignId('logger_id');
         });
     }
 

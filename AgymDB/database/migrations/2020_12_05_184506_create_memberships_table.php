@@ -14,10 +14,10 @@ class CreateMembershipsTable extends Migration
     public function up()
     {
         Schema::create('memberships', function (Blueprint $table) {
-            $table->id('membershipID');
-            $table->foreignId('memberTypeID');
-            $table->foreignId('membershipHistoryID');
-            $table->foreignId('orderID');
+            $table->id();
+            $table->foreignId('member_type_id');
+            $table->foreignId('membership_history_id');
+            $table->foreignId('order_id');
         });
     }
 

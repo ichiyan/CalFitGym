@@ -16,9 +16,9 @@ class CreateRemarksTable extends Migration
         Schema::create('remarks', function (Blueprint $table) {
             $table->id();
             $table->string('content', 500);
-            $table->dateTime('remarkDate');
-            $table->foreignId('employeeID');
-            $table->foreignId('customerID');
+            $table->dateTime('remark_date');
+            $table->foreignId('employee_id');
+            $table->foreignId('customer_id');
         });
     }
 

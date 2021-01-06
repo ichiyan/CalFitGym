@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class batch extends Model
+class Batch extends Model
 {
     use HasFactory;
+    
+    public $timestamps = false;
 
-    protected $primaryKey = 'batchID';
+    protected $fillable = [
+        'batch_amount', 'amt_left_batch', 'expiry_date', 'date_received', 'item_id', 'employee_id'
+    ];
 }

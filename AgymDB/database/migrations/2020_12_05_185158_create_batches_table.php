@@ -14,13 +14,13 @@ class CreateBatchesTable extends Migration
     public function up()
     {
         Schema::create('batches', function (Blueprint $table) {
-            $table->id('batchID');
-            $table->integer('batchAmount');
-            $table->integer('amtLeftBatch');
-            $table->dateTime('expiryDate')->nullable();
-            $table->dateTime('dateReceived');
-            $table->foreignId('itemID');
-            $table->foreignId('employeeID');
+            $table->id();
+            $table->integer('batch_amount');
+            $table->integer('amt_left_batch');
+            $table->dateTime('expiry_date')->nullable();
+            $table->dateTime('date_received');
+            $table->foreignId('item_id');
+            $table->foreignId('employee_id');
         });
     }
 

@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class employee extends Model
+class Employee extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'employeeID';
+    protected $fillable = [
+        'id', 'date_hired', 'date_separated', 'monthly_salary', 'no_of_trainees', 'person_id'
+    ];
 }

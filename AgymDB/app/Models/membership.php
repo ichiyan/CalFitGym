@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class membership extends Model
+class Membership extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'membershipID';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'member_type_id', 'membership_history_id', 'order_id'
+    ];
 }

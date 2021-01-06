@@ -1,8 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
+use Illuminate\Support\Facades\DB;
 
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomizeController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EntryLogController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\InventoryLogController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\MembershipHistoryController;
+use App\Http\Controllers\MemberTypeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RemarkController;
+use App\Http\Controllers\HomeController;
+
+use App\Models\Basket;
+use App\Models\Batch;
+use App\Models\Customer;
+use App\Models\Customize;
+use App\Models\Employee;
+use App\Models\EntryLog;
+use App\Models\Event;
+use App\Models\InventoryLog;
+use App\Models\Item;
+use App\Models\Membership;
+use App\Models\MembershipHistory;
+use App\Models\MemberType;
+use App\Models\Order;
+use App\Models\Person;
+use App\Models\Remark;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +65,23 @@ Route::get('/dashboard', function(){
 
 //Route::resource('/admin/employeeList', EmployeeController::class);
 Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
-//Route::get('/admin/employeeList/{$id}', [App\Http\Controllers\EmployeeController::class, show($id)]);
+Route::get('/admin/employeeList/{id}', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
-Route::get('/admin/employeeList/create', [App\Http\Controllers\EmployeeController::class, 'create']);
+Route::get('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
+Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit']);
+Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
+Route::delete('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
+Route::get('/new/form', function(){
+    $user_id = DB::table('users')->orderBy("id", "desc")->first()->id;
+    $user = User::findOrFail($user_id);
+
+    if($user->user_type == 3){
+        return view('admin.newCustomerForm', compact('user'));
+    } else {
+        return view('admin.newEmployeeForm', compact('user'));
+    }
+})->name('form');
 
 
 //Route::resource('/admin/customerList', CustomerController::class);
@@ -49,6 +95,10 @@ Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\Custome
 Route::get('/admin/customerList/premium', [App\Http\Controllers\CustomerController::class, 'showPremium']);
 Route::get('/admin/customerList/premium/active', [App\Http\Controllers\CustomerController::class, 'showPremiumA']);
 Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\CustomerController::class, 'showPremiumI']);
+Route::get('/admin/customer/{id}', [App\Http\Controllers\CustomerController::class, 'show']);
+Route::get('/admin/customer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit']);
+Route::put('/admin/customer/{id}/update', [App\Http\Controllers\CustomerController::class, 'update']);
+Route::delete('/admin/customer/{id}/delete', [App\Http\Controllers\CustomerController::class, 'destroy']);
 
 Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
 

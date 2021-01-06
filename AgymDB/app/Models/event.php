@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class event extends Model
+class Event extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'eventID';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'event_name', 'event_pic', 'date_posted', 'event_start', 'event_end', 'event_def'
+    ];
 }

@@ -14,10 +14,10 @@ class CreateMembershipHistoriesTable extends Migration
     public function up()
     {
         Schema::create('membership_histories', function (Blueprint $table) {
-            $table->id('membershipHistoryID');
-            $table->dateTime('startDate');
-            $table->dateTime('endDate');
-            $table->foreignId('customerID');
+            $table->id();
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->foreignId('customer_id');
         });
     }
 

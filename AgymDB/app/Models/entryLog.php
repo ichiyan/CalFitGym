@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class entryLog extends Model
+class EntryLog extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'entryLogID';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'entry', 'exit', 'person_id', 'logger_id'
+    ];
 }

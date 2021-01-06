@@ -14,13 +14,13 @@ class CreateBasketsTable extends Migration
     public function up()
     {
         Schema::create('baskets', function (Blueprint $table) {
-            $table->id('basketID');
+            $table->id();
             $table->integer('quantity');
-            $table->foreignId('orderID');
-            $table->foreignId('itemID')->nullable();
-            $table->foreignId('batchID')->nullable();
-            $table->foreignId('customizeID')->nullable();
-            $table->foreignId('membershipID')->nullable();
+            $table->foreignId('order_id');
+            $table->foreignId('item_id')->nullable();
+            $table->foreignId('batch_id')->nullable();
+            $table->foreignId('customize_id')->nullable();
+            $table->foreignId('membership_id')->nullable();
         });
     }
 

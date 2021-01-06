@@ -14,11 +14,11 @@ class CreateInventoryLogsTable extends Migration
     public function up()
     {
         Schema::create('inventory_logs', function (Blueprint $table) {
-            $table->id('inventoryLogID');
-            $table->dateTime('checkingDate');
-            $table->integer('amountLeft');
-            $table->integer('amountSold');
-            $table->foreignId('itemID');
+            $table->id();
+            $table->dateTime('checking_date');
+            $table->integer('amount_left');
+            $table->integer('amount_sold');
+            $table->foreignId('item_id');
         });
     }
 

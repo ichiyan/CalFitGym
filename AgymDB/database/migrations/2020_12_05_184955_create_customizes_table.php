@@ -14,7 +14,7 @@ class CreateCustomizesTable extends Migration
     public function up()
     {
         Schema::create('customizes', function (Blueprint $table) {
-            $table->id('customizeID');
+            $table->id();
             $table->string('color', 20);
             $table->string('message', 200);
         });
