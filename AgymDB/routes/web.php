@@ -65,14 +65,14 @@ Route::get('/dashboard', function(){
 
 //Route::resource('/admin/employeeList', EmployeeController::class);
 Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
-Route::get('/admin/employeeList/{id}', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
+Route::get('/admin/employee/{id}/detail', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
 Route::get('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
 Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit']);
 Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
 Route::delete('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
-Route::get('/new/form', function(){
+Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
     $user_id = DB::table('users')->orderBy("id", "desc")->first()->id;
     $user = User::findOrFail($user_id);
 
@@ -95,14 +95,23 @@ Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\Custome
 Route::get('/admin/customerList/premium', [App\Http\Controllers\CustomerController::class, 'showPremium']);
 Route::get('/admin/customerList/premium/active', [App\Http\Controllers\CustomerController::class, 'showPremiumA']);
 Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\CustomerController::class, 'showPremiumI']);
-Route::get('/admin/customer/{id}', [App\Http\Controllers\CustomerController::class, 'show']);
+Route::get('/admin/customer/{id}/detail', [App\Http\Controllers\CustomerController::class, 'show']);
+Route::get('/admin/customer/create', [App\Http\Controllers\CustomerController::class, 'create']);
 Route::get('/admin/customer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit']);
 Route::put('/admin/customer/{id}/update', [App\Http\Controllers\CustomerController::class, 'update']);
 Route::delete('/admin/customer/{id}/delete', [App\Http\Controllers\CustomerController::class, 'destroy']);
 
-Route::get('/admin/inventory', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
+Route::get('/admin/inventoryList', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
+Route::get('/admin/inventory/create', [App\Http\Controllers\InventoryLogController::class, 'create']);
+Route::get('/admin/inventory/{id}/edit', [App\Http\Controllers\InventoryLogController::class, 'edit']);
+Route::put('/admin/inventory/{id}/update', [App\Http\Controllers\InventoryLogController::class, 'update']);
+Route::delete('/admin/inventory/{id}/delete', [App\Http\Controllers\InventoryLogController::class, 'destroy']);
 
-Route::get('/admin/order', [App\Http\Controllers\OrderController::class, 'showAll']);
+Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'showAll']);
+Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
+Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
+Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
+Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
 
 Route::get('/admin/rates', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 

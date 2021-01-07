@@ -84,13 +84,16 @@ class EmployeeController extends Controller
     public function show($id)
     {
         //
-        $employee = DB::table('employees')
+        $employees = DB::table('employees')
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
                         ->get();
         $count = 1;
 
-        $bday = Carbon::parse($employee->birthday)->age;
+        $bday = array();
+        foreach ($employees as $value => $employee) {
+            $bday[$value] = Carbon::parse($employee->birthday)->age;
+        }
         
         return view('admin.employeeDetail', compact('employees', 'bday', 'count'));
     }
