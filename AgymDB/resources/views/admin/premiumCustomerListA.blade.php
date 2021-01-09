@@ -60,17 +60,14 @@
                                 <td class="text-center">Action</td>
                             </tr>        
                             @forEach ($customers as $value => $customer)
+                                @if($membershipStatus[$value] == 'ACTIVE')
                                 <tr>
                                     <td>
-                                        @if($membershipStatus[$value] == 'ACTIVE')
-                                            @if($log[$value]->exit == NULL)
-                                                <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
-                                            @else
-                                                <a href="/admin/log/{{$customer->id}}/create"><span class="dot" style='background-color: red;'></span></a>
-                                            @endif
+                                        @if($log[$value]->exit == NULL)
+                                            <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
                                         @else
-                                            <span class="dot" style='background-color: gray;'></span>
-                                        @endif                                        
+                                            <a href="/admin/log/{{$customer->id}}/create"><span class="dot" style='background-color: red;'></span></a>
+                                        @endif
                                     </td>
 
                                     <td> {{$customer->id}} </td>
@@ -87,6 +84,7 @@
                                         <button><a href="{{route('customerDetail', $customer->id)}}">Details</a></button>
                                     </td>
                                 </tr>
+                                @endif  
                             @endforeach
                         </table>
                     </div>

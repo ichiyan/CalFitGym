@@ -19,8 +19,8 @@ class CreateCustomersTable extends Migration
             $table->integer('height')->nullable();
             $table->integer('weight')->nullable();
             $table->string('pre_existing_conditions', 200)->nullable();
-            $table->foreignId('member_type_id');
-            $table->foreignId('assigned_employee_id');
+            $table->foreignId('member_type_id')->default(0);
+            $table->foreignId('assigned_employee_id')->default(0);
             $table->foreignId('person_id');
         });
     }

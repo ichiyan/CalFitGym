@@ -23,13 +23,13 @@
                             </button>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href='/admin/employeeList'>All</a>
+                                    <a class="nav-link @if($active == 'all') active @endif" href='/admin/employeeList'>All</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/employeeList/current'>Current</a>
+                                    <a class="nav-link @if($active == 'current') active @endif" href='/admin/employeeList/current'>Current</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/employeeList/previous'>Previous</a>
+                                    <a class="nav-link @if($active == 'previous') active @endif" href='/admin/employeeList/previous'>Previous</a>
                                 </li>
                             </ul>
                              

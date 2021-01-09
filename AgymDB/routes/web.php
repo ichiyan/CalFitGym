@@ -86,20 +86,16 @@ Route::get('/new/form', function(){ //after submitting the registration, this re
 
 //Route::resource('/admin/customerList', CustomerController::class);
 Route::get('/admin/customerList/', [App\Http\Controllers\CustomerController::class, 'showAll']);
-Route::get('/admin/customerList/walk_in', [App\Http\Controllers\CustomerController::class, 'showWalk_in']);
-Route::get('/admin/customerList/walk_in/active', [App\Http\Controllers\CustomerController::class, 'showWalk_inA']);
-Route::get('/admin/customerList/walk_in/inactive', [App\Http\Controllers\CustomerController::class, 'showWalk_inI']);
-Route::get('/admin/customerList/monthly', [App\Http\Controllers\CustomerController::class, 'showMonthly']);
-Route::get('/admin/customerList/monthly/active', [App\Http\Controllers\CustomerController::class, 'showMonthlyA']);
-Route::get('/admin/customerList/monthly/inactive', [App\Http\Controllers\CustomerController::class, 'showMonthlyI']);
-Route::get('/admin/customerList/premium', [App\Http\Controllers\CustomerController::class, 'showPremium']);
-Route::get('/admin/customerList/premium/active', [App\Http\Controllers\CustomerController::class, 'showPremiumA']);
-Route::get('/admin/customerList/premium/inactive', [App\Http\Controllers\CustomerController::class, 'showPremiumI']);
-Route::get('/admin/customer/{id}/detail', [App\Http\Controllers\CustomerController::class, 'show']);
+Route::get('/admin/customerList/walk_in/{stat}', [App\Http\Controllers\CustomerController::class, 'showWalk_in']);
+Route::get('/admin/customerList/monthly/{stat}', [App\Http\Controllers\CustomerController::class, 'showMonthly']);
+Route::get('/admin/customerList/premium/{stat}', [App\Http\Controllers\CustomerController::class, 'showPremium']);
+Route::get('/admin/customer/{id}/detail', [App\Http\Controllers\CustomerController::class, 'show'])->name('customerDetail');
 Route::get('/admin/customer/create', [App\Http\Controllers\CustomerController::class, 'create']);
-Route::get('/admin/customer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit']);
+Route::get('/admin/customer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customerEdit');
 Route::put('/admin/customer/{id}/update', [App\Http\Controllers\CustomerController::class, 'update']);
-Route::delete('/admin/customer/{id}/delete', [App\Http\Controllers\CustomerController::class, 'destroy']);
+
+Route::get('/admin/log/{id}/create', [App\Http\Controllers\EntryLogController::class, 'create'])->name('new_entryLog');
+Route::get('/admin/log/{id}/edit', [App\Http\Controllers\EntryLogController::class, 'edit'])->name('close_entryLog');
 
 Route::get('/admin/inventoryList', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
 Route::get('/admin/inventory/create', [App\Http\Controllers\InventoryLogController::class, 'create']);
@@ -113,8 +109,17 @@ Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::clas
 Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
 
-Route::get('/admin/rates', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
+//for the rates and plans
+Route::get('/admin/ratesList', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
+Route::get('/admin/rates/create', [App\Http\Controllers\MemberTypeController::class, 'create']);
+Route::get('/admin/rates/{id}/edit', [App\Http\Controllers\MemberTypeController::class, 'edit']);
+Route::put('/admin/rates/{id}/update', [App\Http\Controllers\MemberTypeController::class, 'update']);
+Route::delete('/admin/rates/{id}/delete', [App\Http\Controllers\MemberTypeController::class, 'destroy']);
 
-Route::get('/admin/events', [App\Http\Controllers\EventController::class, 'showAll']);
+Route::get('/admin/eventsList', [App\Http\Controllers\EventController::class, 'showAll']);
+Route::get('/admin/events/create', [App\Http\Controllers\EventController::class, 'create']);
+Route::get('/admin/events/{id}/edit', [App\Http\Controllers\EventController::class, 'edit']);
+Route::put('/admin/events/{id}/update', [App\Http\Controllers\EventController::class, 'update']);
+Route::delete('/admin/events/{id}/delete', [App\Http\Controllers\EventController::class, 'destroy']);
 
 ?>

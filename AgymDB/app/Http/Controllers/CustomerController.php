@@ -9,8 +9,9 @@ use Carbon\Carbon;
 
 use App\Models\Basket;
 use App\Models\Batch;
-use App\Models\Employee;
+use App\Models\Customer;
 use App\Models\Customize;
+use App\Models\Employee;
 use App\Models\EntryLog;
 use App\Models\Event;
 use App\Models\InventoryLog;
@@ -40,9 +41,27 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $today = Carbon::today();
+
+        $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'), 
+                                'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'), 
+                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'), 
+                                'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
+                                'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
+                                'photo'=>NULL, 'user_id'=>$request->get('user_id') ]);
+        $person->save();
+
+        $person_id = DB::table('people')->orderBy("id", "desc")->first()->id; 
+
+        $customer = new Customer(['id'=>$person_id, 'height'=>$request->get('height'), 'weight'=>$request->get('weight'),
+                                    'pre_existing_conditions'=>$request->get('pre_existing_conditions'), 'person_id'=>$person_id ]);
+        $customer->save();
+
+        return $this->show($person_id);
+        
     }
 
     /**
@@ -65,7 +84,13 @@ class CustomerController extends Controller
     public function show($id)
     {
         //
-        return view('admin.customerList');
+        $customer = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.id', $id)
+                        ->get();
+        $age = Carbon::parse($customer[0]->birthday)->age;
+
+        return view('admin.detailCustomer', compact('customer', 'age'));
     }
 
     public function showAll()
@@ -75,69 +100,159 @@ class CustomerController extends Controller
                         ->join('people', 'customers.id', '=', 'people.id')
                         ->get();
 
-        $count = DB::table('customers')
-                        ->count();
+        $count = 0;
+        $count = DB::table('customers')->count();
         
-        $bday = array();
+        $age = array();
         foreach ($customers as $value => $customer) {
-            $bday[$value] = Carbon::parse($customer->birthday)->age;
+            $age[$value] = Carbon::parse($customer->birthday)->age;
         }
 
-        return view('admin.customerList', compact('customers', 'bday', 'count'));
+        $member_type = DB::table('member_types')->get();
+
+        $today = Carbon::today();
+        $membershipStatus = array();
+        foreach ($customers as $value => $customer) {
+            $status = DB::table('membership_histories')->where('customer_id', $customer->id)->get();
+            if($today->diffInDays($status[0]->end_date, false) > 0){
+                $membershipStatus[$value] = 'ACTIVE';
+            } else {
+                $membershipStatus[$value] = 'INACTIVE';
+            }                    
+        }
+
+        $log = array();
+        foreach ($customers as $value => $customer) {
+            $log[$value] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+        }
+
+        return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));
     }
 
-    public function showWalk_in()
+    public function showWalk_in($filter)
     {
         //
-        return view('admin.walkinCustomerList');
+        $customers = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('member_type_id', 1)
+                        ->get();
+
+        $today = Carbon::today();
+        $membershipStatus = array();
+        foreach ($customers as $value => $customer) {
+            $status = DB::table('membership_histories')->where('customer_id', $customer->id)->get();
+            if($today->diffInDays($status[0]->end_date, false) > 0){
+                $membershipStatus[$value] = 'ACTIVE';
+            } else {
+                $membershipStatus[$value] = 'INACTIVE';
+            }                    
+        }
+
+        $count = 0;
+        $count = DB::table('customers')->where('member_type_id', 1)->count();
+
+        $log = array();
+        foreach ($customers as $value => $customer) {
+            $log[$value] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+        }
+
+        if($filter == 'inactive'){
+            $file = 'admin.walkinCustomerListI';
+        } else if($filter == 'active'){
+            $file = 'admin.walkinCustomerListA';
+        } else {
+            $file = 'admin.walkinCustomerList';
+        }
+
+        return view($file, compact('customers', 'log', 'count', 'membershipStatus'));
     }
 
-    public function showWalk_inA()
+    public function showMonthly($filter)
     {
         //
-        return view('admin.walkinCustomerList');
+        $customers = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('member_type_id', 2)
+                        ->get();
+
+        $count = 0;
+        $count = DB::table('customers')->where('member_type_id', 2)->count();
+
+        $age = array();
+        foreach ($customers as $value => $customer) {
+            $age[$value] = Carbon::parse($customer->birthday)->age;
+        }
+
+        $today = Carbon::today();
+        $membershipStatus = array();
+        $status = DB::table('membership_histories')->get();
+        foreach($status as $value => $stat){
+            if($today->diffInDays($stat->end_date, false) > 0){
+                $membershipStatus[$value] = 'ACTIVE';
+            } else {
+                $membershipStatus[$value] = 'INACTIVE';
+            }
+        }
+
+        $log = array();
+        foreach ($customers as $value => $customer) {
+            $log[$value] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+        }
+
+        if($filter == 'inactive'){
+            $file = 'admin.monthlyCustomerListI';
+        } else if($filter == 'active'){
+            $file = 'admin.monthlyCustomerListA';
+        } else {
+            $file = 'admin.monthlyCustomerList';
+        }
+
+        return view($file, compact('customers', 'age', 'log', 'count', 'membershipStatus'));
     }
 
-    public function showWalk_inI()
+    public function showPremium($filter)
     {
         //
-        return view('admin.walkinCustomerList');
-    }
+        $customers = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('member_type_id', 3)
+                        ->get();
 
-    public function showMonthly()
-    {
-        //
-        return view('admin.monthlyCustomerList');
-    }
+        $count = 0;
+        $count = DB::table('customers')->where('member_type_id', 3)->count();
 
-    public function showMonthlyA()
-    {
-        //
-        return view('admin.monthlyCustomerList');
-    }
+        $age = array();
+        foreach ($customers as $value => $customer) {
+            $age[$value] = Carbon::parse($customer->birthday)->age;
+        }
 
-    public function showMonthlyI()
-    {
-        //
-        return view('admin.monthlyCustomerList');
-    }
+        $today = Carbon::today();
+        $membershipStatus = array();
+        $status = DB::table('membership_histories')->get();
+        foreach($status as $value => $stat){
+            if($today->diffInDays($stat->end_date, false) > 0){
+                $membershipStatus[$value] = 'ACTIVE';
+            } else {
+                $membershipStatus[$value] = 'INACTIVE';
+            }
+        }
 
-    public function showPremium()
-    {
-        //
-        return view('admin.premiumCustomerList');
-    }
+        $log = array();
+        $trainers = array();
+        foreach ($customers as $value => $customer) {
+            $log[$value] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+            $trainers[$value] = DB::table('people')->where('id', $customer->assigned_employee_id)->first();
+        }
 
-    public function showPremiumA()
-    {
-        //
-        return view('admin.premiumCustomerList');
-    }
+        if($filter == 'inactive'){
+            $file = 'admin.premiumCustomerListI';
+        } else if($filter == 'active'){
+            $file = 'admin.premiumCustomerListA';
+        } else {
+            $file = 'admin.premiumCustomerList';
+        }
 
-    public function showPremiumI()
-    {
-        //
-        return view('admin.premiumCustomerList');
+        return view($file, compact('customers', 'age', 'log', 'trainers', 'count', 'membershipStatus'));
     }
 
     /**
@@ -149,6 +264,11 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
+        $customer = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.id', $id)
+                        ->get();
+        return view('admin.editCustomerForm', compact('customer'));
     }
 
     /**
@@ -161,6 +281,27 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $customer = Customer::findOrFail($id);
+        $customer->height = $request->get('height');
+        $customer->weight = $request->get('weight');
+        $customer->pre_existing_conditions = $request->get('pre_existing_conditions');
+        $customer->save();
+
+        $person = Person::findOrFail($id);
+        $person->fname = $request->get('fname');
+        $person->lname = $request->get('lname');
+        $person->birthday = $request->get('birthday');
+        $person->street_address = $request->get('street_address');
+        $person->city = $request->get('city');
+        $person->email_address = $request->get('email_address'); 
+        $person->phone_number = $request->get('phone_number');
+        $person->emergency_contact_name = $request->get('emergency_contact_name');
+        $person->emergency_contact_number = $request->get('emergency_contact_number');
+        $person->emergency_contact_relationship = $request->get('emergency_contact_relationship');
+        $person->save();
+
+        return redirect()->route('customerDetail', [$id]);
+        
     }
 
     /**
@@ -172,8 +313,5 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
-        $today = Carbon::today();
-
-        return redirect('/admin/customerList/');
     }
 }

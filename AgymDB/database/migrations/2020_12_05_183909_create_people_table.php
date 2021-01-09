@@ -28,7 +28,7 @@ class CreatePeopleTable extends Migration
             $table->integer('emergency_contact_number')->nullable();
             $table->string('emergency_contact_relationship', 50)->nullable();
             $table->string('photo', 50)->nullable();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->default(0);
         });
     }
 

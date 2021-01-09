@@ -18,43 +18,76 @@
                                     <label>Search: <input type="text" name="search" placeholder="find customer name"></label>
                                 </div>
                             </form>
+                            <button>
+                                <!-- Can be replaced with an image or icon -->
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">+</a>
+                            </button>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link " href='/admin/customerList'>All</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item nav-link active" href='/admin/customerList/walk_in'>Walk-In</a>
+                                    <a class="dropdown-item nav-link active" href='/admin/customerList/walk_in/all'>Walk-In</a>
                                     <a class="dropdown-item" href='/admin/customerList/walk_in/active'>Active</a>
                                     <a class="dropdown-item" href='/admin/customerList/walk_in/inactive'>Inactive</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item nav-link" href='/admin/customerList/monthly'>Monthly</a>
+                                    <a class="dropdown-item nav-link" href='/admin/customerList/monthly/all'>Monthly</a>
                                     <a class="dropdown-item" href='/admin/customerList/monthly/active'>Active</a>
                                     <a class="dropdown-item" href='/admin/customerList/monthly/inactive'>Inactive</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item nav-link" href='/admin/customerList/premium'>Premium</a>
+                                    <a class="dropdown-item nav-link" href='/admin/customerList/premium/all'>Premium</a>
                                     <a class="dropdown-item" href='/admin/customerList/premium/active'>Active</a>
                                     <a class="dropdown-item" href='/admin/customerList/premium/inactive'>Inactive</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="card-header">
-                            No. of Customers:  
+                            No. of Walk-In Customers:  {{$count}}
                         </div>
                         <table class="table table-responsive-sm table-hover table-outline mb-0">
                             <tr class="thead-light">
-                                <td class="text-center">dot</td>
+                                <td class="text-center">  </td>
                                 <td class="text-center">#</td>
                                 <td class="text-center">Name</td>
                                 <td class="text-center">Action</td>
                             </tr>        
-                            
+                            @forEach ($customers as $value => $customer)
+                                <tr>
+                                    <td>
+                                        @if($membershipStatus[$value] == 'ACTIVE')
+                                            @if($log[$value]->exit == NULL)
+                                                <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
+                                            @else
+                                                <a href="/admin/log/{{$customer->id}}/create"><span class="dot" style='background-color: red;'></span></a>
+                                            @endif
+                                        @else
+                                            <span class="dot" style='background-color: gray;'></span>
+                                        @endif                                        
+                                    </td>
+
+                                    <td> {{$customer->id}} </td>
+                                    <td> {{$customer->fname}}   {{$customer->lname}} </td>
+                                    <td>
+                                        <button><a href="{{route('customerEdit', $customer->id)}}">Update</a></button>
+                                        <button><a href="{{route('customerDetail', $customer->id)}}">Details</a></button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                     </div>
                 </div>  
             </div>
         </main>
     </div>            
-</div>   
+</div>
+<style>
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+</style>
 @endsection

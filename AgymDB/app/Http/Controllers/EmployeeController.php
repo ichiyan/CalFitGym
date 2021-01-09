@@ -11,6 +11,7 @@ use App\Models\Basket;
 use App\Models\Batch;
 use App\Models\Customer;
 use App\Models\Customize;
+use App\Models\Employee;
 use App\Models\EntryLog;
 use App\Models\Event;
 use App\Models\InventoryLog;
@@ -88,14 +89,13 @@ class EmployeeController extends Controller
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
                         ->get();
-        $count = 1;
 
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
         
-        return view('admin.employeeDetail', compact('employees', 'bday', 'count'));
+        return view('admin.employeeDetail', compact('employees', 'bday'));
     }
 
 
@@ -113,7 +113,9 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
 
-        return view('admin.employeeList', compact('employees', 'bday', 'count'));
+        $active = 'all';
+
+        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
     }
 
 
@@ -133,7 +135,9 @@ class EmployeeController extends Controller
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
 
-        return view('admin.employeeListCurrent', compact('employees', 'bday', 'count'));
+        $active = 'current';
+
+        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
     }
 
 
@@ -152,8 +156,10 @@ class EmployeeController extends Controller
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
+
+        $active = 'previous';
         
-        return view('admin.employeeList', compact('employees', 'bday', 'count'));
+        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
     }
 
     /**

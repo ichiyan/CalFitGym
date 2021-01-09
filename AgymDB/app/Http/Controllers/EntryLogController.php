@@ -3,6 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+use App\Models\Basket;
+use App\Models\Batch;
+use App\Models\Customer;
+use App\Models\Customize;
+use App\Models\EntryLog;
+use App\Models\Event;
+use App\Models\InventoryLog;
+use App\Models\Item;
+use App\Models\Membership;
+use App\Models\MembershipHistory;
+use App\Models\MemberType;
+use App\Models\Order;
+use App\Models\Person;
+use App\Models\Remark;
+use App\Models\User;
 
 class EntryLogController extends Controller
 {
@@ -21,9 +41,17 @@ class EntryLogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $today = Carbon::now();
+        $user_id = Auth::id();
+        $logger = DB::table('people')->where('user_id', $user_id)->get();
+
+        $log = new EntryLog (['entry'=>$today, 'exit'=>NULL, 'person_id'=>$id, 'logger_id'=>$logger[0]->id]);
+        $log->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -57,6 +85,11 @@ class EntryLogController extends Controller
     public function edit($id)
     {
         //
+        $log = EntryLog::findOrFail($id);
+        $log->exit = Carbon::now();
+        $log->save();
+
+        return redirect()->back();
     }
 
     /**
