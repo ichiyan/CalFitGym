@@ -5,6 +5,18 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Styles -->
+<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
+
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{asset('css/welcome_style.css')}}" rel="stylesheet">
+<link href="{{asset('css/login_style.css')}}" rel="stylesheet">
+
  <!-- CoreUI CSS -->
 
  <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous">
@@ -12,7 +24,73 @@
 
  <title>{{config('app.name','CalFitGym')}}</title>
  </head>
- <body class="c-app flex-row align-items-center">
-    @yield('content')
+ <body>
+    <!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
+    <div class="container d-flex">
+    <div class="contact-info mr-auto">
+        <i class="icofont-envelope"></i> <a href="mailto:cebuultimategym@gmail.com">cebuultimategym@gmail.com</a>
+        <i class="icofont-smart-phone"></i> 0905 523 1075
+        <i class="icofont-clock-time"></i> Mon - Sat 6:30 am - 11:00 pm Sun 2:00 pm - 11:00pm
+    </div>
+    <div class="social-links">
+        <a href="https://twitter.com/CFgymCebu" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="https://www.facebook.com/Californiafitnessgym" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
+    </div>
+    </div>
+</div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+
+        <h1 class="logo mr-auto"><a href="{{ url('/welcome') }}">California Fitness Gym</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="">Facility</a></li>
+                <li><a href="">Products</a></li>
+                <li><a href="">Rates</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                @if (Route::has('login'))
+                    @auth
+                        <li><a href="{{ url('/home') }}">My Account</a></li>
+                    @else
+                    <li class="active"><a href="{{ route('login') }}">Log In</a></li>
+                    @endauth
+
+                @endif
+
+            </ul>
+        </nav><!-- .nav-menu -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <div id="login-bg">
+        @yield('login')
+    </div>
+
+    @include('partials.footer')
+
+
+      <!-- Vendor JS Files -->
+  <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src=" {{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src=" {{ asset('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+  <script src=" {{ asset('vendor/php-email-form/validate.js') }}"></script>
+  <script src=" {{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src=" {{ asset('vendor/venobox/venobox.min.js')}}"></script>
+  <script src=" {{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+  <script src=" {{ asset('vendor/aos/aos.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src=" {{ asset('js/main.js') }} "></script>
+
  </body>
 </html>
