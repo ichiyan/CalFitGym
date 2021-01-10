@@ -3,6 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+use App\Models\Basket;
+use App\Models\Batch;
+use App\Models\Customer;
+use App\Models\Customize;
+use App\Models\Employee;
+use App\Models\EntryLog;
+use App\Models\Event;
+use App\Models\InventoryLog;
+use App\Models\Item;
+use App\Models\Membership;
+use App\Models\MembershipHistory;
+use App\Models\MemberType;
+use App\Models\Order;
+use App\Models\Person;
+use App\Models\Remark;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -24,6 +44,14 @@ class OrderController extends Controller
     public function create()
     {
         //
+    }
+
+    public function form($id)
+    {
+        //
+        $customer = Person::findOrFail($id);
+
+        return view('admin.orderForm', compact('customer'));
     }
 
     /**
@@ -50,7 +78,6 @@ class OrderController extends Controller
 
     public function showAll()
     {
-        //
         return view('admin.orderList');
     }
 

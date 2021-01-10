@@ -60,8 +60,11 @@ class CustomerController extends Controller
                                     'pre_existing_conditions'=>$request->get('pre_existing_conditions'), 'person_id'=>$person_id ]);
         $customer->save();
 
-        return $this->show($person_id);
-        
+        $membershipHistory = new MembershipHistory (['start_date'=>$today, 'end_date'=>$today, 'customer_id'=>$person_id]);
+        $membershipHistory->save();
+
+        return redirect()->route('orderForm', [$person_id]);
+        //return $this->showAll();
     }
 
     /**
@@ -104,8 +107,8 @@ class CustomerController extends Controller
         $count = DB::table('customers')->count();
         
         $age = array();
-        foreach ($customers as $value => $customer) {
-            $age[$value] = Carbon::parse($customer->birthday)->age;
+        foreach ($customers as $num => $customer) {
+            $age[$num] = Carbon::parse($customer->birthday)->age;
         }
 
         $member_type = DB::table('member_types')->get();
@@ -122,8 +125,8 @@ class CustomerController extends Controller
         }
 
         $log = array();
-        foreach ($customers as $value => $customer) {
-            $log[$value] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+        foreach ($customers as $key => $customer) {
+            $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
         }
 
         return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));

@@ -106,6 +106,7 @@ Route::delete('/admin/inventory/{id}/delete', [App\Http\Controllers\InventoryLog
 
 Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'showAll']);
 Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
+Route::get('/admin/order/{id}/form', [App\Http\Controllers\OrderController::class, 'form'])->name('orderForm');
 Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
 Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);

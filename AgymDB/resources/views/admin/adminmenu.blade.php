@@ -40,7 +40,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/admin/inventory">
+            <a class="c-sidebar-nav-link" href="/admin/inventoryList">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/admin/order">
+            <a class="c-sidebar-nav-link" href="/admin/orderList">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
@@ -58,7 +58,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/admin/rates">
+            <a class="c-sidebar-nav-link" href="/admin/ratesList">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
@@ -67,7 +67,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/admin/events">
+            <a class="c-sidebar-nav-link" href="/admin/eventsList">
 <!-- ICONS CODE -->
                 <!-- <svg class="c-sidebar-nav-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>

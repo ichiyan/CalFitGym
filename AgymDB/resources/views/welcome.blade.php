@@ -180,6 +180,7 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< Updated upstream
 
 
                         <div class="row bottom-unit">
@@ -252,6 +253,19 @@
                     <a class="cta-btn" href="#">View Rates</a>
                 </div>
 
+=======
+                            
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+                        
+                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+                        </div>
+                        <!-- @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif -->
+                    @endauth
+>>>>>>> Stashed changes
                 </div>
             </section><!-- End Cta Section -->
 
