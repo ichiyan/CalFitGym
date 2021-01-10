@@ -184,8 +184,8 @@
 
                         <div class="row bottom-unit">
                             <div class="col-lg-8 merchandise">
-                                <div class="large-thumb"></div>
-                                <div class="text-block">
+                                <div class="large-thumb" data-aos="fade-right"></div>
+                                <div class="text-block" data-aos="fade-right">
                                     <div class="text-lockup">
                                         <h3>Helping You</h3>
                                         <h2>Get Involved In Yourself</h2>
@@ -197,12 +197,12 @@
 
                             </div>
                             <div class="col-lg-4 merchandise-pics">
-                                <div class="small-thumb-1"></div>
-                                <div class="small-thumb-2"></div>
+                                <div class="small-thumb-1" data-aos="fade-left"></div>
+                                <div class="small-thumb-2" data-aos="fade-left"></div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br><br>
 
                 <div class="container">
 

@@ -3,7 +3,7 @@
 @section('login')
 
     <div class="container">
-        <div class="card login-card">
+        <div class="card login-card" data-aos="fade-up">
             <div class="row no-gutters">
                 <div class="col-md-5">
                     <img src="{{ asset('images/login.jpg') }}" alt="login" class="login-card-img">
@@ -53,7 +53,7 @@
                                     </a>
                                 @endif
 
-                                <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Contact us</a></p>
+                                <p class="login-card-footer-text">Don't have an account? <a href="/#contact" class="text-reset">Contact us</a></p>
                             </div>
                         </form>
                     </div>
