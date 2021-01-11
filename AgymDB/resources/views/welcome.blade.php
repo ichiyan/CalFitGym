@@ -64,8 +64,10 @@
                     @if (Route::has('login'))
                         @auth
                             <li><a href="{{ url('/home') }}">My Account</a></li>
+                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                         @else
                         <li><a href="{{ route('login') }}">Log In</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li><!-- Here for testing. Remove later -->
                         @endauth
 
                     @endif
@@ -180,7 +182,6 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< Updated upstream
 
 
                         <div class="row bottom-unit">
@@ -251,21 +252,6 @@
                     <h3>Let's do this together!</h3>
                     <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <a class="cta-btn" href="#">View Rates</a>
-                </div>
-
-=======
-                            
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-                        
-                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-                        </div>
-                        <!-- @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif -->
-                    @endauth
->>>>>>> Stashed changes
                 </div>
             </section><!-- End Cta Section -->
 

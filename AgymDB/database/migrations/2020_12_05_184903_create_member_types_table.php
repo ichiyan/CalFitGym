@@ -17,6 +17,7 @@ class CreateMemberTypesTable extends Migration
             $table->id();
             $table->string('member_type_name', 20);
             $table->integer('member_type_price');
+            $table->integer('length');
         });
     }
 

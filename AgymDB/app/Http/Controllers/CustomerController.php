@@ -64,7 +64,6 @@ class CustomerController extends Controller
         $membershipHistory->save();
 
         return redirect()->route('orderForm', [$person_id]);
-        //return $this->showAll();
     }
 
     /**
