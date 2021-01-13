@@ -197,7 +197,11 @@
                             <div class="form-group row">
                                     <div class="col-md-4 col-form-label text-md-right"> Total Price:  </div>
                                     <div class="col-md-6 col-form-label text-md-right"> {{$total_price}} </div>
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                                    <div class="col-md-4 col-form-label text-md-right"> Amount Recieved:  </div>
+                                    <div class="col-md-6 col-form-label text-md-right"> <input type='text' name='quantity' value=1 required> </div>
+                            </div>
                         </div>
                     </div>
                 </div>  

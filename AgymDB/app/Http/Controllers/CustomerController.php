@@ -90,9 +90,7 @@ class CustomerController extends Controller
                         ->join('people', 'customers.id', '=', 'people.id')
                         ->where('customers.id', $id)
                         ->get();
-        $age = Carbon::parse($customer[0]->birthday)->age;
-
-        return view('admin.detailCustomer', compact('customer', 'age'));
+        return view('admin.detailCustomer', compact('customer'));
     }
 
     public function showAll()

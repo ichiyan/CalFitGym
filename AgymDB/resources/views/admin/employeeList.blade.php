@@ -60,10 +60,8 @@
                                     <td> {{$employee->monthly_salary}} </td>
                                     <td> {{$employee->no_of_trainees}} </td>
                                     <td>
-                                        <form>
-                                            <input type='hidden' name='employee_id' value='{{$employee->id}}'>
-                                            <input type="submit" value="Update">
-                                        </form>
+                                        <button><a href="{{route('employeeEdit', $employee->id)}}">Update</a></button>
+                                        <button><a href="{{route('employeeDetail', $employee->id)}}">Details</a></button>
                                     </td>
                                 </tr>
                             @endforeach

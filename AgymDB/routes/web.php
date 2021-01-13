@@ -70,7 +70,7 @@ Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeControll
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
 Route::get('/admin/employee/{id}/detail', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
 Route::get('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
-Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit']);
+Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employeeEdit');
 Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
 Route::delete('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
 Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form

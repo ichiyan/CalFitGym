@@ -85,17 +85,12 @@ class EmployeeController extends Controller
     public function show($id)
     {
         //
-        $employees = DB::table('employees')
+        $employee = DB::table('employees')
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
-                        ->get();
-
-        $bday = array();
-        foreach ($employees as $value => $employee) {
-            $bday[$value] = Carbon::parse($employee->birthday)->age;
-        }
+                        ->first();
         
-        return view('admin.employeeDetail', compact('employees', 'bday'));
+        return view('admin.detailEmployee', compact('employee'));
     }
 
 
@@ -173,7 +168,7 @@ class EmployeeController extends Controller
         //
         $employee = Employee::findOrFail($id);
         $person = Person::findOrFail($id);
-        return view('admin.employeeEdit', compact('employee', 'person'));
+        return view('admin.editEmployeeForm', compact('employee', 'person'));
     }
 
     /**
