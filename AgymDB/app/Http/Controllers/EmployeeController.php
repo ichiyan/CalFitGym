@@ -33,8 +33,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
-        
+
+
+
     }
 
     /**
@@ -47,17 +48,17 @@ class EmployeeController extends Controller
         //
         $today = Carbon::today();
 
-        $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'), 
-                                'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'), 
-                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'), 
+        $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
+                                'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'),
+                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
                                 'photo'=>NULL, 'user_id'=>$request->get('user_id') ]);
         $person->save();
 
-        $person_id = DB::table('people')->orderBy("id", "desc")->first()->id; 
+        $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
 
-        $employee = new Employee(['id'=>$person_id, 'date_hired'=>$today, 
+        $employee = new Employee(['id'=>$person_id, 'date_hired'=>$today,
                                     'date_separated'=>NULL, 'monthly_salary'=>$request->get('monthly_salary'),
                                     'no_of_trainees'=>0, 'person_id'=>$person_id ]);
         $employee->save();
@@ -88,9 +89,20 @@ class EmployeeController extends Controller
         $employee = DB::table('employees')
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
+<<<<<<< Updated upstream
                         ->first();
         
         return view('admin.detailEmployee', compact('employee'));
+=======
+                        ->get();
+
+        $bday = array();
+        foreach ($employees as $value => $employee) {
+            $bday[$value] = Carbon::parse($employee->birthday)->age;
+        }
+
+        return view('admin.employeeDetail', compact('employees', 'bday'));
+>>>>>>> Stashed changes
     }
 
 
@@ -102,7 +114,7 @@ class EmployeeController extends Controller
 
         $count = DB::table('employees')
                         ->count();
-        
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
@@ -117,14 +129,14 @@ class EmployeeController extends Controller
     public function showCurrent()
     {
         $employees = DB::table('employees')
-                        ->join('people', 'employees.id', '=', 'people.id') 
+                        ->join('people', 'employees.id', '=', 'people.id')
                         ->whereNull('date_separated')
                         ->get();
 
         $count = DB::table('employees')
                         ->whereNull('date_separated')
                         ->count();
-        
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
@@ -153,7 +165,7 @@ class EmployeeController extends Controller
         }
 
         $active = 'previous';
-        
+
         return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
     }
 
@@ -191,7 +203,7 @@ class EmployeeController extends Controller
         $person->birthday = $request->get('birthday');
         $person->street_address = $request->get('street_address');
         $person->city = $request->get('city');
-        $person->email_address = $request->get('email_address'); 
+        $person->email_address = $request->get('email_address');
         $person->phone_number = $request->get('phone_number');
         $person->emergency_contact_name = $request->get('emergency_contact_name');
         $person->emergency_contact_number = $request->get('emergency_contact_number');

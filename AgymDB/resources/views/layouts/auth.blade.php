@@ -23,6 +23,9 @@
 <link rel ="stylesheet" href = "/app.css">
 
  <title>{{config('app.name','CalFitGym')}}</title>
+ <!-- Favicons -->
+ <link href="{{ asset('images/logo_transparent.png') }}" rel="icon">
+
  </head>
  <body>
     <!-- ======= Top Bar ======= -->

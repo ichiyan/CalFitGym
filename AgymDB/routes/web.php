@@ -57,14 +57,23 @@ Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', function(){
-    return view('admin.home');
-});
-
-Route::get('/dashboard', function(){
     return view('admin.dashboard');
 });
 
-//Route::resource('/admin/employeeList', EmployeeController::class);
+Route::get('/dashboard1', function(){
+    return view('admin-coreUI.dashboard');
+});
+
+Route::get('/dashboard2', function(){
+    return view('admin.dashboard');
+});
+
+Route::view('/admin/employeeList', 'admin.employeeList');
+
+/* test */
+Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');
+
+// Route::resource('/admin/employeeList/', EmployeeController::class);
 Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
