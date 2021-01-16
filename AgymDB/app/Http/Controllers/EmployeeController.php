@@ -89,20 +89,9 @@ class EmployeeController extends Controller
         $employee = DB::table('employees')
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
-<<<<<<< Updated upstream
                         ->first();
-        
+
         return view('admin.detailEmployee', compact('employee'));
-=======
-                        ->get();
-
-        $bday = array();
-        foreach ($employees as $value => $employee) {
-            $bday[$value] = Carbon::parse($employee->birthday)->age;
-        }
-
-        return view('admin.employeeDetail', compact('employees', 'bday'));
->>>>>>> Stashed changes
     }
 
 

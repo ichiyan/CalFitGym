@@ -211,7 +211,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- End of Content Row -->
 
     </div>
     <!-- End of Page Content -->

@@ -51,6 +51,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/facility', function () {
+    return view('facility');
+});
+
 
 Auth::routes();
 
@@ -113,7 +117,7 @@ Route::get('/admin/inventory/{id}/edit', [App\Http\Controllers\InventoryLogContr
 Route::put('/admin/inventory/{id}/update', [App\Http\Controllers\InventoryLogController::class, 'update']);
 Route::delete('/admin/inventory/{id}/delete', [App\Http\Controllers\InventoryLogController::class, 'destroy']);
 
-Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'order']); 
+Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'order']);
 Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
 Route::get('/admin/order/renew', [App\Http\Controllers\OrderController::class, 'renew']);
 Route::get('/admin/order/customize', [App\Http\Controllers\OrderController::class, 'customize']);

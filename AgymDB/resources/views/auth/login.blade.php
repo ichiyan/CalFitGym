@@ -1,6 +1,34 @@
 @extends('layouts.auth')
 
-@section('login')
+
+@section('topnav')
+
+<nav class="nav-menu d-none d-lg-block">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="facility">Facility</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="/#rates">Rates</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        @if (Route::has('login'))
+            @auth
+                <li><a href="{{ url('/home') }}">My Account</a></li>
+            @else
+            <li class="active"><a href="{{ route('login') }}">Log In</a></li>
+            @endauth
+
+        @endif
+
+    </ul>
+</nav>
+
+@endsection
+
+
+
+@section('content')
 
     <div class="container">
         <div class="card login-card" data-aos="fade-up">

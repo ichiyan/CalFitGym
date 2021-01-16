@@ -29,54 +29,23 @@
  </head>
  <body>
     <!-- ======= Top Bar ======= -->
-<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
-    <div class="container d-flex">
-    <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="mailto:cebuultimategym@gmail.com">cebuultimategym@gmail.com</a>
-        <i class="icofont-smart-phone"></i> 0905 523 1075
-        <i class="icofont-clock-time"></i> Mon - Sat 6:30 am - 11:00 pm Sun 2:00 pm - 11:00pm
-    </div>
-    <div class="social-links">
-        <a href="https://twitter.com/CFgymCebu" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="https://www.facebook.com/Californiafitnessgym" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
-    </div>
-    </div>
-</div>
+    @include('partials.topbar-contact-details')
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
-        <h1 class="logo mr-auto"><a href="{{ url('/welcome') }}">California Fitness Gym</a></h1>
+        <h1 class="logo mr-auto"><a href="{{ url('/') }}">California Fitness Gym</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav class="nav-menu d-none d-lg-block">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/#about">About</a></li>
-                <li><a href="/#services">Services</a></li>
-                <li><a href="">Facility</a></li>
-                <li><a href="">Products</a></li>
-                <li><a href="">Rates</a></li>
-                <li><a href="/#contact">Contact</a></li>
-                @if (Route::has('login'))
-                    @auth
-                        <li><a href="{{ url('/home') }}">My Account</a></li>
-                    @else
-                    <li class="active"><a href="{{ route('login') }}">Log In</a></li>
-                    @endauth
-
-                @endif
-
-            </ul>
-        </nav><!-- .nav-menu -->
+        @yield('topnav')
 
         </div>
     </header><!-- End Header -->
 
     <div id="login-bg">
-        @yield('login')
+        @yield('content')
     </div>
 
     @include('partials.footer')

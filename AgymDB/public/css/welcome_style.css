@@ -180,6 +180,7 @@ body {
 
   #header .logo a {
     color: #fff;
+    text-decoration: none;
   }
 
   #header .logo img {
