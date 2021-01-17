@@ -73,7 +73,7 @@
             <div class="section-title">
                 <span>Services</span>
                 <h2>Services</h2>
-                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <p>From equipments to hardworking coaches, our gym lacks nothing.</p>
             </div>
 
             </div>
@@ -88,7 +88,7 @@
                                     <h3>We provide you</h3>
                                     <h2>Quality Equipment</h2>
                                     <i class="icofont-gym-alt-2 icofont-2x"></i>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                                    <p>We have equipments for each and every possibly area our members want to workout on. These equipments are not only durable but diverse in order to accomodate a variety of heights and sizes.</p>
                                     <a href="">View Gallery</a>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                     <h3>Improve through</h3>
                                     <h2>Personalized Coaching</h2>
                                     <i class="icofont-gym icofont-2x"></i>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                                    <p>Sometimes, one must seek help to those with experience or professional in order to get the body you desire. </p>
                                     <a href="">View Rates</a>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="text-lockup">
                                     <h3>Enjoy our</h3>
                                     <h2>Healthy Options</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                                    <p>Working out right is never enough. Eating right also have its own advantages. Try our healthy uptakes on simple foods and beverages to match your working our lifestyle!</p>
                                     <a href="">View Products</a>
                                     <i class="icofont-food-basket icofont-2x"></i>
                                 </div>
@@ -145,7 +145,7 @@
                                 <div class="text-lockup">
                                     <h3>Helping You</h3>
                                     <h2>Get Involved In Yourself</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumdolore eu fugiat nulla pariatur.</p>
+                                    <p>Get some affordable gymwear, cute tumblrs and other gym necessities to match in with our coaches.</p>
                                     <a href="">View Merchandise</a>
                                     <i class="icofont-shopping-cart icofont-2x"></i>
                                 </div>
@@ -172,7 +172,7 @@
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-wifi"></i></div>
                       <h4><a href="">Wi-Fi</a></h4>
-                      <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                      <p>FREE WI-FI 24/7 for all of our members in order to listen to spotify or any other social media.</p>
                     </div>
                   </div>
 
@@ -180,7 +180,7 @@
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-closet"></i></div>
                       <h4><a href="">Locker Room</a></h4>
-                      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                      <p>Over 50 Lockers to safely put your items while you workout!</p>
                     </div>
                   </div>
 
@@ -188,7 +188,7 @@
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-droplet"></i></div>
                       <h4><a href="">Shower Room</a></h4>
-                      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                      <p>Our gym features shower rooms for our member to bath after an intense workout!</p>
                     </div>
                   </div>
 
@@ -204,7 +204,7 @@
 
             <div class="text-center">
                 <h3>Let's do this together!</h3>
-                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p> Do something today that your future self will thank you for. Workout and change your lifestyle here with California Fitness Gym.</p>
                 <a class="cta-btn" href="#contact">Contact Us!</a>
             </div>
         </section><!-- End Cta Section -->
@@ -216,7 +216,7 @@
             <div class="section-title">
                 <span>Pricing</span>
                 <h2>Pricing</h2>
-                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <p>Check out our best packages that fit your needs!</p>
             </div>
 
             <div class="row">
@@ -284,7 +284,7 @@
             <div class="section-title">
                 <span>Contact</span>
                 <h2>Contact</h2>
-                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <p>Take your workout experience to new levels with a perfect and personalized coaching! </p>
             </div>
 
             <div class="row" data-aos="fade-up">
