@@ -78,7 +78,7 @@
                                             <button class="btn btn-primary" type="submit" value="Update">
                                         </form> --}}
                                         <button type="button" class="btn btn-sm btn-info"><a href="{{route('employeeDetail', $employee->id)}}" style="color: white">Info</a></button>
-                                        <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Update</a></button>
+                                        <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
                                         @if (is_null( $employee->date_separated ) )
                                             <button type="button" class="btn btn-sm btn-danger"><a href="/admin/employee/{{$employee->id}}/delete" style="color: white">Dismiss</a></button>
                                         @else

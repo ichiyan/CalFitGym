@@ -47,8 +47,9 @@
                             </div>
                         </div>
                         <div class="col col-md-2 align-self-start">
+                            <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
                             <button class="btn-rounded-light"><a href='/admin/employeeList'>Back</a></button>                        </div>
-                         </div>
+                        </div>
                     <div class="row justify-content-end">
                         <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
@@ -66,7 +67,7 @@
                                                     <label>Address</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>Barangay, {{$employee->street_address}}, {{$employee->city}} City</p>
+                                                    <p>{{$employee->barangay}}, {{$employee->street_address}}, {{$employee->city}} City</p>
                                                 </div>
                                             </div>
                                             <div class="row">

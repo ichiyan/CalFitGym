@@ -50,7 +50,7 @@ class EmployeeController extends Controller
 
         $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
                                 'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'),
-                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
+                                'barangay'=>$request->get('barangay'), 'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
                                 'photo'=>NULL, 'user_id'=>$request->get('user_id') ]);
@@ -218,6 +218,7 @@ class EmployeeController extends Controller
         $person->lname = $request->get('lname');
         $person->birthday = $request->get('birthday');
         $person->street_address = $request->get('street_address');
+        $person->barangay = $request->get('barangay');
         $person->city = $request->get('city');
         $person->email_address = $request->get('email_address');
         $person->phone_number = $request->get('phone_number');
