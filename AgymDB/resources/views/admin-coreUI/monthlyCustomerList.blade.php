@@ -61,7 +61,7 @@
                             @forEach ($customers as $value => $customer)
                                 <tr>
                                     <td>
-                                        @if($membershipStatus[$value] == 'ACTIVE')
+                                        @if($today->diffInDays($customer->end_date, false) > 0)
                                             @if($log[$value]->exit == NULL)
                                                 <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
                                             @else
@@ -69,7 +69,7 @@
                                             @endif
                                         @else
                                             <span class="dot" style='background-color: gray;'></span>
-                                        @endif                                        
+                                        @endif
                                     </td>
 
                                     <td> {{$customer->id}} </td>

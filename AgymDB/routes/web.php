@@ -57,9 +57,7 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', function(){
-    return view('admin.dashboard');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome']);
 
 Route::get('/dashboard1', function(){
     return view('admin-coreUI.dashboard');
