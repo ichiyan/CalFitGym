@@ -28,7 +28,7 @@
     </div>
 
     <!-- Nav Item - Employees -->
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="/admin/employeeList">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Employees</span>
@@ -36,7 +36,7 @@
     </li>
 
     <!-- Nav Item - Customers -->
-    <li class="nav-item">
+    <li class="nav-item active">
         <a class="nav-link collapsed" href="/admin/customerList">
             <i class="fas fa-fw fa-user"></i>
             <span>Customers</span>
