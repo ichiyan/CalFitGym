@@ -51,9 +51,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/facility', function () {
-    return view('facility');
-});
 
 
 Auth::routes();
@@ -73,6 +70,7 @@ Route::get('/dashboard2', function(){
 });
 
 Route::view('/admin/employeeList', 'admin.employeeList');
+Route::view('/facility', 'facility');
 
 /* test */
 Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');

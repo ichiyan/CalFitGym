@@ -31,8 +31,7 @@
 
         <!-- Nav Item - Employees -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/admin/employeeList" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="/admin/employeeList">
                 <i class="fas fa-fw fa-user-tie"></i>
                 <span>Employees</span>
             </a>
@@ -40,8 +39,7 @@
 
         <!-- Nav Item - Customers -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="/admin/customerList">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Customers</span>
             </a>
@@ -49,8 +47,7 @@
 
         <!-- Nav Item - Inventory -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="/admin/inventory">
                 <i class="fas fa-fw fa-boxes"></i>
                 <span>Inventory</span>
             </a>
@@ -58,8 +55,7 @@
 
         <!-- Nav Item - Order -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="/admin/orderList">
                 <i class="fas fa-fw fa-shopping-cart"></i>
                 <span>Order</span>
             </a>
@@ -67,8 +63,7 @@
 
         <!-- Nav Item - Products -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="">
                 <i class="fas fa-fw fa-store"></i>
                 <span>Products</span>
             </a>
@@ -90,15 +85,6 @@
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-calendar-alt"></i>
                 <span>Events & Promos</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Facility -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-dumbbell"></i>
-                <span>Facility</span>
             </a>
         </li>
 
@@ -124,13 +110,13 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <div class="btn-toolbar">
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
                 </div>
             </div>
         </div>

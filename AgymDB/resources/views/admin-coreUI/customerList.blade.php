@@ -59,7 +59,7 @@
                                 <td class="text-center">Status</td>
                                 <td class="text-center">More Info</td>
                                 <td class="text-center">Action</td>
-                            </tr> 
+                            </tr>
                             @forEach ($customers as $value => $customer)
                                 <tr>
                                     <td>
@@ -71,7 +71,7 @@
                                             @endif
                                         @else
                                             <span class="dot" style='background-color: gray;'></span>
-                                        @endif                                        
+                                        @endif
                                     </td>
 
                                     <td> {{$customer->id}} </td>
@@ -88,7 +88,7 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                        
+
                                     <td> {{$membershipStatus[$value]}} </td>
 
                                     <td> icons </td>
@@ -101,10 +101,10 @@
                             @endforeach
                         </table>
                     </div>
-                </div>  
+                </div>
             </div>
         </main>
-    </div>            
+    </div>
 </div>
 <style>
     .dot {
