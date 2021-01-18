@@ -16,10 +16,10 @@
                     <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- End of Content Row -->
 
     </div>
     <!-- End of Page Content -->

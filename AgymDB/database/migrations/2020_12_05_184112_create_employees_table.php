@@ -18,7 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->timestamps();
             $table->date('date_hired');
             $table->date('date_separated')->nullable()->default(null);
-            $table->integer('monthly_salary');
+            $table->decimal('monthly_salary', 15, 2);
             $table->integer('no_of_trainees')->default(0);
             $table->foreignId('person_id');
         });

@@ -52,6 +52,7 @@ Route::get('/', function () {
 });
 
 
+
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -69,6 +70,7 @@ Route::get('/dashboard2', function(){
 });
 
 Route::view('/admin/employeeList', 'admin.employeeList');
+Route::view('/facility', 'facility');
 
 /* test */
 Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');

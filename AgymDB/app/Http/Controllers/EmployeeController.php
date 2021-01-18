@@ -102,7 +102,15 @@ class EmployeeController extends Controller
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->get();
 
-        $count = DB::table('employees')
+        $countAll = DB::table('employees')
+                        ->count();
+
+        $countCurrent = DB::table('employees')
+                        ->whereNull('date_separated')
+                        ->count();
+
+        $countPrevious = DB::table('employees')
+                        ->whereNotNull('date_separated')
                         ->count();
 
         $bday = array();
@@ -124,8 +132,15 @@ class EmployeeController extends Controller
                         ->whereNull('date_separated')
                         ->get();
 
-        $count = DB::table('employees')
+        $countAll = DB::table('employees')
+                        ->count();
+
+        $countCurrent = DB::table('employees')
                         ->whereNull('date_separated')
+                        ->count();
+
+        $countPrevious = DB::table('employees')
+                        ->whereNotNull('date_separated')
                         ->count();
 
         $bday = array();
@@ -135,7 +150,7 @@ class EmployeeController extends Controller
 
         $active = 'current';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious','active'));
     }
 
 
@@ -146,7 +161,14 @@ class EmployeeController extends Controller
                         ->whereNotNull('date_separated')
                         ->get();
 
-        $count = DB::table('employees')
+        $countAll = DB::table('employees')
+                        ->count();
+
+        $countCurrent = DB::table('employees')
+                        ->whereNull('date_separated')
+                        ->count();
+
+        $countPrevious = DB::table('employees')
                         ->whereNotNull('date_separated')
                         ->count();
 
@@ -157,7 +179,7 @@ class EmployeeController extends Controller
 
         $active = 'previous';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active'));
     }
 
     /**

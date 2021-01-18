@@ -46,15 +46,15 @@ class CustomerController extends Controller
         //
         $today = Carbon::today();
 
-        $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'), 
-                                'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'), 
-                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'), 
+        $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
+                                'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'),
+                                'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
                                 'photo'=>NULL, 'user_id'=>$request->get('user_id') ]);
         $person->save();
 
-        $person_id = DB::table('people')->orderBy("id", "desc")->first()->id; 
+        $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
 
         $customer = new Customer(['id'=>$person_id, 'height'=>$request->get('height'), 'weight'=>$request->get('weight'),
                                     'pre_existing_conditions'=>$request->get('pre_existing_conditions'), 'person_id'=>$person_id ]);
@@ -102,7 +102,7 @@ class CustomerController extends Controller
 
         $count = 0;
         $count = DB::table('customers')->count();
-        
+
         $age = array();
         foreach ($customers as $num => $customer) {
             $age[$num] = Carbon::parse($customer->birthday)->age;
@@ -118,7 +118,7 @@ class CustomerController extends Controller
                 $membershipStatus[$value] = 'ACTIVE';
             } else {
                 $membershipStatus[$value] = 'INACTIVE';
-            }                    
+            }
         }
 
         $log = array();
@@ -126,7 +126,7 @@ class CustomerController extends Controller
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
         }
 
-        return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));
+        return view('admin-coreUI.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));
     }
 
     public function showWalk_in($filter)
@@ -145,7 +145,7 @@ class CustomerController extends Controller
                 $membershipStatus[$value] = 'ACTIVE';
             } else {
                 $membershipStatus[$value] = 'INACTIVE';
-            }                    
+            }
         }
 
         $count = 0;
@@ -293,7 +293,7 @@ class CustomerController extends Controller
         $person->birthday = $request->get('birthday');
         $person->street_address = $request->get('street_address');
         $person->city = $request->get('city');
-        $person->email_address = $request->get('email_address'); 
+        $person->email_address = $request->get('email_address');
         $person->phone_number = $request->get('phone_number');
         $person->emergency_contact_name = $request->get('emergency_contact_name');
         $person->emergency_contact_number = $request->get('emergency_contact_number');
@@ -301,7 +301,7 @@ class CustomerController extends Controller
         $person->save();
 
         return redirect()->route('customerDetail', [$id]);
-        
+
     }
 
     /**
