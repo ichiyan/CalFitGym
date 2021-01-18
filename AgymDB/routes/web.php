@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\BatchController;
@@ -85,13 +86,12 @@ Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeControll
 Route::get('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
 Route::get('/admin/employee/{id}/rehire', [App\Http\Controllers\EmployeeController::class, 'rehire']);
 Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
-    $user_id = DB::table('users')->orderBy("id", "desc")->first()->id;
-    $user = User::findOrFail($user_id);
+    $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
 
     if($user->user_type == 3){
-        return view('admin.newCustomerForm', compact('user'));
+        return view('admin-coreUI.newCustomerForm', compact('user'));
     } else {
-        return view('admin.newEmployeeForm', compact('user'));
+        return view('admin-coreUI.newEmployeeForm', compact('user'));
     }
 })->name('form');
 
@@ -124,6 +124,7 @@ Route::get('/admin/order/trainer', [App\Http\Controllers\OrderController::class,
 Route::get('/admin/order/pay', [App\Http\Controllers\OrderController::class, 'pay']);
 Route::get('/admin/order/find', [App\Http\Controllers\OrderController::class, 'find']);
 Route::get('/admin/order/{id}/form', [App\Http\Controllers\OrderController::class, 'form'])->name('orderForm');
+Route::get('/admin/order/{id}/show', [App\Http\Controllers\OrderController::class, 'show'])->name('orderDetail');
 Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
 Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);

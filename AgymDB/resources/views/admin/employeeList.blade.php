@@ -51,6 +51,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>  </th>
                             <th>#</th>
                             <th>Name</th>
                             <th>Age</th>
@@ -64,6 +65,18 @@
                     <tbody>
                         @forEach ($employees as $value => $employee)
                                 <tr>
+                                    <td>
+                                    @if (is_null( $employee->date_separated ) )
+                                        @if($log[$value]->exit == NULL)
+                                            <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
+                                        @else
+                                            <a href="/admin/log/{{$employee->id}}/create"><span class="dot" style='background-color: red;'></span></a>
+                                        @endif
+                                    @else
+                                        <span class="dot" style='background-color: gray;'></span>
+                                    @endif
+                                    </td>
+
                                     <td> {{$employee->id}} </td>
                                     <td> {{$employee->fname}}   {{$employee->lname}} </td>
                                     <td> {{$bday[$value]}} </td>
@@ -92,6 +105,13 @@
             </div>
         </div>
     </div>
-
 </div>
+<style>
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+</style>
 @endsection

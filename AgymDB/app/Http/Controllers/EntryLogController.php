@@ -46,9 +46,9 @@ class EntryLogController extends Controller
         //
         $today = Carbon::now();
         $user_id = Auth::id();
-        $logger = DB::table('people')->where('user_id', $user_id)->get();
+        $logger = DB::table('people')->where('user_id', $user_id)->first();
 
-        $log = new EntryLog (['entry'=>$today, 'exit'=>NULL, 'person_id'=>$id, 'logger_id'=>$logger[0]->id]);
+        $log = new EntryLog (['entry'=>$today, 'exit'=>NULL, 'person_id'=>$id, 'logger_id'=>$logger->id]);
         $log->save();
 
         return redirect()->back();

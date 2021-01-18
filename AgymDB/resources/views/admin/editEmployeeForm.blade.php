@@ -86,7 +86,7 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Phone Number: </label>
                         <div class="col-md-6">
-                            <input type='tel' name='phone_number' required>
+                            <input type='tel' name='phone_number' required value='{{$person->phone_number}}'>
                         </div>
                     </div>
 
@@ -117,7 +117,7 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Relationship: </label>
                         <div class="col-md-6">
-                            <input type='text' name='relationship' required value='{{$person->emergency_contact_relationship}}'>
+                            <input type='text' name='emergency_contact_relationship' required value='{{$person->emergency_contact_relationship}}'>
                         </div>
                     </div>
                 </div>

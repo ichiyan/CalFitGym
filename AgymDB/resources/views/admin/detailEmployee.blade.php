@@ -67,7 +67,7 @@
                                                     <label>Address</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>{{$employee->barangay}}, {{$employee->street_address}}, {{$employee->city}} City</p>
+                                                    <p>{{$employee->street_address}}, {{$employee->barangay}}, {{$employee->city}} City</p>
                                                 </div>
                                             </div>
                                             <div class="row">

@@ -102,7 +102,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right"> Relationship: </label>
                                         <div class="col-md-6">
-                                            <input type='text' name='relationship' required>
+                                            <input type='text' name='emergency_contact_relationship' required>
                                         </div>
                                     </div>
                                 </div>

@@ -47,6 +47,7 @@ class EmployeeController extends Controller
     {
         //
         $today = Carbon::today();
+        $now = Carbon::now();
 
         $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
                                 'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'),
@@ -62,6 +63,11 @@ class EmployeeController extends Controller
                                     'date_separated'=>NULL, 'monthly_salary'=>$request->get('monthly_salary'),
                                     'no_of_trainees'=>0, 'person_id'=>$person_id ]);
         $employee->save();
+
+        $user_id = Auth::id();
+        $logger = DB::table('people')->where('user_id', $user_id)->first();
+        $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger]);
+        $init_log->save();
 
         return redirect('/admin/employeeList/');
     }
@@ -124,7 +130,12 @@ class EmployeeController extends Controller
 
         $active = 'all';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active'));
+        $log = array();
+        foreach ($employees as $key => $employee) {
+            $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
+        }
+
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
 
@@ -153,7 +164,12 @@ class EmployeeController extends Controller
 
         $active = 'current';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious','active'));
+        $log = array();
+        foreach ($employees as $key => $employee) {
+            $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
+        }
+
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
 
@@ -182,7 +198,12 @@ class EmployeeController extends Controller
 
         $active = 'previous';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active'));
+        $log = array();
+        foreach ($employees as $key => $employee) {
+            $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
+        }
+
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
     /**

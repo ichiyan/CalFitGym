@@ -121,6 +121,16 @@ class OrderController extends Controller
         return redirect()->route('orderForm', [$customer->id]);
     }
 
+    public function pay(Request $request)
+    {
+        //
+        $customer = Person::findOrFail($request->get('person_id'));
+        $order = Order::findOrFail($request->get('order_id'));
+        $order->amount_recieved = $request->get('payment');
+        $order->change = $request->get('payment') - $order->total_price;
+        return redirect()->route('orderDetail', [$customer->id]);
+    }
+
     public function order()
     {
         //
@@ -226,6 +236,11 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        $products = DB::table('items')->get();
+        $customizations = DB::table('customizes')->get();
+        $member_type = DB::table('member_types')->get();
+        $trainers = DB::table('employees')->join('people', 'employees.id', '=', 'people.id')->get();
+        return view('admin.orderForm', compact('customer', 'trainers', 'member_type', 'memberships'));
     }
 
     public function showAll()
