@@ -60,7 +60,7 @@
                                 <td class="text-center">Action</td>
                             </tr>        
                             @forEach ($customers as $value => $customer)
-                                @if($membershipStatus[$value] == 'INACTIVE')
+                                @if($today->diffInDays($customer->end_date, false) < 0)
                                 <tr>
                                     <td>
                                         <span class="dot" style='background-color: gray;'></span>

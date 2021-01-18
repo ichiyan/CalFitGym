@@ -59,7 +59,7 @@
                                 <td class="text-center">Action</td>
                             </tr>        
                             @forEach ($customers as $value => $customer)
-                                @if($membershipStatus[$value] == 'ACTIVE')
+                                @if($today->diffInDays($customer->end_date, false) > 0)
                                 <tr>
                                     <td>
                                         @if($log[$value]->exit == NULL)

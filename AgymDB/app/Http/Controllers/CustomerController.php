@@ -116,7 +116,8 @@ class CustomerController extends Controller
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
         }
 
-        return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'today'));
+        //return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'today'));
+        return view('admin-coreUI.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'today'));
     }
 
     public function showWalk_in($filter)
@@ -136,21 +137,24 @@ class CustomerController extends Controller
 
         $count = 0;
         if($filter == 'inactive'){
-            $file = 'admin.walkinCustomerListI';
+            // $file = 'admin.walkinCustomerListI';
+            $file = 'admin-coreUI.walkinCustomerListI';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) < 0){
                     $count++;
                 }
             }
         } else if($filter == 'active'){
-            $file = 'admin.walkinCustomerListA';
+            // $file = 'admin.walkinCustomerListA';
+            $file = 'admin-coreUI.walkinCustomerListA';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) > 0){
                     $count++;
                 }
             }
         } else {
-            $file = 'admin.walkinCustomerList';
+            //$file = 'admin.walkinCustomerList';
+            $file = 'admin-coreUI.walkinCustomerList';
             $count = DB::table('customers')->where('member_type_id', 1)->count();
         }
 
@@ -179,21 +183,24 @@ class CustomerController extends Controller
 
         $count = 0;
         if($filter == 'inactive'){
-            $file = 'admin.monthlyCustomerListI';
+            //$file = 'admin.monthlyCustomerListI';
+            $file = 'admin-coreUI.monthlyCustomerListI';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) < 0){
                     $count++;
                 }
             }
         } else if($filter == 'active'){
-            $file = 'admin.monthlyCustomerListA';
+            // $file = 'admin.monthlyCustomerListA';
+            $file = 'admin-coreUI.monthlyCustomerListA';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) > 0){
                     $count++;
                 }
             }
         } else {
-            $file = 'admin.monthlyCustomerList';
+            //$file = 'admin.monthlyCustomerList';
+            $file = 'admin-coreUI.monthlyCustomerList';
             $count = DB::table('customers')->where('member_type_id', 2)->count();
         }
 
@@ -224,21 +231,24 @@ class CustomerController extends Controller
 
         $count = 0;
         if($filter == 'inactive'){
-            $file = 'admin.premiumCustomerListI';
+            //$file = 'admin.premiumCustomerListI';
+            $file = 'admin-coreUI.premiumCustomerListI';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) < 0){
                     $count++;
                 }
             }
         } else if($filter == 'active'){
-            $file = 'admin.premiumCustomerListA';
+            //$file = 'admin.premiumCustomerListA';
+            $file = 'admin-coreUI.premiumCustomerListA';
             foreach ($customers as $customer){
                 if($today->diffInDays($customer->end_date, false) > 0){
                     $count++;
                 }
             }
         } else {
-            $file = 'admin.premiumCustomerList';
+            //$file = 'admin.premiumCustomerList';
+            $file = 'admin-coreUI.premiumCustomerList';
             $count = DB::table('customers')->where('member_type_id', 3)->count();
         }
 
