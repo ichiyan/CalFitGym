@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('user_type');
+            $table->enum('user_type', ['admin', 'employee', 'customer']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,7 +30,16 @@ class CreateUsersTable extends Migration
                 'name' => 'Gabriela',
                 'email' => "admin@gmail.com",
                 'password' => bcrypt('p@ssw0rd'),
-                'user_type' => '1'
+                'user_type' => 'admin'
+            )
+        );
+
+        DB::table('users')->insert(
+            array(
+                'name' => 'Anne',
+                'email' => "anne@gmail.com",
+                'password' => bcrypt('adminpass'),
+                'user_type' => 'admin'
             )
         );
 

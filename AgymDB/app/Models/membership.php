@@ -12,6 +12,9 @@ class Membership extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'member_type_id', 'membership_history_id', 'order_id'
+        'member_type_id', 
+        'customer_id', 
+        'order_id',
+        'trainer_id'
     ];
 }

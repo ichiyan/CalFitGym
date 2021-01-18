@@ -12,7 +12,13 @@ class Item extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'item_name', 'price', 'description', 'item_pic'
+        'item_name', 
+        'is_customizable',
+        'has_variations',
+        'has_different_prices',
+        'price', 
+        'description', 
+        'item_pic'
     ];
 
 }

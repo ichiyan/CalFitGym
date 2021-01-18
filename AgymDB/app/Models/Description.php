@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Batch extends Model
+class Description extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
 
     protected $fillable = [
-        'batch_amount', 
-        'amt_left_batch', 
-        'expiry_date', 
-        'date_received', 
-        'item_id', 
-        'employee_id'
+        'description', 'member_type_id'
     ];
-    
+
 }

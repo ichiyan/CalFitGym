@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMembershipHistoriesTable extends Migration
+class CreateDescriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMembershipHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('membership_histories', function (Blueprint $table) {
+        Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->foreignId('customer_id');
+            $table->string('description', 500);
+            $table->foreignId('member_type_id');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateMembershipHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('membership_histories');
+        Schema::dropIfExists('descriptions');
     }
 }

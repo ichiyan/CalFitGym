@@ -19,6 +19,30 @@ class CreateMemberTypesTable extends Migration
             $table->integer('member_type_price');
             $table->integer('length');
         });
+
+        DB::table('member_types')->insert(
+            array(
+                'member_type_name' => 'Walk-In', 
+                'member_type_price'  => 150,
+                'length'  => 1
+            )
+        );
+
+        DB::table('member_types')->insert(
+            array(
+                'member_type_name' => 'Monthly-In', 
+                'member_type_price'  => 1000,
+                'length'  => 30
+            )
+        );
+
+        DB::table('member_types')->insert(
+            array(
+                'member_type_name' => 'Premium', 
+                'member_type_price'  => 3000,
+                'length'  => 30
+            )
+        );
     }
 
     /**

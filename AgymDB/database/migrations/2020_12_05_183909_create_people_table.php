@@ -21,6 +21,7 @@ class CreatePeopleTable extends Migration
             $table->string('lname', 30);
             $table->date('birthday')->nullable();
             $table->string('street_address', 50)->nullable();
+            $table->string('barangay', 50)->nullable();
             $table->string('city', 20)->nullable();
             $table->string('email_address', 50)->nullable();
             $table->integer('phone_number')->nullable();
@@ -29,6 +30,8 @@ class CreatePeopleTable extends Migration
             $table->string('emergency_contact_relationship', 50)->nullable();
             $table->string('photo', 50)->nullable();
             $table->foreignId('user_id')->default(0);
+            // $table->integer('user_id')->unsigned();
+            // $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

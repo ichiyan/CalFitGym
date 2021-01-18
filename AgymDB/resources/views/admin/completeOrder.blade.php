@@ -180,7 +180,7 @@
                                                 <td>
                                                     <input type='hidden' name='person_id' value='{{$customer->id}}'>
                                                     <input type='hidden' name='order_id' value='{{$order_id}}'>
-                                                    <input type='submit' value='Apply'>
+                                                    <input type='submit' value='Check'>
                                                 </td>
                                         </form></tr>
 
@@ -191,6 +191,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="card-header">
                             <div class="form-group row">
@@ -198,33 +199,19 @@
                                     <div class="col-md-6 col-form-label text-md-right"> {{$total_price}} </div>
                             </div>
                             <div class="form-group row"><form method='' action='/admin/order/pay' >
-                                    Amount Recieved: <input type='text' name='payment' required>
-                                    <input type='hidden' name='person_id'value='{{$customer->id}}' >
+                                    <input type='hidden' name='person_id' value='{{$customer->id}}'>
                                     <input type='hidden' name='order_id' value='{{$order_id}}'>
-                                    <input type='submit' value='Check Out'>
+                                    Amount Recieved: <input type='text' name='payment' required>
+                                    <input type='submit' value='Complete Transaction'>
                             </form></div>
                         </div>
-                        @endif
                     </div>
                 </div>  
             </div>
         </main>
     </div>            
 </div>
-<style>
-#new_order_item {
-    display:none;
-}
-#customizations{
-    display:none;
-}
-#customize{
-    display:none;
-}
-#new_membership{
-    display:none;
-}
-</style>
+
 <script>
     function showBorrowerFunction(id) {
 		document.getElementById(id).style.display = "block";

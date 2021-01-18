@@ -12,6 +12,12 @@ class MemberType extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'member_type_name', 'member_type_price'
+        'member_type_name', 
+        'member_type_price',
+        'length'
     ];
+
+    public function advantages(){
+        return $this->hasMany('App\Models\Description');
+    }
 }

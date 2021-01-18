@@ -12,6 +12,9 @@ class Remark extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'content', 'remark_date', 'employee_id', 'customer_id'
+        'content', 
+        'remark_date', 
+        'employee_id', 
+        'customer_id'
     ];
 }

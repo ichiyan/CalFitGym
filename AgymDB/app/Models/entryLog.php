@@ -12,6 +12,13 @@ class EntryLog extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'entry', 'exit', 'person_id', 'logger_id'
+        'entry', 
+        'exit', 
+        'person_id', 
+        'logger_id'
     ];
+
+    public function logs(){
+        return $this->belongsTo('App\Models\Person');
+    }
 }

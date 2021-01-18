@@ -169,15 +169,8 @@
                                     <td> {{$employee->monthly_salary}} </td>
                                     <td> {{$employee->no_of_trainees}} </td>
                                     <td>
-<<<<<<< Updated upstream
                                         <button><a href="{{route('employeeEdit', $employee->id)}}">Update</a></button>
                                         <button><a href="{{route('employeeDetail', $employee->id)}}">Details</a></button>
-=======
-                                        <form>
-                                            <input type='hidden' name='employee_id' value='{{$employee->id}}'>
-                                            <input class="btn btn-sm btn-primary" type="submit" value="Update">
-                                        </form>
->>>>>>> Stashed changes
                                     </td>
                                 </tr>
                             @endforeach

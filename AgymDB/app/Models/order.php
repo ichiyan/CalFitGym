@@ -12,6 +12,11 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'amount_received', 'total_price', 'change', 'order_date', 'customer_id', 'employee_id'
+        'amount_received', 
+        'total_price', 
+        'change', 
+        'order_date', 
+        'customer_id', 
+        'employee_id'
     ];
 }

@@ -29,8 +29,7 @@
 
     <!-- Nav Item - Employees -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="{{ url('/admin/employeeList') }}" >
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Employees</span>
         </a>
@@ -38,8 +37,7 @@
 
     <!-- Nav Item - Customers -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="/admin/customerList">
             <i class="fas fa-fw fa-user"></i>
             <span>Customers</span>
         </a>
@@ -47,8 +45,7 @@
 
     <!-- Nav Item - Inventory -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="/admin/inventoryList">
             <i class="fas fa-fw fa-boxes"></i>
             <span>Inventory</span>
         </a>
@@ -56,8 +53,7 @@
 
     <!-- Nav Item - Order -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="/admin/orderList">
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Order</span>
         </a>
@@ -65,8 +61,7 @@
 
     <!-- Nav Item - Products -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" >
             <i class="fas fa-fw fa-store"></i>
             <span>Products</span>
         </a>
@@ -74,8 +69,7 @@
 
     <!-- Nav Item - Rates & Plans -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="/admin/ratesList" >
             <i class="fas fa-fw fa-tags"></i>
             <span>Rates & Plans</span>
         </a>
@@ -84,8 +78,7 @@
 
     <!-- Nav Item - Events & Promos -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="/admin/eventsList" >
             <i class="fas fa-fw fa-calendar-alt"></i>
             <span>Events & Promos</span>
         </a>
@@ -93,8 +86,7 @@
 
      <!-- Nav Item - Facility -->
      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" >
             <i class="fas fa-fw fa-dumbbell"></i>
             <span>Facility</span>
         </a>
