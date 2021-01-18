@@ -83,7 +83,8 @@ Route::get('/admin/employee/{id}/detail', [App\Http\Controllers\EmployeeControll
 Route::get('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
 Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employeeEdit');
 Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
-Route::delete('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
+Route::get('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
+Route::get('/admin/employee/{id}/rehire', [App\Http\Controllers\EmployeeController::class, 'rehire']);
 Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
     $user_id = DB::table('users')->orderBy("id", "desc")->first()->id;
     $user = User::findOrFail($user_id);

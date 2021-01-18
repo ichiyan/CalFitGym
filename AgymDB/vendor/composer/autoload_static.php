@@ -593,10 +593,7 @@ class ComposerStaticInit6c4b10dc5bfe034114a0cf2d0ba2b15f
         'App\\Models\\Person' => __DIR__ . '/../..' . '/app/Models/Person.php',
         'App\\Models\\Remark' => __DIR__ . '/../..' . '/app/Models/Remark.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-<<<<<<< HEAD
         'App\\Models\\Variation' => __DIR__ . '/../..' . '/app/Models/Variation.php',
-=======
->>>>>>> d7fe1c377e4e52c6f3e1cdf2f78a906d8cf1693b
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

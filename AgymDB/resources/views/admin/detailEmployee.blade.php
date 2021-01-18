@@ -92,7 +92,11 @@
                                             <label>Trainees ({{$employee->no_of_trainees}})</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Trainee Names</p>
+                                            <ul>
+                                            @forEach($trainees as $trainee)
+                                                <li> {{$trainee->fname}} {{$trainee->lname}} </li>
+                                            @endforeach
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="row">

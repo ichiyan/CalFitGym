@@ -90,8 +90,12 @@ class EmployeeController extends Controller
                         ->join('people', 'employees.id', '=', 'people.id')
                         ->where('employees.id', '=', $id)
                         ->first();
+        $trainees = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.assigned_employee_id', $id)
+                        ->get();
         
-        return view('admin.detailEmployee', compact('employee'));
+        return view('admin.detailEmployee', compact('employee', 'trainees'));
         //return view('admin-coreUI.detailEmployee', compact('employee'));
     }
 
@@ -120,8 +124,7 @@ class EmployeeController extends Controller
 
         $active = 'all';
 
-        return view('admin.employeeList', compact('employees', 'bday', 'count', 'active'));
-        //return view('admin-coreUI.employeeList', compact('employees', 'bday', 'count', 'active'));
+        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active'));
     }
 
 
@@ -239,6 +242,20 @@ class EmployeeController extends Controller
 
         $employee = Employee::findOrFail($id);
         $employee->date_separated = $today;
+        $employee->save();
+
+        return redirect('/admin/employeeList/current');
+    }
+
+    public function rehire($id)
+    {
+        //
+        $today = Carbon::today();
+
+        $employee = Employee::findOrFail($id);
+        $employee->date_hired = $today;
+        $employee->date_separated = NULL;
+        $employee->save();
 
         return redirect('/admin/employeeList/current');
     }
