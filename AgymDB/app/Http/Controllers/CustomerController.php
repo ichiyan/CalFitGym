@@ -126,7 +126,7 @@ class CustomerController extends Controller
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
         }
 
-        return view('admin-coreUI.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));
+        return view('admin.customerList', compact('customers', 'age', 'log', 'count', 'member_type', 'membershipStatus'));
     }
 
     public function showWalk_in($filter)

@@ -89,7 +89,7 @@
                                     <h2>Quality Equipment</h2>
                                     <i class="icofont-gym-alt-2 icofont-2x"></i>
                                     <p>We have equipments for each and every possibly area our members want to workout on. These equipments are not only durable but diverse in order to accomodate a variety of heights and sizes.</p>
-                                    <a href="">View Gallery</a>
+                                    <a href="facility">View Gallery</a>
                                 </div>
                             </div>
                             <div class="col-lg-8 large-thumb" data-aos="fade-left"></div>
@@ -104,7 +104,7 @@
                                     <h2>Personalized Coaching</h2>
                                     <i class="icofont-gym icofont-2x"></i>
                                     <p>Sometimes, one must seek help to those with experience or professional in order to get the body you desire. </p>
-                                    <a href="">View Rates</a>
+                                    <a href="/#rates">View Rates</a>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                   <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-wifi"></i></div>
-                      <h4><a href="">Wi-Fi</a></h4>
+                      <h4><a href="facility">Wi-Fi</a></h4>
                       <p>FREE WI-FI 24/7 for all of our members in order to listen to spotify or any other social media.</p>
                     </div>
                   </div>
@@ -179,7 +179,7 @@
                   <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="150">
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-closet"></i></div>
-                      <h4><a href="">Locker Room</a></h4>
+                      <h4><a href="facility">Locker Room</a></h4>
                       <p>Over 50 Lockers to safely put your items while you workout!</p>
                     </div>
                   </div>
@@ -187,7 +187,7 @@
                   <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <div class="icon-box">
                       <div class="icon"><i class="bx bx-droplet"></i></div>
-                      <h4><a href="">Shower Room</a></h4>
+                      <h4><a href="facility">Shower Room</a></h4>
                       <p>Our gym features shower rooms for our member to bath after an intense workout!</p>
                     </div>
                   </div>

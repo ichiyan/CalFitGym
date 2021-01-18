@@ -71,6 +71,7 @@ Route::get('/dashboard2', function(){
 
 Route::view('/admin/employeeList', 'admin.employeeList');
 Route::view('/facility', 'facility');
+Route::view('/admin-test/customerList', 'admin.customerList');
 
 /* test */
 Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');
