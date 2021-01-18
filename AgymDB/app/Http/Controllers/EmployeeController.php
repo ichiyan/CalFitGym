@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 use App\Models\Basket;
@@ -66,7 +67,7 @@ class EmployeeController extends Controller
 
         $user_id = Auth::id();
         $logger = DB::table('people')->where('user_id', $user_id)->first();
-        $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger]);
+        $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger->id]);
         $init_log->save();
 
         return redirect('/admin/employeeList/');
