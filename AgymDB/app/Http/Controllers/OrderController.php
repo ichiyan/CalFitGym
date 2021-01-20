@@ -180,9 +180,10 @@ class OrderController extends Controller
         //
         $customer = Person::findOrFail($request->get('person_id'));
         $order = Order::findOrFail($request->get('order_id'));
-        $order->amount_recieved = $request->get('payment');
+        $order->amount_received = $request->get('payment');
         $order->change = $request->get('payment') - $order->total_price;
-        return redirect()->route('orderDetail', [$customer->id]);
+        $order->save();
+        return redirect()->route('orderDetail', [$request->get('order_id')]);
     }
 
     public function order()
@@ -289,11 +290,19 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        $order = Order::findOrFail($id);
+        $customer = Person::findOrFail($order->customer_id);
+        $customer_details = Customer::findOrFail($order->customer_id);
+        $basket = Basket::where('order_id', $order->id)->get();
+
         $products = DB::table('items')->get();
         $customizations = DB::table('customizes')->get();
         $member_type = DB::table('member_types')->get();
-        $trainers = DB::table('employees')->join('people', 'employees.id', '=', 'people.id')->get();
-        return view('admin.orderForm', compact('customer', 'trainers', 'member_type', 'memberships'));
+        $trainer = Person::findOrFail($customer_details->assigned_employee_id);
+        $variations = DB::table('variations')->get();
+        $memberships = DB::table('memberships')->where('order_id', $order_id)->get();
+        
+        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 'basket', 'products', 'trainer', 'member_type', 'customizations', 'variations', 'memberships'));
     }
 
     public function showAll()

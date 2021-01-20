@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">{{ __('CUSTOMERS') }}</div>
+    <div class="card-header">{{ __('PURCHASING') }}</div>
     <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">
@@ -31,8 +31,6 @@
                             <div class="card-header"> Find customer who will order </div>
                         @else
                             <div class="card-header">
-                                <div>Order Form</div>
-
                                 <div class="form-group row">
                                     <div class="col-md-2 col-form-label text-md-right"> Order ID: {{$order_id}} </div>
                                     <div class="col-md-4 col-form-label text-md-right"> Buyer ID: {{$person->id}} </div>
