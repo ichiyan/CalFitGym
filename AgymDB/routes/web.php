@@ -120,6 +120,7 @@ Route::get('/admin/order/new', [App\Http\Controllers\OrderController::class, 'or
 Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
 Route::get('/admin/order/renew', [App\Http\Controllers\OrderController::class, 'renew']);
 Route::get('/admin/order/customize', [App\Http\Controllers\OrderController::class, 'customize']);
+Route::get('/admin/order/variation', [App\Http\Controllers\OrderController::class, 'variation']);
 Route::get('/admin/order/trainer', [App\Http\Controllers\OrderController::class, 'trainer']);
 Route::get('/admin/order/pay', [App\Http\Controllers\OrderController::class, 'pay']);
 Route::get('/admin/order/find', [App\Http\Controllers\OrderController::class, 'find']);
@@ -128,6 +129,7 @@ Route::get('/admin/order/{id}/show', [App\Http\Controllers\OrderController::clas
 Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
 Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
+Route::delete('/admin/order/{id}/cancel', [App\Http\Controllers\OrderController::class, 'cancel']);
 
 //for the rates and plans
 Route::get('/admin/ratesList', [App\Http\Controllers\MemberTypeController::class, 'showAll']);

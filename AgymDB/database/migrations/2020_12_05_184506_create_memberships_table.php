@@ -18,7 +18,7 @@ class CreateMembershipsTable extends Migration
             $table->foreignId('member_type_id');
             $table->foreignId('customer_id');
             $table->foreignId('order_id');
-            $table->foreignId('trainer_id');
+            $table->foreignId('trainer_id')->nullable();
         });
     }
 
