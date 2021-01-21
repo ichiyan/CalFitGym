@@ -210,8 +210,10 @@ class OrderController extends Controller
 
         if($id == NULL || $id==0){ //customer hasn't been selected yet or can't be found
             $person = NULL;
+            $customer_details = NULL;
         } else {
             $person = Person::findOrFail($id);
+            $customer_details = Customer::findOrFail($id);
 
             if(DB::table('orders')->count() > 0){
                 $oldOrder = DB::table('orders')->orderBy("id", "desc")->first();
@@ -245,7 +247,7 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.orderForm', compact('id', 'person', 'variations', 'trainers', 'total_price', 'products', 'order_id', 'basket', 'customizations', 'member_type', 'memberships'));
+        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'variations', 'trainers', 'total_price', 'products', 'order_id', 'basket', 'customizations', 'member_type', 'memberships'));
     }
     
     public function find(Request $request)

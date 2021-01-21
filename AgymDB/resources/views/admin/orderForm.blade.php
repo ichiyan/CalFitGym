@@ -137,7 +137,7 @@
                                                                     <select name='trainer' required>
                                                                         <option> -- Trainer -- </option>
                                                                         @forEach ($trainers as $trainer)
-                                                                            @if($customer->assigned_employee_id == $trainer->id)
+                                                                            @if($customer_details->assigned_employee_id == $trainer->id)
                                                                                 <option value='{{$trainer->id}}' selected> {{$trainer->fname}}  {{$trainer->lname}} </option>
                                                                             @else
                                                                                 <option value='{{$trainer->id}}'> {{$trainer->fname}}  {{$trainer->lname}} </option>
