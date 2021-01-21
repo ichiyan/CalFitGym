@@ -11383,6 +11383,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .profile-head h6{
     color: #0062cc;
+    font-weight: 700;
 }
 .btn-rounded-light{
     border: none;
@@ -11441,6 +11442,7 @@ body.sidebar-toggled footer.sticky-footer {
     font-size: 15px;
     font-weight: 600;
 }
+
 .profile-head .nav-tabs{
     margin-bottom:5%;
 }
@@ -11478,3 +11480,47 @@ body.sidebar-toggled footer.sticky-footer {
     font-weight: 600;
     color: #0062cc;
 }
+
+.list ul{
+    font-weight: 600;
+    color: #0062cc;
+    padding-left: 0;
+}
+
+ /*--------------------------------------------------------------
+    log button
+  --------------------------------------------------------------*/
+
+.log-btn {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.login {
+    background-color: rgb(99, 220, 0);
+}
+
+.logout {
+    background-color: red;
+}
+
+.inactive {
+    background-color: rgb(159, 159, 159);
+}
+
+
+.count-heading{
+    font-size: 15px;
+    color: #818182;
+}
+.count-heading span{
+    color: #495057;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.tooltip {
+    font-size: 12px !important;
+  }

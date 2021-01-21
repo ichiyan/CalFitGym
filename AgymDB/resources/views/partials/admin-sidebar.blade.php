@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('home') ? 'active' : '' }} ">
         <a class="nav-link" href="{{ url('/home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -28,16 +28,16 @@
     </div>
 
     <!-- Nav Item - Employees -->
-    <li class="nav-item active">
-        <a class="nav-link collapsed" href="/admin/employeeList">
+    <li class="nav-item  @if (str_contains(url()->current(), 'admin/employeeList')) active @endif ">
+        <a class="nav-link collapsed" href="{{ url('/admin/employeeList/all/all') }}">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Employees</span>
         </a>
     </li>
 
     <!-- Nav Item - Customers -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="/admin/customerList">
+    <li class="nav-item  @if (str_contains(url()->current(), 'admin/customerList')) active @endif  ">
+        <a class="nav-link collapsed" href="/admin/customerList/all/all">
             <i class="fas fa-fw fa-user"></i>
             <span>Customers</span>
         </a>

@@ -72,11 +72,12 @@ Route::view('/admin/employeeList', 'admin.employeeList');
 Route::view('/facility', 'facility');
 Route::view('/admin-test/customerList', 'admin.customerList');
 
+
 /* test */
 Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');
 
 // Route::resource('/admin/employeeList/', EmployeeController::class);
-Route::get('/admin/employeeList/', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
+Route::get('/admin/employeeList/all/{stat}', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
 Route::get('/admin/employee/{id}/detail', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
@@ -97,7 +98,7 @@ Route::get('/new/form', function(){ //after submitting the registration, this re
 
 
 //Route::resource('/admin/customerList', CustomerController::class);
-Route::get('/admin/customerList/', [App\Http\Controllers\CustomerController::class, 'showAll']);
+Route::get('/admin/customerList/all/{stat}', [App\Http\Controllers\CustomerController::class, 'showAll']);
 Route::get('/admin/customerList/walk_in/{stat}', [App\Http\Controllers\CustomerController::class, 'showWalk_in']);
 Route::get('/admin/customerList/monthly/{stat}', [App\Http\Controllers\CustomerController::class, 'showMonthly']);
 Route::get('/admin/customerList/premium/{stat}', [App\Http\Controllers\CustomerController::class, 'showPremium']);
@@ -115,7 +116,7 @@ Route::get('/admin/inventory/{id}/edit', [App\Http\Controllers\InventoryLogContr
 Route::put('/admin/inventory/{id}/update', [App\Http\Controllers\InventoryLogController::class, 'update']);
 Route::delete('/admin/inventory/{id}/delete', [App\Http\Controllers\InventoryLogController::class, 'destroy']);
 
-Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'order']); 
+Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'order']);
 Route::get('/admin/order/new', [App\Http\Controllers\OrderController::class, 'order']);
 Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
 Route::get('/admin/order/renew', [App\Http\Controllers\OrderController::class, 'renew']);

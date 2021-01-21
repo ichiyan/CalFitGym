@@ -18,10 +18,10 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Update Employee Record</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Create Employee Record</h6>
         </div>
         <div class="card-body">
-            <form method='post' action='/admin/employee/{{$employee->id}}/update'>
+            <form method='' action='/admin/employee/create'>
                 {{csrf_field()}}
                 <input type='hidden' name='_method' value='PUT'>
                 <div>
@@ -41,21 +41,21 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Firstname: </label>
                         <div class="col-md-6">
-                            <input type='text' name='fname' required value='{{$person->fname}}'>
+                            <input type='text' name='fname' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Surname: </label>
                         <div class="col-md-6">
-                            <input type='text' name='lname' required value='{{$person->lname}}'>
+                            <input type='text' name='lname' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Birthday: </label>
                         <div class="col-md-6">
-                            <input type='date' name='birthday' required value='{{$person->birthday}}'>
+                            <input type='date' name='birthday' required>
                         </div>
                     </div>
                 </div>
@@ -65,35 +65,35 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Street Address: </label>
                         <div class="col-md-6">
-                            <input type='text' name='street_address' required value='{{$person->street_address}}'>
+                            <input type='text' name='street_address' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Barangay: </label>
                         <div class="col-md-6">
-                            <input type='text' name='barangay' required value='{{$person->barangay}}'>
+                            <input type='text' name='barangay' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> City: </label>
                         <div class="col-md-6">
-                            <input type='text' name='city' required value='{{$person->city}}'>
+                            <input type='text' name='city' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Phone Number: </label>
                         <div class="col-md-6">
-                            <input type='tel' name='phone_number' required value='{{$person->phone_number}}'>
+                            <input type='tel' name='phone_number' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Email Address: </label>
                         <div class="col-md-6">
-                            <input type='email' name='email_address' required value='{{$person->email_address}}'>
+                            <input type='email' name='email_address' required>
                         </div>
                     </div>
                 </div>
@@ -103,21 +103,21 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Name: </label>
                         <div class="col-md-6">
-                            <input type='text' name='emergency_contact_name' required value='{{$person->emergency_contact_name}}'>
+                            <input type='text' name='emergency_contact_name' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Contact Number: </label>
                         <div class="col-md-6">
-                            <input type='tel' name='emergency_contact_number' required value='{{$person->emergency_contact_number}}'>
+                            <input type='tel' name='emergency_contact_number' required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Relationship: </label>
                         <div class="col-md-6">
-                            <input type='text' name='emergency_contact_relationship' required value='{{$person->emergency_contact_relationship}}'>
+                            <input type='text' name='relationship' required>
                         </div>
                     </div>
                 </div>
@@ -127,14 +127,15 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Monthly Salary: </label>
                         <div class="col-md-6">
-                            <input type='number' name='monthly_salary' required value='{{$employee->monthly_salary}}'>
+                            <input type='number' name='monthly_salary' required>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <div class="form-row justify-content-center">
-                    <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Update'></div>
-                    <div class="col-md-2"><button class="btn btn-rounded-light"><a href='{{ url()->previous() }}'>Cancel</a></button></div>
+                    <input type='hidden' name='user_id' value='{{$user->id}}'>
+                    <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Register'></div>
+                    <div class="col-md-2"><button class="btn btn-rounded-light"><a href='/admin/employeeList'>Cancel</a></button></div>
                 </div>
             </form>
         </div>

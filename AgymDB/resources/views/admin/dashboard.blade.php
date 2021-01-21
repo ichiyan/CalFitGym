@@ -1,7 +1,7 @@
 @extends('layouts.admin-app')
 
 @section('sidebar')
-    @include('admin.admin-sidebar')
+    @include('partials.admin-sidebar')
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <div class="btn-toolbar">
                 <div class="btn-group mr-3">
-                    <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-coral shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
+                    <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>

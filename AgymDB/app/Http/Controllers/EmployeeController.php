@@ -35,7 +35,8 @@ class EmployeeController extends Controller
     public function index()
     {
 
-
+        $sidebarActive = 'employees';
+        return view('admin.employeeList', compact('sidebarActive'));
 
     }
 
@@ -101,13 +102,13 @@ class EmployeeController extends Controller
                         ->join('people', 'customers.id', '=', 'people.id')
                         ->where('customers.assigned_employee_id', $id)
                         ->get();
-        
+
         return view('admin.detailEmployee', compact('employee', 'trainees'));
         //return view('admin-coreUI.detailEmployee', compact('employee'));
     }
 
 
-    public function showAll()
+    public function showAll($filter)
     {
         $employees = DB::table('employees')
                         ->join('people', 'employees.id', '=', 'people.id')
@@ -124,19 +125,44 @@ class EmployeeController extends Controller
                         ->whereNotNull('date_separated')
                         ->count();
 
+
         $bday = array();
         foreach ($employees as $value => $employee) {
             $bday[$value] = Carbon::parse($employee->birthday)->age;
         }
-
-        $active = 'all';
 
         $log = array();
         foreach ($employees as $key => $employee) {
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
         }
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
+
+        $count = 0;
+
+        if($filter == 'logged_in') {
+            $file = 'admin.allEmployeeListLI';
+            foreach ($employees as $key => $employee){
+                if($employee->date_separated == NULL && $log[$key]->exit == NULL){
+                    $count++;
+                }
+            }
+
+        } else if($filter == 'logged_out') {
+            $file = 'admin.allEmployeeListLO';
+            foreach ($employees as $key =>  $employee){
+                if($employee->date_separated == NULL && $log[$key]->exit != NULL){
+                    $count++;
+                }
+            }
+
+        }else{
+            $file = 'admin.allEmployeeList';
+        }
+
+        $active = 'all';
+
+        return view($file, compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'count', 'active', 'log' ));
+        //return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
 
@@ -170,7 +196,7 @@ class EmployeeController extends Controller
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
         }
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
+        return view('admin.allEmployeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
 
@@ -204,7 +230,7 @@ class EmployeeController extends Controller
             $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $employee->id)->first();
         }
 
-        return view('admin.employeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
+        return view('admin.allEmployeeList', compact('employees', 'bday', 'countAll', 'countCurrent', 'countPrevious', 'active', 'log'));
     }
 
     /**
