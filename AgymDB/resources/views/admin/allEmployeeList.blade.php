@@ -2,7 +2,7 @@
 
 @section('sidebar')
 
-    @include('partials.sidebar-employees-active')
+    @include('partials.admin-sidebar')
 
 @endsection
 
@@ -21,25 +21,15 @@
 
     <!-- Table  -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link @if($active == 'all') active @endif" href='/admin/employeeList'>All ({{ $countAll }})</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @if($active == 'current') active @endif" href='/admin/employeeList/current'>Current ({{ $countCurrent }})</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @if($active == 'previous') active @endif" href='/admin/employeeList/previous'>Previous ({{ $countPrevious }})</a>
-                </li>
-            </ul>
-        </div>
+
+        @include('partials.employeeList-tabs')
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>  </th>
+                            <th>Log</th>
                             <th>#</th>
                             <th>Name</th>
                             <th>Age</th>
@@ -50,31 +40,18 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>  </th>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Email Address</th>
-                            <th>Contact No.</th>
-                            <th>Monthly Salary</th>
-                            <th>Trainees</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forEach ($employees as $value => $employee)
                                 <tr>
                                     <td>
                                     @if (is_null( $employee->date_separated ) )
                                         @if($log[$value]->exit == NULL)
-                                            <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="dot" style='background-color: green;'></span></a>
+                                            <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="log-btn login" data-toggle="tooltip" data-placement="top" title="click to logout"></span></a>
                                         @else
-                                            <a href="/admin/log/{{$employee->id}}/create"><span class="dot" style='background-color: red;'></span></a>
+                                            <a href="/admin/log/{{$employee->id}}/create"><span class="log-btn logout" data-toggle="tooltip" data-placement="top" title="click to login"></span></a>
                                         @endif
                                     @else
-                                        <span class="dot" style='background-color: gray;'></span>
+                                        <span class="log-btn inactive" data-toggle="tooltip" data-placement="top" title="inactive"></span>
                                     @endif
                                     </td>
 
@@ -94,25 +71,20 @@
                                         <button type="button" class="btn btn-sm btn-info"><a href="{{route('employeeDetail', $employee->id)}}" style="color: white">Info</a></button>
                                         <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
                                         @if (is_null( $employee->date_separated ) )
-                                            <button type="button" class="btn btn-sm btn-danger"><a href="/admin/employee/{{$employee->id}}/delete" style="color: white">Dismiss</a></button>
-                                        @else
-                                            <button type="button" class="btn btn-sm btn-danger"><a href="/admin/employee/{{$employee->id}}/rehire" style="color: white">Rehire</a></button>
-                                        @endif
+                                            <button type="button" class="btn btn-sm btn-danger"><a href="" data-toggle="modal" data-target="#dismissEmployeeModal" style="color: white">Dismiss</a></button>
+                                            @else
+                                            <button type="button" class="btn btn-sm btn-warning"><a href="" data-toggle="modal" data-target="#rehireEmployeeModal"  style="color: white">Rehire</a></button>
+                                         @endif
                                     </td>
                                 </tr>
-                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<style>
-    .dot {
-        height: 15px;
-        width: 15px;
-        border-radius: 50%;
-        display: inline-block;
-    }
-</style>
+
+@include('partials.employee-modals')
+
 @endsection
