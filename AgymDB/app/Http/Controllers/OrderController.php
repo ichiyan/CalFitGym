@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use App\Models\Basket;
 use App\Models\Batch;
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Customize;
 use App\Models\Description;
@@ -25,6 +26,7 @@ use App\Models\Person;
 use App\Models\Remark;
 use App\Models\User;
 use App\Models\Variation;
+use App\Models\VariationCategory;
 
 class OrderController extends Controller
 {
@@ -89,8 +91,10 @@ class OrderController extends Controller
         $basket->save();
 
         $new_basket = Basket::orderBy("id", "desc")->first();
-        $order->total_price = $order->total_price + ($product->price * $new_basket->quantity);
-        $order->save();
+        if($product->has_different_prices == 0){  //price is as listed on items table
+            $order->total_price = $order->total_price + ($product->price * $new_basket->quantity);
+            $order->save();
+        }
 
         return redirect()->route('orderForm', [$customer->id]);
     }
@@ -100,8 +104,40 @@ class OrderController extends Controller
         //
         $customer = Person::findOrFail($request->get('person_id'));
         $basket = Basket::findOrFail($request->get('basket_item_id'));
-        $basket->variation_id = $request->get('variation');
-        $basket->save();
+        $product = Item::findOrFail($basket->item_id);
+        $order = Order::findOrFail($basket->order_id);
+        $variation_category = DB::table('variation_categories')->get();
+
+        foreach($variation_category as $var_cat){
+            if($request->get($var_cat->category_name) != NULL){
+                $variation = Variation::findOrFail($request->get($var_cat->category_name));
+                if($product->has_different_prices == 1 && $var_cat->price_priority == 1){
+                    $order->total_price = $order->total_price + ($variation->price * $basket->quantity);
+                    $order->save();
+                }
+                $variation->chosenProduct()->attach($request->get('basket_item_id'));
+            } 
+        }
+
+        return redirect()->route('orderForm', [$customer->id]);
+    }
+    
+    public function remove_variation(Request $request, $id)
+    {
+        //
+        $customer = Person::findOrFail($request->get('person_id'));
+        $basket = Basket::findOrFail($request->get('basket_item_id'));
+        $product = Item::findOrFail($basket->item_id);
+        $order = Order::findOrFail($basket->order_id);
+        $basket_var = DB::table('basket_variation')->whereId($id)->first();
+        $var = Variation::findOrFail($basket_var->variation_id);
+        $var_cat = VariationCategory::findOrFail($var->variation_category_id);
+
+        if($product->has_different_prices == 1 && $var_cat->price_priority == 1){
+            $order->total_price = $order->total_price - ($var->price * $basket->quantity);
+            $order->save();
+        }
+        $variation = DB::table('basket_variation')->whereId($id)->delete();
 
         return redirect()->route('orderForm', [$customer->id]);
     }
@@ -205,13 +241,23 @@ class OrderController extends Controller
         $member_type = DB::table('member_types')->get();
         $trainers = DB::table('employees')->join('people', 'employees.id', '=', 'people.id')->get();
         $variations = DB::table('variations')->get();
+        $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
+        $variation_category = DB::table('variation_categories')->get();
 
         if($id == NULL || $id==0){ //customer hasn't been selected yet or can't be found
             $person = NULL;
             $customer_details = NULL;
+            $employee_details = NULL;
         } else {
             $person = Person::findOrFail($id);
-            $customer_details = Customer::findOrFail($id);
+            if(Customer::whereId($id)->exists()){
+                $customer_details = Customer::findOrFail($id);
+                $employee_details = NULL;
+            }else{
+                $employee_details = Employee::findOrFail($id);
+                $customer_details = NULL;
+            }
+            
 
             if(DB::table('orders')->count() > 0){
                 $oldOrder = DB::table('orders')->orderBy("id", "desc")->first();
@@ -245,7 +291,7 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'variations', 'trainers', 'total_price', 'products', 'order_id', 'basket', 'customizations', 'member_type', 'memberships'));
+        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'employee_details', 'variations', 'variation_category', 'chosen_var', 'trainers', 'total_price', 'products', 'order_id', 'basket', 'customizations', 'member_type', 'memberships'));
     }
     
     public function find(Request $request)
@@ -300,9 +346,14 @@ class OrderController extends Controller
         $member_type = DB::table('member_types')->get();
         $trainer = Person::findOrFail($customer_details->assigned_employee_id);
         $variations = DB::table('variations')->get();
+        $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
+        $variation_category = DB::table('variation_categories')->get();
         $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
         
-        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 'basket', 'products', 'trainer', 'member_type', 'customizations', 'variations', 'memberships'));
+        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 
+                                                    'basket', 'products', 'trainer', 'member_type', 
+                                                    'customizations', 'variations', 'chosen_var', 
+                                                    'variation_category', 'memberships'));
     }
 
     public function showAll()

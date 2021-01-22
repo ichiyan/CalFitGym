@@ -131,6 +131,7 @@ Route::get('/admin/order/{id}/edit', [App\Http\Controllers\OrderController::clas
 Route::put('/admin/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/admin/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
 Route::delete('/admin/order/{id}/cancel', [App\Http\Controllers\OrderController::class, 'cancel']);
+Route::delete('/admin/order/{id}/remove_variation', [App\Http\Controllers\OrderController::class, 'remove_variation']);
 
 //for the rates and plans
 Route::get('/admin/ratesList', [App\Http\Controllers\MemberTypeController::class, 'showAll']);

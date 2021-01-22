@@ -15,4 +15,8 @@ class Variation extends Model
         'name', 'price', 'description', 'item_id'
     ];
     
+    public function chosenProduct(){
+        return $this->belongsToMany('App\Models\Basket');
+    }
+
 }

@@ -31,5 +31,9 @@ class Basket extends Model
     public function boughtMembership(){
         return $this->hasOne('App\Models\Membership');
     }
+
+    public function variants(){
+        return $this->belongsToMany('App\Models\Variation');
+    }
 }
  

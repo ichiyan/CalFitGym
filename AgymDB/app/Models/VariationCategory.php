@@ -5,19 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class VariationCategory extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
     protected $fillable = [
-        'amount_received', 
-        'total_price', 
-        'change', 
-        'order_date', 
-        'customer_id', 
-        'employee_id'
+        'category_name', 'price_priority'
     ];
-
 }

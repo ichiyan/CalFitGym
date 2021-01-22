@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->string('description', 200);
             $table->string('item_pic', 100);
+            $table->foreignId('category_id');
         });
     }
 

@@ -20,7 +20,6 @@ class CreateBasketsTable extends Migration
             $table->foreignId('item_id')->nullable();
             $table->foreignId('batch_id')->nullable();
             $table->foreignId('customize_id')->nullable();
-            $table->foreignId('variation_id')->nullable()->default(NULL);
             $table->foreignId('membership_id')->nullable();
         });
     }

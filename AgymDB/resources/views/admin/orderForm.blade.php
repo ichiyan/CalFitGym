@@ -62,10 +62,14 @@
                                                                 @if($product->has_different_prices == 0)
                                                                     {{$product->price}}
                                                                 @else
-                                                                    @forEach ($variations as $variation)
-                                                                        @if($basket_item->variation_id == $variation->id)
-                                                                            {{$variation->price}}
-                                                                        @endif
+                                                                    @forEach ($variation_category as $var_cat)
+                                                                        @forEach ($chosen_var as $variation)
+                                                                            @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
+                                                                                    @if($var_cat->price_priority == 1)
+                                                                                        {{$variation->price}}
+                                                                                    @endif
+                                                                            @endif
+                                                                        @endforeach
                                                                     @endforeach
                                                                 @endif
                                                             </td>
@@ -92,24 +96,44 @@
                                                                 @endif
                                                             @endif
 
+                                                                <ul>
+                                                                @forEach ($chosen_var as $c_var)
+                                                                    @if($c_var->basket_id == $basket_item->id)
+                                                                        <li>
+                                                                            @forEach ($variation_category as $var_cat)
+                                                                                @if($var_cat->id == $c_var->variation_category_id)
+                                                                                    {{$var_cat->category_name}} :
+                                                                                @endif
+                                                                            @endforeach
+                                                                            {{$c_var->name}}
+                                                                            <form method='post' action='/admin/order/{{$c_var->id}}/remove_variation'>
+                                                                                {{csrf_field()}}
+                                                                                <input type='hidden' name='_method' value='DELETE'>
+                                                                                <input type='hidden' name='person_id' value='{{$person->id}}'>
+                                                                                <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
+                                                                                <input type='submit' value=' - '>
+                                                                            </form>
+                                                                        </li>
+                                                                    @endif
+                                                                @endforeach
+                                                                <ul>
+
                                                             @if($product->has_variations == 1)
-                                                                <form method='' action='/admin/order/variation' >
-                                                                    <select name='variation' required>
-                                                                        <option> -- Variation -- </option>
-                                                                        @forEach ($variations as $variation)
-                                                                            @if($basket_item->item_id == $variation->item_id)
-                                                                                @if($basket_item->variation_id == $variation->id)
-                                                                                    <option value='{{$variation->id}}' selected> {{$variation->name}} </option>
-                                                                                @else
+                                                                @forEach ($variation_category as $var_cat)
+                                                                    <form method='' action='/admin/order/variation' >
+                                                                        <select name='{{$var_cat->category_name}}' required>
+                                                                            <option> -- {{$var_cat->category_name}} -- </option>
+                                                                            @forEach ($variations as $variation)
+                                                                                @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
                                                                                     <option value='{{$variation->id}}'> {{$variation->name}} </option>
                                                                                 @endif
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <input type='hidden' name='person_id' value='{{$person->id}}'>
-                                                                    <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
-                                                                    <input type='submit' value='@if($basket_item->variation_id == NULL) Choose @else Change @endif'>
-                                                                </form>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        <input type='hidden' name='person_id' value='{{$person->id}}'>
+                                                                        <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
+                                                                        <input type='submit' value='Choose'>
+                                                                    </form>
+                                                                @endforeach
                                                             @endif
                                                             </td>
                                                             
@@ -191,33 +215,38 @@
                                             </td>
                                         </form></tr>
 
-                                        <tr id='new_membership'><form method='' action='/admin/order/renew' >
-                                            <td> </td>
+                                        @if($employee_details == NULL)
+                                            <tr id='new_membership'><form method='' action='/admin/order/renew' >
+                                                <td> </td>
 
-                                            <td>
-                                                <select name='membership_type_id' required>
-                                                    <option> -- Membership -- </option>
-                                                    @forEach ($member_type as $mem_type)
-                                                        <option value='{{$mem_type->id}}'> {{$mem_type->member_type_name}} (Php. {{$mem_type->member_type_price}} )</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
+                                                <td>
+                                                    <select name='membership_type_id' required>
+                                                        <option> -- Membership -- </option>
+                                                        @forEach ($member_type as $mem_type)
+                                                            <option value='{{$mem_type->id}}'> {{$mem_type->member_type_name}} (Php. {{$mem_type->member_type_price}} )</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
 
-                                            <td>  </td> <!-- product price -->
-                                            <td> <input type='text' name='quantity' value=1 required> </td>
-                                            <td></td> <!-- customizations -->
+                                                <td>  </td> <!-- product price -->
+                                                <td> <input type='text' name='quantity' value=1 required> </td>
+                                                <td></td> <!-- customizations -->
 
-                                            <td>
-                                                <input type='hidden' name='person_id' value='{{$person->id}}'>
-                                                <input type='hidden' name='order_id' value='{{$order_id}}'>
-                                                <input type='submit' value='Apply'>
-                                            </td>
-                                        </form></tr>
+                                                <td>
+                                                    <input type='hidden' name='person_id' value='{{$person->id}}'>
+                                                    <input type='hidden' name='order_id' value='{{$order_id}}'>
+                                                    <input type='submit' value='Apply'>
+                                                </td>
+                                            </form></tr>
+                                        @endif
+
                                     </table>
 
                                     <div>
                                         <button onclick="showBorrowerFunction('new_order_item')"> + Order another item </button>
-                                        <button onclick="showBorrowerFunction('new_membership')"> + Order membership </button>
+                                        @if($employee_details == NULL)
+                                            <button onclick="showBorrowerFunction('new_membership')"> + Order membership </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

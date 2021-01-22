@@ -54,14 +54,18 @@
 
                                                         <td>
                                                             @if($product->has_different_prices == 0)
-                                                                {{$product->price}}
-                                                            @else
-                                                                @forEach ($variations as $variation)
-                                                                    @if($basket_item->variation_id == $variation->id)
-                                                                            {{$variation->price}}
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
+                                                                    {{$product->price}}
+                                                                @else
+                                                                    @forEach ($variation_category as $var_cat)
+                                                                        @forEach ($chosen_var as $variation)
+                                                                            @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
+                                                                                    @if($var_cat->price_priority == 1)
+                                                                                        {{$variation->price}}
+                                                                                    @endif
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endforeach
+                                                                @endif
                                                         </td>
 
                                                         <td> {{$basket_item->quantity}} </td>
@@ -74,6 +78,20 @@
                                                                     @endif
                                                                 @endforeach
                                                             @endif
+                                                            <ul>
+                                                                @forEach ($chosen_var as $c_var)
+                                                                    @if($c_var->basket_id == $basket_item->id)
+                                                                        <li> 
+                                                                            @forEach ($variation_category as $var_cat)
+                                                                                @if($var_cat->id == $c_var->variation_category_id)
+                                                                                    {{$var_cat->category_name}} :
+                                                                                @endif
+                                                                            @endforeach
+                                                                            {{$c_var->name}}
+                                                                        </li>
+                                                                    @endif
+                                                                @endforeach
+                                                            <ul>
                                                         </td>
                                                     @endif
                                                 @endforeach
