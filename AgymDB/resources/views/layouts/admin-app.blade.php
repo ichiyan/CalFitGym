@@ -118,6 +118,12 @@
           $('[data-toggle="tooltip"]').tooltip()
         });
 
+
+        $(document).ready(function() {
+            $('table.display').DataTable();
+        } );
+
+
     </script>
 
 </body>
