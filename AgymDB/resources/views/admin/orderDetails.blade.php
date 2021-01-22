@@ -19,7 +19,7 @@
                             <div class="form-group row">
                                 <div class="col-md-2 col-form-label text-md-right"> Order ID: {{$order->id}} </div>
                                 <div class="col-md-4 col-form-label text-md-right"> Buyer ID: {{$customer->id}} </div>
-                                <div class="col-md-4 col-form-label text-md-right"> Name: {{$customer_details->fname}}  {{$customer_details->lname}} </div>
+                                <div class="col-md-4 col-form-label text-md-right"> Name: {{$customer->fname}}  {{$customer->lname}} </div>
                             </div>
 
                             <div class="form-group row">

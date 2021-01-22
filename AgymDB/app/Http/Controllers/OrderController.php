@@ -66,18 +66,16 @@ class OrderController extends Controller
         }
 
         //updates the inventory entry to account for the new sale
-        $inventory = DB::table('inventory_logs')
-                        ->orderBy("id", "desc")
-                        ->where('checking_date', $date)
+        $inventory = InventoryLog::where('checking_date', $date)
                         ->where('item_id', $request->get('product_id'))
+                        ->orderBy("id", "desc")
                         ->first();
         $inventory->amount_left =  $inventory->amount_left - $request->get('quantity');
         $inventory->amount_sold = $inventory->amount_sold + $request->get('quantity');
         $inventory->save();
 
         //batch table update
-        $batches = DB::table('batches')
-                        ->where('item_id', $request->get('product_id'))
+        $batches = Batch::where('item_id', $request->get('product_id'))
                         ->where('amt_left_batch', '>', 0)
                         ->orderBy("id", "asc")
                         ->first();
@@ -90,7 +88,7 @@ class OrderController extends Controller
                             'membership_id'=>NULL ]);
         $basket->save();
 
-        $new_basket = DB::table('baskets')->orderBy("id", "desc")->first();
+        $new_basket = Basket::orderBy("id", "desc")->first();
         $order->total_price = $order->total_price + ($product->price * $new_basket->quantity);
         $order->save();
 
@@ -115,7 +113,7 @@ class OrderController extends Controller
 
         $customize = new Customize (['color'=>$request->get('color'), 'message'=>$request->get('message')]);
         $customize->save();
-        $customize_id = DB::table('customizes')->orderBy("id", "desc")->first()->id;
+        $customize_id = Customize::orderBy("id", "desc")->first()->id;
 
         $basket = Basket::findOrFail($request->get('basket_item_id'));
         $basket->customize_id = $customize_id;
@@ -165,7 +163,7 @@ class OrderController extends Controller
         $customer->assigned_employee_id = $request->get('trainer');
         $customer->save();
 
-        $membership = Membership::findOrFail($basket_item->membership_id);
+        $membership = Membership::findOrFail($request->get('membership_id'));
         $membership->trainer_id = $request->get('trainer');
         $membership->save();
 
@@ -302,7 +300,7 @@ class OrderController extends Controller
         $member_type = DB::table('member_types')->get();
         $trainer = Person::findOrFail($customer_details->assigned_employee_id);
         $variations = DB::table('variations')->get();
-        $memberships = DB::table('memberships')->where('order_id', $order_id)->get();
+        $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
         
         return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 'basket', 'products', 'trainer', 'member_type', 'customizations', 'variations', 'memberships'));
     }
@@ -352,8 +350,7 @@ class OrderController extends Controller
         if($basket_item->item_id != NULL){ //order contained a product
             $item = Item::findOrFail($basket_item->item_id);
             $batch = Batch::findOrFail($basket_item->batch_id);
-            $inventory = DB::table('inventory_logs')
-                            ->where('checking_date', $date)
+            $inventory = InventoryLog::where('checking_date', $date)
                             ->where('item_id', $basket_item->item_id)
                             ->orderBy("id", "desc")
                             ->first();
@@ -431,8 +428,7 @@ class OrderController extends Controller
         foreach($full_basket as $basket_entry){
             if($basket_entry->item_id != NULL){ //order contained a product
                 $batch = Batch::findOrFail($basket_entry->batch_id);
-                $inventory = DB::table('inventory_logs')
-                                ->where('checking_date', $date)
+                $inventory = InventoryLog::where('checking_date', $date)
                                 ->where('item_id', $basket_entry->item_id)
                                 ->orderBy("id", "desc")
                                 ->first();
@@ -462,7 +458,7 @@ class OrderController extends Controller
                     $trainer->save();
                 }
 
-                Membership::destroy($basket_item->membership_id);
+                Membership::destroy($basket_entry->membership_id);
 
                 //Reverting to previous values for member_type and trainer_id
                 if(DB::table('memberships')->where('customer_id', $request->get('person_id'))->exists()){
@@ -484,7 +480,7 @@ class OrderController extends Controller
                     $customer_details->assigned_employee_id = NULL;
                 }
             }
-            Basket::destroy($id);
+            Basket::destroy($basket_entry->id);
         }
 
         //no basket entries for this order anymore

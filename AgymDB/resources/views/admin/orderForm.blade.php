@@ -81,14 +81,14 @@
                                                                 @endforeach
                                                             @else
                                                                 @if($product->is_customizable == 1 )
-                                                                <div id='customize'><form method='' action='/admin/order/customize' >
+                                                                <div id='{{$basket_item->id}}' style='display:none;'><form method='' action='/admin/order/customize' >
                                                                     <input type='text' name='color' placeholder='Color'>
                                                                     <input type='text' name='message' placeholder='Message'>
                                                                     <input type='hidden' name='person_id' value='{{$person->id}}'>
                                                                     <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
                                                                     <input type='submit' value='+'>
                                                                 </form></div>
-                                                                <button onclick="showBorrowerFunction('customize')"> + Add customization </button>
+                                                                <button onclick="showBorrowerFunction({{$basket_item->id}})"> + Add customization </button>
                                                                 @endif
                                                             @endif
 
@@ -97,7 +97,7 @@
                                                                     <select name='variation' required>
                                                                         <option> -- Variation -- </option>
                                                                         @forEach ($variations as $variation)
-                                                                            @if($basket_item->id == $variation->item_id)
+                                                                            @if($basket_item->item_id == $variation->item_id)
                                                                                 @if($basket_item->variation_id == $variation->id)
                                                                                     <option value='{{$variation->id}}' selected> {{$variation->name}} </option>
                                                                                 @else
@@ -108,7 +108,7 @@
                                                                     </select>
                                                                     <input type='hidden' name='person_id' value='{{$person->id}}'>
                                                                     <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
-                                                                    <input type='submit' value='Change'>
+                                                                    <input type='submit' value='@if($basket_item->variation_id == NULL) Choose @else Change @endif'>
                                                                 </form>
                                                             @endif
                                                             </td>
@@ -117,7 +117,7 @@
                                                                 <form method='post' action='/admin/order/{{$basket_item->id}}/delete'>
                                                                     {{csrf_field()}}
                                                                     <input type='hidden' name='_method' value='DELETE'>
-                                                                    <input type='hidden' name='person_id' value='{{$customer->id}}'>
+                                                                    <input type='hidden' name='person_id' value='{{$person->id}}'>
                                                                     <input type='hidden' name='order_id' value='{{$order_id}}'>
                                                                     <input type='submit' value=' - '>
                                                                 </form>
@@ -175,7 +175,7 @@
                                                 <select name='product_id' required>
                                                     <option> -- Product -- </option>
                                                     @forEach ($products as $product)
-                                                        <option value='{{$product->id}}'> {{$product->item_name}} </option>
+                                                        <option value='{{$product->id}}'> {{$product->item_name}} (Php. {{$product->price}}) </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -262,9 +262,6 @@
     display:none;
 }
 #customizations{
-    display:none;
-}
-#customize{
     display:none;
 }
 #new_membership{
