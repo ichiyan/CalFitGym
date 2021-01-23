@@ -65,7 +65,7 @@
                                                                     @forEach ($variation_category as $var_cat)
                                                                         @forEach ($chosen_var as $variation)
                                                                             @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
-                                                                                    @if($var_cat->price_priority == 1)
+                                                                                    @if($var_cat->price_priority == 1 && $basket_item->id == $variation->basket_id)
                                                                                         {{$variation->price}}
                                                                                     @endif
                                                                             @endif

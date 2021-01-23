@@ -104,7 +104,7 @@
 
                                                         <td>
                                                             @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
-                                                                {{$trainer->fname}}  {{$trainer->lname}}
+                                                                Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
                                                             @endif
                                                         </td>
                                                     @endif

@@ -257,7 +257,6 @@ class OrderController extends Controller
                 $employee_details = Employee::findOrFail($id);
                 $customer_details = NULL;
             }
-            
 
             if(DB::table('orders')->count() > 0){
                 $oldOrder = DB::table('orders')->orderBy("id", "desc")->first();
@@ -338,19 +337,27 @@ class OrderController extends Controller
         //
         $order = Order::findOrFail($id);
         $customer = Person::findOrFail($order->customer_id);
-        $customer_details = Customer::findOrFail($order->customer_id);
-        $basket = Basket::where('order_id', $order->id)->get();
 
+        if(Customer::whereId($order->customer_id)->exists()){
+            $customer_details = Customer::findOrFail($order->customer_id);
+            $employee_details = NULL;
+            $trainer = Person::findOrFail($customer_details->assigned_employee_id);
+        }else{
+            $employee_details = Employee::findOrFail($order->customer_id);
+            $customer_details = NULL;
+            $trainer = NULL;
+        }
+
+        $basket = Basket::where('order_id', $order->id)->get();
         $products = DB::table('items')->get();
         $customizations = DB::table('customizes')->get();
         $member_type = DB::table('member_types')->get();
-        $trainer = Person::findOrFail($customer_details->assigned_employee_id);
         $variations = DB::table('variations')->get();
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
         $variation_category = DB::table('variation_categories')->get();
         $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
         
-        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 
+        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer', 'member_type', 
                                                     'customizations', 'variations', 'chosen_var', 
                                                     'variation_category', 'memberships'));
@@ -358,7 +365,15 @@ class OrderController extends Controller
 
     public function showAll()
     {
-        return view('admin.orderForm');
+        $orders = Order::where('amount_received', '>', 0)->get();
+        $buyers = DB::table('people')->get();
+
+        $count = array();
+        foreach($orders as $key => $order){
+            $count[$key] = Basket::where('order_id', $order->id)->count();
+        }
+
+        return view('admin-coreUI.orderList', compact('orders', 'buyers', 'count'));
     }
 
     /**
