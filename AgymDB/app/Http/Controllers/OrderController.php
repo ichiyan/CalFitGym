@@ -54,10 +54,9 @@ class OrderController extends Controller
         $order = Order::findOrFail($request->get('order_id'));
 
         //creates an inventory log for today if it doesn't exist
-        if(DB::table('inventory_logs')->where('checking_date', $date)->where('item_id', $product->id)->doesntExist()){
+        if(InventoryLog::where('checking_date', $date)->where('item_id', $product->id)->doesntExist()){
             //sums up the batch entries for inventory
-            $batch_sum = DB::table('batches')
-                        ->where('item_id', $request->get('product_id'))
+            $batch_sum = Batch::where('item_id', $request->get('product_id'))
                         ->where('amt_left_batch', '>', 0)
                         ->sum('amt_left_batch');
             
@@ -243,7 +242,14 @@ class OrderController extends Controller
         $variations = DB::table('variations')->get();
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
         $variation_category = DB::table('variation_categories')->get();
-
+        
+        $batches = array();
+        foreach($products as $key => $product){
+            $batches[$product->id] = Batch::where('item_id', $product->id)
+                        ->where('amt_left_batch', '>', 0)
+                        ->sum('amt_left_batch');
+        }
+        
         if($id == NULL || $id==0){ //customer hasn't been selected yet or can't be found
             $person = NULL;
             $customer_details = NULL;
@@ -257,7 +263,6 @@ class OrderController extends Controller
                 $employee_details = Employee::findOrFail($id);
                 $customer_details = NULL;
             }
-
             if(DB::table('orders')->count() > 0){
                 $oldOrder = DB::table('orders')->orderBy("id", "desc")->first();
                 if($oldOrder->total_price == 0){  //changes customer_id in order entry from previous search if it wasn't used
@@ -290,7 +295,10 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'employee_details', 'variations', 'variation_category', 'chosen_var', 'trainers', 'total_price', 'products', 'order_id', 'basket', 'customizations', 'member_type', 'memberships'));
+        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'employee_details', 
+                                                'variations', 'variation_category', 'chosen_var', 'trainers', 
+                                                'total_price', 'products', 'order_id', 'basket', 'batches',
+                                                'customizations', 'member_type', 'memberships'));
     }
     
     public function find(Request $request)
@@ -337,15 +345,17 @@ class OrderController extends Controller
         //
         $order = Order::findOrFail($id);
         $customer = Person::findOrFail($order->customer_id);
+        $trainer = NULL;
 
         if(Customer::whereId($order->customer_id)->exists()){
             $customer_details = Customer::findOrFail($order->customer_id);
             $employee_details = NULL;
-            $trainer = Person::findOrFail($customer_details->assigned_employee_id);
+            if(Person::whereId($customer_details->assigned_employee_id)->exists()){
+                $trainer = Person::findOrFail($customer_details->assigned_employee_id);
+            }
         }else{
             $employee_details = Employee::findOrFail($order->customer_id);
             $customer_details = NULL;
-            $trainer = NULL;
         }
 
         $basket = Basket::where('order_id', $order->id)->get();
@@ -372,7 +382,6 @@ class OrderController extends Controller
         foreach($orders as $key => $order){
             $count[$key] = Basket::where('order_id', $order->id)->count();
         }
-
         return view('admin-coreUI.orderList', compact('orders', 'buyers', 'count'));
     }
 
@@ -486,8 +495,7 @@ class OrderController extends Controller
         $date = Carbon::today();
         $order = Order::findOrFail($request->get('order_id'));
         $customer = Person::findOrFail($request->get('person_id'));
-        $full_basket = DB::table('baskets')
-                        ->where('order_id', $request->get('order_id'))
+        $full_basket = Basket::where('order_id', $request->get('order_id'))
                         ->get();
 
         //cancel each item in the basket
@@ -528,14 +536,15 @@ class OrderController extends Controller
 
                 //Reverting to previous values for member_type and trainer_id
                 if(DB::table('memberships')->where('customer_id', $request->get('person_id'))->exists()){
-                    $old_membership = DB::table('memberships')
+                    $old_membership = Membership::where('customer_id', $request->get('person_id'))
                                     ->orderBy("id", "desc")
-                                    ->where('customer_id', $request->get('person_id'))
                                     ->first();
                     $customer_details->member_type_id = $old_membership->member_type_id;
+                    $customer_details->save();
 
                     if($old_membership->trainer_id != NULL){
                         $customer_details->assigned_employee_id = $old_membership->trainer_id;
+                        $customer_details->save();
 
                         $old_trainer = Employee::findOrFail($old_membership->trainer_id);
                         $old_trainer->no_of_trainees++;
@@ -544,6 +553,7 @@ class OrderController extends Controller
                 }else{ //no previous membership record so restore to default values
                     $customer_details->member_type_id = 0;
                     $customer_details->assigned_employee_id = NULL;
+                    $customer_details->save();
                 }
             }
             Basket::destroy($basket_entry->id);

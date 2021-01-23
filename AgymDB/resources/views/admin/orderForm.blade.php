@@ -199,7 +199,9 @@
                                                 <select name='product_id' required>
                                                     <option> -- Product -- </option>
                                                     @forEach ($products as $product)
-                                                        <option value='{{$product->id}}'> {{$product->item_name}} (Php. {{$product->price}}) </option>
+                                                        @if($batches[$product->id] > 0)
+                                                            <option value='{{$product->id}}'> {{$product->item_name}} (Php. {{$product->price}}) </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </td>
