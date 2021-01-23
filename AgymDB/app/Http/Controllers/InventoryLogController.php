@@ -51,7 +51,8 @@ class InventoryLogController extends Controller
     public function showAll()
     {
         //
-        return view('admin.inventory');
+        $person = NULL;
+        return view('admin-coreUI.inventory', compact('person'));
     }
 
     /**

@@ -48,6 +48,12 @@ class BatchController extends Controller
         //
     }
 
+    public function showAll()
+    {
+        //
+        return view('admin-coreUI.inventory', compact('person'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

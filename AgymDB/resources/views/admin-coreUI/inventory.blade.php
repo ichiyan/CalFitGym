@@ -33,17 +33,31 @@
                         </div>
                         <table class="table table-responsive-sm table-hover table-outline mb-0">
                             <tr class="thead-light">
-                                <td class="text-center">#</td>
-                                <td class="text-center">Name</td>
-                                <td class="text-center">Batch #</td>
-                                <td class="text-center">Description</td>
-                                <td class="text-center">Quantity</td>
-                                <td class="text-center">Amount Left</td>
-                                <td class="text-center">Batch Arrival</td>
-                                <td class="text-center">Expiry Date</td>
-                                <td class="text-center">Checked On</td>
-                                <td class="text-center">Action</td>
+                                <td class="text-center"> # </td>
+                                <td class="text-center"> Name </td>
+                                <td class="text-center"> Batch # </td>
+                                <td class="text-center"> Batch Amount </td>
+                                <td class="text-center"> Amount Left </td>
+                                <td class="text-center"> Arrival Date </td>
+                                <td class="text-center"> Expiry Date </td>
+                                <td class="text-center"> Checked On </td>
+                                <td class="text-center"> Action </td>
                             </tr>
+
+                            @forEach()
+                                <tr>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                </tr>
+                            @endforeach
+
                         </table>
                     </div>
                 </div>  
