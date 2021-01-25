@@ -52,8 +52,8 @@
     </li>
 
     <!-- Nav Item - Order -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+    <li class="nav-item @if (str_contains(url()->current(), 'admin/order')) active @endif ">
+        <a class="nav-link collapsed" href="/admin/orderList">
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Order</span>
         </a>

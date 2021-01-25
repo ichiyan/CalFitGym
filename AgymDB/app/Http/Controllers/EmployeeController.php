@@ -293,7 +293,8 @@ class EmployeeController extends Controller
         $employee->date_separated = $today;
         $employee->save();
 
-        return redirect('/admin/employeeList/current');
+        // return redirect('/admin/employeeList/current');
+        return back()->withInput();
     }
 
     public function rehire($id)
@@ -306,6 +307,7 @@ class EmployeeController extends Controller
         $employee->date_separated = NULL;
         $employee->save();
 
-        return redirect('/admin/employeeList/current');
+        // return redirect('/admin/employeeList/current');
+        return back()->withInput();
     }
 }

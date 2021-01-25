@@ -59,7 +59,7 @@ class OrderController extends Controller
             $batch_sum = Batch::where('item_id', $request->get('product_id'))
                         ->where('amt_left_batch', '>', 0)
                         ->sum('amt_left_batch');
-            
+
             //hasn't been adjusted to the new sale
             $new_inventory = new InventoryLog (['checking_date'=>$date, 'amount_left'=>$batch_sum,
                                                 'amount_sold'=>0, 'item_id'=>$request->get('product_id'),]);
@@ -97,7 +97,7 @@ class OrderController extends Controller
 
         return redirect()->route('orderForm', [$customer->id]);
     }
-    
+
     public function variation(Request $request)
     {
         //
@@ -115,12 +115,12 @@ class OrderController extends Controller
                     $order->save();
                 }
                 $variation->chosenProduct()->attach($request->get('basket_item_id'));
-            } 
+            }
         }
 
         return redirect()->route('orderForm', [$customer->id]);
     }
-    
+
     public function remove_variation(Request $request, $id)
     {
         //
@@ -153,7 +153,7 @@ class OrderController extends Controller
         $basket = Basket::findOrFail($request->get('basket_item_id'));
         $basket->customize_id = $customize_id;
         $basket->save();
-        
+
         return redirect()->route('orderForm', [$customer->id]);
     }
 
@@ -176,7 +176,7 @@ class OrderController extends Controller
         $customer_details->end_date = $date;
         $customer_details->member_type_id = $membership_type->id;
         $customer_details->save();
-        
+
         $membership_id = DB::table('memberships')->orderBy("id", "desc")->first()->id;
         $basket = new Basket(['quantity'=>1, 'order_id'=>$request->get('order_id'),
                             'item_id'=>NULL, 'batch_id'=>NULL,
@@ -234,22 +234,26 @@ class OrderController extends Controller
         $memberships = NULL;
         $customizations = NULL;
         $total_price = 0;
-        
+
+        $customers = DB::table('customers')
+                    ->join('people', 'customers.id', '=', 'people.id')
+                    ->get();
         $products = DB::table('items')->get();
         $customizations = DB::table('customizes')->get();
         $member_type = DB::table('member_types')->get();
         $trainers = DB::table('employees')->join('people', 'employees.id', '=', 'people.id')->get();
         $variations = DB::table('variations')->get();
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
+
         $variation_category = DB::table('variation_categories')->get();
-        
+
         $batches = array();
         foreach($products as $key => $product){
             $batches[$product->id] = Batch::where('item_id', $product->id)
                         ->where('amt_left_batch', '>', 0)
                         ->sum('amt_left_batch');
         }
-        
+
         if($id == NULL || $id==0){ //customer hasn't been selected yet or can't be found
             $person = NULL;
             $customer_details = NULL;
@@ -295,16 +299,24 @@ class OrderController extends Controller
             }
         }
 
-        return view('admin.orderForm', compact('id', 'person', 'customer_details', 'employee_details', 
-                                                'variations', 'variation_category', 'chosen_var', 'trainers', 
+        $flag = 0;
+
+        return view('admin.orderFormv2', compact('id', 'person', 'customers' , 'customer_details', 'employee_details',
+                                                'variations', 'variation_category', 'chosen_var', 'trainers',
                                                 'total_price', 'products', 'order_id', 'basket', 'batches',
-                                                'customizations', 'member_type', 'memberships'));
+                                                'customizations', 'member_type', 'memberships', 'flag'));
+
+        // return view('admin.orderForm', compact('id', 'person', 'customer_details', 'employee_details',
+        //                                 'variations', 'variation_category', 'chosen_var', 'trainers',
+        //                                 'total_price', 'products', 'order_id', 'basket', 'batches',
+        //                                 'customizations', 'member_type', 'memberships'));
     }
-    
+
     public function find(Request $request)
     {
         //
         $id = 0;
+
 
         if ($request->get('id') != NULL && DB::table('people')->where('id', $request->get('id'))->exists()){
             $id = DB::table('people')
@@ -366,10 +378,10 @@ class OrderController extends Controller
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
         $variation_category = DB::table('variation_categories')->get();
         $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
-        
-        return view('admin.orderDetails', compact('order', 'customer', 'customer_details', 'employee_details',
-                                                    'basket', 'products', 'trainer', 'member_type', 
-                                                    'customizations', 'variations', 'chosen_var', 
+
+        return view('admin.orderDetailsv2', compact('order', 'customer', 'customer_details', 'employee_details',
+                                                    'basket', 'products', 'trainer', 'member_type',
+                                                    'customizations', 'variations', 'chosen_var',
                                                     'variation_category', 'memberships'));
     }
 
@@ -382,7 +394,8 @@ class OrderController extends Controller
         foreach($orders as $key => $order){
             $count[$key] = Basket::where('order_id', $order->id)->count();
         }
-        return view('admin-coreUI.orderList', compact('orders', 'buyers', 'count'));
+
+        return view('admin.orderList', compact('orders', 'buyers', 'count'));
     }
 
     /**
@@ -447,7 +460,7 @@ class OrderController extends Controller
             $membership = Membership::findOrFail($basket_item->membership_id);
             $mem_type = MemberType::findOrFail($membership->member_type_id);
             $customer_details = Customer::findOrFail($request->get('person_id'));
-            
+
             $date->subDays($mem_type->length);
             $customer_details->end_date = $date;
             $customer_details->save();
@@ -478,7 +491,7 @@ class OrderController extends Controller
                     $old_trainer->no_of_trainees++;
                     $old_trainer->save();
                 }
-                
+
             }else{ //no previous membership record so restore to default values
                 $customer_details->member_type_id = 0;
                 $customer_details->assigned_employee_id = NULL;
@@ -521,7 +534,7 @@ class OrderController extends Controller
                 $membership = Membership::findOrFail($basket_entry->membership_id);
                 $mem_type = MemberType::findOrFail($membership->member_type_id);
                 $customer_details = Customer::findOrFail($request->get('person_id'));
-                
+
                 $date->subDays($mem_type->length);
                 $customer_details->end_date = $date;
                 $customer_details->save();
