@@ -34,7 +34,7 @@
 
                                     @forEach($basket as $key => $basket_item)
                                         <tr class="thead-light">
-                                            <td> {{$key+1}} </td>    
+                                            <td> {{$key+1}} </td>
 
                                             @if($basket_item->membership_id == NULL)
                                                 @forEach($products as $product)
@@ -81,7 +81,7 @@
                                                             <ul>
                                                                 @forEach ($chosen_var as $c_var)
                                                                     @if($c_var->basket_id == $basket_item->id)
-                                                                        <li> 
+                                                                        <li>
                                                                             @forEach ($variation_category as $var_cat)
                                                                                 @if($var_cat->id == $c_var->variation_category_id)
                                                                                     {{$var_cat->category_name}} :
@@ -96,7 +96,8 @@
                                                     @endif
                                                 @endforeach
                                             @else <!-- basket entry contains membership not product -->
-                                                @forEach($memberships as $membership)
+
+                                                @foreach($memberships as $membership)
                                                     @if($basket_item->membership_id == $membership->id)
                                                         <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}} </td>
                                                         <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
@@ -132,9 +133,9 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </main>
-    </div>            
+    </div>
 </div>
 @endsection

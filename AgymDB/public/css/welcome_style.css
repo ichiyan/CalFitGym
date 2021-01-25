@@ -2027,3 +2027,14 @@ body {
     }
   }
 
+.products-tabs li a{
+    color: rgb(135, 135, 135);
+}
+
+.products-tabs li a:hover{
+    color: #cc1616 !important;
+}
+
+.products-active a{
+    color: #cc1616 !important;
+}

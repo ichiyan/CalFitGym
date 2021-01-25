@@ -8,7 +8,7 @@
         <li><a href="/#about">About</a></li>
         <li><a href="/#services">Services</a></li>
         <li class="active"><a href="facility">Facility</a></li>
-        <li><a href="products">Products</a></li>
+        <li><a href="/products/1">Products</a></li>
         <li><a href="/#rates">Rates</a></li>
         <li><a href="/#contact">Contact</a></li>
         @if (Route::has('login'))

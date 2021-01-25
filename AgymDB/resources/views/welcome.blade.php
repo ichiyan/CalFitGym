@@ -8,7 +8,7 @@
         <li><a href="/#about">About</a></li>
         <li><a href="/#services">Services</a></li>
         <li><a href="facility">Facility</a></li>
-        <li><a href="products">Products</a></li>
+        <li><a href="/products/1">Products</a></li>
         <li><a href="/#rates">Rates</a></li>
         <li><a href="/#contact">Contact</a></li>
         @if (Route::has('login'))
@@ -89,7 +89,7 @@
                                     <h2>Quality Equipment</h2>
                                     <i class="icofont-gym-alt-2 icofont-2x"></i>
                                     <p>We have equipments for each and every possibly area our members want to workout on. These equipments are not only durable but diverse in order to accomodate a variety of heights and sizes.</p>
-                                    <a href="facility">View Gallery</a>
+                                    <a href="/facility">View Gallery</a>
                                 </div>
                             </div>
                             <div class="col-lg-8 large-thumb" data-aos="fade-left"></div>
@@ -121,7 +121,7 @@
                                     <h3>Enjoy our</h3>
                                     <h2>Healthy Options</h2>
                                     <p>Working out right is never enough. Eating right also have its own advantages. Try our healthy uptakes on simple foods and beverages to match your working our lifestyle!</p>
-                                    <a href="">View Products</a>
+                                    <a href="/products/1">View Products</a>
                                     <i class="icofont-food-basket icofont-2x"></i>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                     <h3>Helping You</h3>
                                     <h2>Get Involved In Yourself</h2>
                                     <p>Get some affordable gymwear, cute tumblrs and other gym necessities to match in with our coaches.</p>
-                                    <a href="">View Merchandise</a>
+                                    <a href="/products/5">View Merchandise</a>
                                     <i class="icofont-shopping-cart icofont-2x"></i>
                                 </div>
                             </div>
@@ -214,63 +214,51 @@
             <div class="container">
 
             <div class="section-title">
-                <span>Pricing</span>
-                <h2>Pricing</h2>
+                <span>Rates</span>
+                <h2>Rates</h2>
                 <p>Check out our best packages that fit your needs!</p>
             </div>
 
             <div class="row">
 
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
-                <div class="box">
-                    <h3>Free</h3>
-                    <h4><sup>$</sup>0<span> / month</span></h4>
-                    <ul>
-                    <li>Aida dere</li>
-                    <li>Nec feugiat nisl</li>
-                    <li>Nulla at volutpat dola</li>
-                    <li class="na">Pharetra massa</li>
-                    <li class="na">Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                    <a href="#" class="btn-buy">Buy Now</a>
+                {{-- <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="box">
+                        <h3>Walk-In</h3>
+                        <h4><sup>&#8369 </sup>{{ number_format( $->monthly_salary , 2, '.', ',') }}<span> / month</span></h4>
+                        <ul>
+                        <li>Aida dere</li>
+                        <li>Nec feugiat nisl</li>
+                        <li>Nulla at volutpat dola</li>
+                        <li class="na">Pharetra massa</li>
+                        <li class="na">Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                        <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
                     </div>
-                </div>
-                </div>
+                </div> --}}
 
-                <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in">
-                <div class="box featured">
-                    <h3>Business</h3>
-                    <h4><sup>$</sup>19<span> / month</span></h4>
-                    <ul>
-                    <li>Aida dere</li>
-                    <li>Nec feugiat nisl</li>
-                    <li>Nulla at volutpat dola</li>
-                    <li>Pharetra massa</li>
-                    <li class="na">Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                    <a href="#" class="btn-buy">Buy Now</a>
-                    </div>
-                </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
-                <div class="box">
-                    <h3>Developer</h3>
-                    <h4><sup>$</sup>29<span> / month</span></h4>
-                    <ul>
-                    <li>Aida dere</li>
-                    <li>Nec feugiat nisl</li>
-                    <li>Nulla at volutpat dola</li>
-                    <li>Pharetra massa</li>
-                    <li>Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                    <a href="#" class="btn-buy">Buy Now</a>
-                    </div>
-                </div>
-                </div>
+                    @foreach ($membership_types as $mem_type)
+                        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
+                            <div class="box @if ($mem_type->member_type_name == 'Premium' ) featured @endif ">
+                                <h3>{{ $mem_type->member_type_name }}</h3>
+                                <h4><sup>&#8369 </sup>{{ number_format( $mem_type->member_type_price , 2, '.', ',') }}<span> @if ($mem_type->id == 1) / day @else /month @endif</span></h4>
+                                <ul>
+                                    @foreach ($descriptions as $desc)
+                                        @if ($mem_type->id == $desc->member_type_id)
+                                            <li>{{ $desc->description }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                                <div class="btn-wrap">
+                                    <a href="/#contact" class="btn-buy">Contact or Visit Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
 
             </div>
 

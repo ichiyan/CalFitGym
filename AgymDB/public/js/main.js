@@ -103,7 +103,7 @@
         var top = $(this).offset().top,
           bottom = top + $(this).outerHeight();
 
-        if(window.location.toString().indexOf("facility") === -1){
+        if( window.location.toString().indexOf("facility") === -1 ){
 
                 if (cur_pos >= top && cur_pos <= bottom) {
                 if (cur_pos <= bottom) {
@@ -114,7 +114,9 @@
                 if (cur_pos < 300) {
                 $(".nav-menu ul:first li:first").addClass('active');
                 }
-             }
+
+            }
+
       });
     });
 

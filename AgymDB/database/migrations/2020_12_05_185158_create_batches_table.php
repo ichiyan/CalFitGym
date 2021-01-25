@@ -19,7 +19,7 @@ class CreateBatchesTable extends Migration
             $table->integer('amt_left_batch');
             $table->dateTime('expiry_date')->nullable();
             $table->dateTime('date_received');
-            $table->dateTime('updated_at')->nullable();
+            //$table->dateTime('updated_at')->nullable();
             $table->foreignId('item_id');
             $table->foreignId('employee_id');
             $table->timestamps();

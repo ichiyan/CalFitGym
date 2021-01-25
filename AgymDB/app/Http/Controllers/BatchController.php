@@ -51,7 +51,7 @@ class BatchController extends Controller
     public function showAll()
     {
         //
-        return view('admin-coreUI.inventory', compact('person'));
+        return view('admin.inventory', compact('person'));
     }
 
     /**

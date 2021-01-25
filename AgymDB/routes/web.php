@@ -48,9 +48,9 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Auth::routes();
@@ -86,12 +86,12 @@ Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeControll
 Route::get('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
 Route::get('/admin/employee/{id}/rehire', [App\Http\Controllers\EmployeeController::class, 'rehire']);
 
-Route::get('/new/form/employee', function(){ 
+Route::get('/new/form/employee', function(){
     return view('admin.newEmployeeForm');
 });
 
-Route::get('/new/form/customer', function(){ 
-    return view('admin.newCustomerForm'); 
+Route::get('/new/form/customer', function(){
+    return view('admin.newCustomerForm');
 });
 
 Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
@@ -126,6 +126,7 @@ Route::get('/admin/inventory/{id}/edit', [App\Http\Controllers\InventoryLogContr
 Route::put('/admin/inventory/{id}/update', [App\Http\Controllers\InventoryLogController::class, 'update']);
 Route::delete('/admin/inventory/{id}/delete', [App\Http\Controllers\InventoryLogController::class, 'destroy']);
 
+
 Route::get('/admin/orderList', [App\Http\Controllers\OrderController::class, 'showAll']);
 Route::get('/admin/order/new', [App\Http\Controllers\OrderController::class, 'order']);
 Route::get('/admin/order/create', [App\Http\Controllers\OrderController::class, 'create']);
@@ -150,10 +151,17 @@ Route::get('/admin/rates/{id}/edit', [App\Http\Controllers\MemberTypeController:
 Route::put('/admin/rates/{id}/update', [App\Http\Controllers\MemberTypeController::class, 'update']);
 Route::delete('/admin/rates/{id}/delete', [App\Http\Controllers\MemberTypeController::class, 'destroy']);
 
+
+
 Route::get('/admin/eventsList', [App\Http\Controllers\EventController::class, 'showAll']);
 Route::get('/admin/events/create', [App\Http\Controllers\EventController::class, 'create']);
 Route::get('/admin/events/{id}/edit', [App\Http\Controllers\EventController::class, 'edit']);
 Route::put('/admin/events/{id}/update', [App\Http\Controllers\EventController::class, 'update']);
 Route::delete('/admin/events/{id}/delete', [App\Http\Controllers\EventController::class, 'destroy']);
+
+Route::get('/', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
+
+// Route::get('/products/#products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
+Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
 
 ?>
