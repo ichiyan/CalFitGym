@@ -85,16 +85,27 @@ Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController
 Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
 Route::get('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
 Route::get('/admin/employee/{id}/rehire', [App\Http\Controllers\EmployeeController::class, 'rehire']);
+
+Route::get('/new/form/employee', function(){ 
+    return view('admin.newEmployeeForm');
+});
+
+Route::get('/new/form/customer', function(){ 
+    return view('admin.newCustomerForm'); 
+});
+
 Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
     $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
+    $person = Person::where('email_address', $user->email)->first();
+    $person->user_id = $user->id;
+    $person->save();
 
-    if($user->user_type == 3){
-        return view('admin-coreUI.newCustomerForm', compact('user'));
+    if($user->user_type == 'customer'){
+        return redirect('/admin/customerList/all/all');
     } else {
-        return view('admin-coreUI.newEmployeeForm', compact('user'));
+        return redirect('/admin/employeeList/all/all');
     }
-})->name('form');
-
+});
 
 //Route::resource('/admin/customerList', CustomerController::class);
 Route::get('/admin/customerList/all/{stat}', [App\Http\Controllers\CustomerController::class, 'showAll']);

@@ -45,9 +45,19 @@ class InventoryLogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $now = Carbon::now();
+        $user_id = Auth::id();
+        $logger = Person::where('user_id', $user_id)->first();
+
+        $batch = new Batch (['batch_amount'=>$request->get('batch_amount'), 'amt_left_batch'=>$request->get('batch_amount'),
+                            'expiry_date'=>$request->get('expiry_date'), 'date_received'=>$now,
+                            'item_id'=>$request->get('product_id'),'employee_id'=>$logger->id ]);
+        $batch->save();
+
+        return redirect('/admin/inventoryList/all');
     }
 
     /**

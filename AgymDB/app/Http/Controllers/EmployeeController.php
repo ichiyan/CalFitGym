@@ -56,7 +56,7 @@ class EmployeeController extends Controller
                                 'barangay'=>$request->get('barangay'), 'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
-                                'photo'=>NULL, 'user_id'=>$request->get('user_id') ]);
+                                'photo'=>NULL, 'user_id'=>0 ]);
         $person->save();
 
         $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger->id]);
         $init_log->save();
 
-        return redirect('/admin/employeeList/');
+        return redirect('/admin/employeeList/all/all');
     }
 
     /**

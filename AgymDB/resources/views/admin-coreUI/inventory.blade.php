@@ -27,10 +27,16 @@
                                     <a class="nav-link" href='/admin/inventoryList/1'>Food</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href='/admin/inventoryList/2'>Beverages</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href='/admin/inventoryList/3'>Active Wear</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/inventoryList/2'>Merchandise</a>
+                                    <a class="nav-link" href='/admin/inventoryList/4'>Gym Essentials</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='/admin/inventoryList/5'>Merchandise</a>
                                 </li>
                             </ul>
                         </div>

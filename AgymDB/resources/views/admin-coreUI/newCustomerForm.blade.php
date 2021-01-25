@@ -24,7 +24,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right"> Firstname: </label>
                                         <div class="col-md-6">
-                                            <input type='text' name='fname' required value='{{$user->name}}'>
+                                            <input type='text' name='fname' required>
                                         </div>
                                     </div>
 
@@ -99,7 +99,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right"> Email Address: </label>
                                         <div class="col-md-6">
-                                            <input type='email' name='email_address' required value='{{$user->email}}'>
+                                            <input type='email' name='email_address' required >
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +131,6 @@
 
                                 <div class="form-group row">
                                     <center class="col-md-6">
-                                        <input type='hidden' name='user_id' value='{{$user->id}}'>
                                         <input type='submit' value='Register'>
                                     </center>
                                 </div>

@@ -392,7 +392,7 @@ class OrderController extends Controller
 
         $count = array();
         foreach($orders as $key => $order){
-            $count[$key] = Basket::where('order_id', $order->id)->count();
+            $count[$key] = Basket::where('order_id', $order->id)->sum('quantity');
         }
 
         return view('admin.orderList', compact('orders', 'buyers', 'count'));

@@ -12,9 +12,14 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Customers</h1>
-        <div class="btn-toolbar">
+        <!-- <div class="btn-toolbar">
             <div class="btn-group mr-3">
                 <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+            </div>
+        </div> -->
+        <div class="btn-toolbar">
+            <div class="btn-group mr-3">
+                <a href="/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer </a>
             </div>
         </div>
     </div><!-- End of Page Heading  -->
@@ -83,6 +88,11 @@
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info"><a href="{{route('customerDetail', $customer->id)}}" style="color: white">Info</a></button>
                                         <button type="button" class="btn btn-sm btn-primary"><a href="{{route('customerEdit', $customer->id)}}" style="color: white">Edit</a></button>
+                                        @if($customer->user_id == 0)
+                                            <div class="btn-group mr-3">
+                                                <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Register Customer</a>
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

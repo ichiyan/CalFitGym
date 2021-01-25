@@ -12,9 +12,14 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Employees</h1>
-        <div class="btn-toolbar">
+        <!-- <div class="btn-toolbar">
             <div class="btn-group mr-3">
                 <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Employee</a>
+            </div>
+        </div> -->
+        <div class="btn-toolbar">
+            <div class="btn-group mr-3">
+                <a href="/new/form/employee" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Employee </a>
             </div>
         </div>
     </div><!-- End of Page Heading  -->
@@ -73,9 +78,15 @@
                                         <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
                                         @if (is_null( $employee->date_separated ) )
                                             <button type="button" class="btn btn-sm btn-danger"><a href="" data-toggle="modal" data-target="#dismissEmployeeModal-{{$employee->id}}" style="color: white">Dismiss</a></button>
-                                            @else
+                                            @if($employee->user_id == 0)
+                                                <div class="btn-group mr-3">
+                                                    <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Register Employee</a>
+                                                </div>
+                                            @endif
+                                        @else
                                             <button type="button" class="btn btn-sm btn-warning"><a href="" data-toggle="modal" data-target="#rehireEmployeeModal-{{$employee->id}}"  style="color: white">Rehire</a></button>
-                                         @endif
+                                        @endif
+                                         
                                     </td>
 
                                 </tr>
@@ -91,7 +102,7 @@
                                                     <span aria-hidden="true">×</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">Select "Dismiss" below to confirm dismissal of employee.</div>
+                                            <div class="modal-body">Select "Dismiss" below to confirm dismissal of {{$employee->fname}}   {{$employee->lname}}.</div>
                                             <div class="modal-footer">
                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                                 <button type="button" class="btn btn-danger"><a href="/admin/employee/{{$employee->id}}/delete" style="color: white">Dismiss</a></button>
@@ -111,7 +122,7 @@
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">Select "Rehire" below to confirm reemployment of employee.</div>
+                                        <div class="modal-body">Select "Rehire" below to confirm reemployment of {{$employee->fname}}   {{$employee->lname}}.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-warning"><a href="/admin/employee/{{$employee->id}}/rehire" style="color: white">Rehire</a></button>

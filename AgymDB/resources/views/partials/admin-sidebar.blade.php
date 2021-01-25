@@ -45,7 +45,7 @@
 
     <!-- Nav Item - Inventory -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/admin/inventoryList/all">
             <i class="fas fa-fw fa-boxes"></i>
             <span>Inventory</span>
         </a>
