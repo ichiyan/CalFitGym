@@ -18,16 +18,16 @@
                             </form>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href='/admin/inventory'>All</a>
+                                    <a class="nav-link active" href='/admin/inventoryList/all'>All</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/inventory/'>Food</a>
+                                    <a class="nav-link" href='/admin/inventoryList/1'>Food</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/inventory/'>Active Wear</a>
+                                    <a class="nav-link" href='/admin/inventoryList/3'>Active Wear</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='/admin/inventory/'>Merchandise</a>
+                                    <a class="nav-link" href='/admin/inventoryList/2'>Merchandise</a>
                                 </li>
                             </ul>
                         </div>
@@ -41,20 +41,18 @@
                                 <td class="text-center"> Arrival Date </td>
                                 <td class="text-center"> Expiry Date </td>
                                 <td class="text-center"> Checked On </td>
-                                <td class="text-center"> Action </td>
                             </tr>
 
-                            @forEach()
+                            @forEach($batches as $key => $batch)
                                 <tr>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
+                                    <td> {{$key+1}} </td>
+                                    <td> {{$batch->item_name}}  </td>
+                                    <td> {{$batch->id}} </td>
+                                    <td> {{$batch->batch_amount}} </td>
+                                    <td> {{$batch->amt_left_batch}} </td>
+                                    <td> {{$batch->date_received}} </td>
+                                    <td> {{$batch->expiry_date}} </td>
+                                    <td> {{$batch->updated_at}} </td>
                                 </tr>
                             @endforeach
 

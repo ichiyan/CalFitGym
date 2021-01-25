@@ -120,6 +120,7 @@
 
                                                             @if($product->has_variations == 1)
                                                                 @forEach ($variation_category as $var_cat)
+                                                                @if(DB::table('variations')->where('item_id', $basket_item->item_id)->where('variation_category_id', $var_cat->id)->exists())
                                                                     <form method='' action='/admin/order/variation' >
                                                                         <select name='{{$var_cat->category_name}}' required>
                                                                             <option> -- {{$var_cat->category_name}} -- </option>
@@ -133,6 +134,7 @@
                                                                         <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
                                                                         <input type='submit' value='Choose'>
                                                                     </form>
+                                                                @endif
                                                                 @endforeach
                                                             @endif
                                                             </td>

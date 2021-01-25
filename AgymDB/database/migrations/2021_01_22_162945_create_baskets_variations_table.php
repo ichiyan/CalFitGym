@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderVariationsTable extends Migration
+class CreateBasketsVariationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,6 @@ class CreateOrderVariationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_variations');
+        Schema::dropIfExists('basket_variation');
     }
 }

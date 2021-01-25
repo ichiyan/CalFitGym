@@ -21,6 +21,7 @@ class CreateBatchesTable extends Migration
             $table->dateTime('date_received');
             $table->foreignId('item_id');
             $table->foreignId('employee_id');
+            $table->timestamps();
         });
     }
 

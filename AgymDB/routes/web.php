@@ -110,7 +110,7 @@ Route::put('/admin/customer/{id}/update', [App\Http\Controllers\CustomerControll
 Route::get('/admin/log/{id}/create', [App\Http\Controllers\EntryLogController::class, 'create'])->name('new_entryLog');
 Route::get('/admin/log/{id}/edit', [App\Http\Controllers\EntryLogController::class, 'edit'])->name('close_entryLog');
 
-Route::get('/admin/inventoryList', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
+Route::get('/admin/inventoryList/{category}', [App\Http\Controllers\InventoryLogController::class, 'showAll']);
 Route::get('/admin/inventory/create', [App\Http\Controllers\InventoryLogController::class, 'create']);
 Route::get('/admin/inventory/{id}/edit', [App\Http\Controllers\InventoryLogController::class, 'edit']);
 Route::put('/admin/inventory/{id}/update', [App\Http\Controllers\InventoryLogController::class, 'update']);
