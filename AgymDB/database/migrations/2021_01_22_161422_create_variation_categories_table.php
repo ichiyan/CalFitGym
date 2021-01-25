@@ -18,6 +18,16 @@ class CreateVariationCategoriesTable extends Migration
             $table->string('category_name', 50);
             $table->integer('price_priority');
         });
+
+        DB::table('variation_categories')->insert(
+            array(
+                ['category_name' => 'Size', 
+                'price_priority' => 1 ],
+ 
+                ['category_name' => 'Flavor', 
+                'price_priority' => 2 ]
+            )
+        );
     }
 
     /**

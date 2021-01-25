@@ -17,6 +17,16 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('category', 50);
         });
+
+        DB::table('categories')->insert(
+            array(
+                ['category' => 'Nutrition'],
+                ['category' => 'Beverages'],
+                ['category' => 'Active Wear'],
+                ['category' => 'Gym Essentials'],
+                ['category' => 'Merchandise'],
+            )
+        );
     }
 
     /**

@@ -23,28 +23,20 @@ class CreateMemberTypesTable extends Migration
 
         DB::table('member_types')->insert(
             array(
-                'member_type_name' => 'Walk-In', 
+                ['member_type_name' => 'Walk-In', 
                 'member_type_price'  => 150,
                 'length'  => 1,
-                'has_trainer' => 0
-            )
-        );
+                'has_trainer' => 0],
 
-        DB::table('member_types')->insert(
-            array(
-                'member_type_name' => 'Monthly-In', 
+                ['member_type_name' => 'Monthly-In', 
                 'member_type_price'  => 1000,
                 'length'  => 30,
-                'has_trainer' => 0
-            )
-        );
+                'has_trainer' => 0],
 
-        DB::table('member_types')->insert(
-            array(
-                'member_type_name' => 'Premium', 
+                ['member_type_name' => 'Premium', 
                 'member_type_price'  => 3000,
                 'length'  => 30,
-                'has_trainer' => 1
+                'has_trainer' => 1]
             )
         );
     }
