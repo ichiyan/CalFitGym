@@ -20,10 +20,17 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard_style.css') }}" rel="stylesheet">
+
+
+    {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> --}}
+    {{-- <link href="{{ asset('vendor/bootstrap/css/test.css') }}" rel="stylesheet"> --}}
+    {{-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" /> --}}
 
 </head>
 
@@ -88,6 +95,7 @@
     </div>
 
 
+
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src=" {{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -112,6 +120,10 @@
      <!-- tables custom scripts -->
      <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
+     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script> --}}
+
      <script>
 
         $(function () {
@@ -122,7 +134,6 @@
         $(document).ready(function() {
             $('table.display').DataTable();
         } );
-
 
     </script>
 

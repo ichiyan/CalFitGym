@@ -16,6 +16,9 @@
                             <form>
                                 <label>Search: <input type="text" name="search" placeholder="find inventory item"></label>
                             </form>
+                            <div class="btn-group mr-3">
+                                <button onclick="showBorrowerFunction('new_batch')"> + New batch </button>
+                            </div>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link active" href='/admin/inventoryList/all'>All</a>
@@ -43,6 +46,35 @@
                                 <td class="text-center"> Checked On </td>
                             </tr>
 
+                            <tr id='new_batch'>
+                                <form method='' action='/admin/inventory/create'>
+                                    <td>  </td>
+
+                                    <td>
+                                        <select name='product_id' required>
+                                            <option> -- Product -- </option>
+                                            @forEach ($products as $product)
+                                                <option value='{{$product->id}}'> {{$product->item_name}} </option>
+                                             @endforeach
+                                        </select>
+                                    </td>
+
+                                    <td>  </td>
+
+                                    <td> <input type='number' name='batch_amount' required> </td>
+
+                                    <td>  </td>
+                                    <td>  </td>
+
+                                    <td> <input type='date' name='expiry_date' required> </td>
+
+                                    <td>
+                                        <input type='submit' value='Check'>
+                                    </td>
+
+                                </form>
+                            </tr>
+
                             @forEach($batches as $key => $batch)
                                 <tr>
                                     <td> {{$key+1}} </td>
@@ -63,4 +95,15 @@
         </main>
     </div>            
 </div>
+
+<style>
+#new_batch {
+    display:none;
+}
+</style>
+<script>
+    function showBorrowerFunction(id) {
+		document.getElementById(id).style.display = "block";
+	}
+</script>
 @endsection

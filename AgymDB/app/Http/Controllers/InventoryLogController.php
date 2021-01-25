@@ -88,7 +88,9 @@ class InventoryLogController extends Controller
                         ->get();
         }
 
-        return view('admin-coreUI.inventory', compact('batches'));
+        $products = DB::table('items')->get();
+
+        return view('admin-coreUI.inventory', compact('batches', 'products'));
     }
 
     /**

@@ -18,7 +18,7 @@
                         <div class="card-header">
                             @if($total_price == 0)
                             <form method='' action='/admin/order/find'>
-                                
+
                                 <label>ID: <input type="text" name="id" ></label>
                                 <label>First Name: <input type="text" name="fname" ></label>
                                 <label>Last Name: <input type="text" name="lname" ></label>
@@ -50,8 +50,8 @@
 
                                         @if($basket != NULL)
                                             @forEach($basket as $key => $basket_item)
-                                            <tr class="thead-light">
-                                                <td> {{$key+1}} </td>    
+                                                <tr class="thead-light">
+                                                    <td> {{$key+1}} </td>
 
                                                 @if($basket_item->membership_id == NULL)
                                                     @forEach($products as $product)
@@ -77,24 +77,24 @@
                                                             <td> {{$basket_item->quantity}} </td>
 
                                                             <td>
-                                                            @if($basket_item->customize_id != NULL)
-                                                                @forEach($customizations as $custom)
-                                                                    @if($basket_item->customize_id == $custom->id)
-                                                                    Color: {{$custom->color}} <br> Message: {{$custom->message}}
+                                                                @if($basket_item->customize_id != NULL)
+                                                                    @forEach($customizations as $custom)
+                                                                        @if($basket_item->customize_id == $custom->id)
+                                                                        Color: {{$custom->color}} <br> Message: {{$custom->message}}
+                                                                        @endif
+                                                                    @endforeach
+                                                                @else
+                                                                    @if($product->is_customizable == 1 )
+                                                                    <div id='{{$basket_item->id}}' style='display:none;'><form method='' action='/admin/order/customize' >
+                                                                        <input type='text' name='color' placeholder='Color'>
+                                                                        <input type='text' name='message' placeholder='Message'>
+                                                                        <input type='hidden' name='person_id' value='{{$person->id}}'>
+                                                                        <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
+                                                                        <input type='submit' value='+'>
+                                                                    </form></div>
+                                                                    <button onclick="showBorrowerFunction({{$basket_item->id}})"> + Add customization </button>
                                                                     @endif
-                                                                @endforeach
-                                                            @else
-                                                                @if($product->is_customizable == 1 )
-                                                                <div id='{{$basket_item->id}}' style='display:none;'><form method='' action='/admin/order/customize' >
-                                                                    <input type='text' name='color' placeholder='Color'>
-                                                                    <input type='text' name='message' placeholder='Message'>
-                                                                    <input type='hidden' name='person_id' value='{{$person->id}}'>
-                                                                    <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}'>
-                                                                    <input type='submit' value='+'>
-                                                                </form></div>
-                                                                <button onclick="showBorrowerFunction({{$basket_item->id}})"> + Add customization </button>
                                                                 @endif
-                                                            @endif
 
                                                                 <ul>
                                                                 @forEach ($chosen_var as $c_var)
@@ -138,7 +138,7 @@
                                                                 @endforeach
                                                             @endif
                                                             </td>
-                                                            
+
                                                             <td>
                                                                 <form method='post' action='/admin/order/{{$basket_item->id}}/delete'>
                                                                     {{csrf_field()}}
@@ -150,6 +150,7 @@
                                                             </td>
                                                         @endif
                                                     @endforeach
+
                                                 @else <!-- basket entry contains membership not product -->
                                                     @forEach($memberships as $membership)
                                                         @if($basket_item->membership_id == $membership->id)
@@ -183,7 +184,7 @@
                                                                     <input type='hidden' name='_method' value='DELETE'>
                                                                     <input type='hidden' name='person_id' value='{{$person->id}}'>
                                                                     <input type='hidden' name='order_id' value='{{$order_id}}'>
-                                                                    
+
                                                                     <input type='submit' value=' - '>
                                                                 </form>
                                                             </td>
@@ -280,14 +281,14 @@
                                     </form>
                                 </div>
                             </div>
-                            
+
                             </div> <!--end card-header -->
                         @endif
                     </div>
-                </div>  
+                </div>
             </div>
         </main>
-    </div>            
+    </div>
 </div>
 
 <style>

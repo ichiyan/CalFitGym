@@ -135,7 +135,7 @@
                 <div class="form-row justify-content-center">
                     <input type='hidden' name='user_id' value='{{$user->id}}'>
                     <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Register'></div>
-                    <div class="col-md-2"><button class="btn btn-rounded-light"><a href='/admin/employeeList'>Cancel</a></button></div>
+                    <div class="col-md-2"><button class="btn btn-rounded-light"><a href='{{ url()->previous() }}'>Cancel</a></button></div>
                 </div>
             </form>
         </div>
