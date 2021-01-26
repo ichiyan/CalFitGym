@@ -190,7 +190,7 @@
             <div class="col-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Subscriptions Expiring in the Next - Days</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Subscriptions Expiring in the Next 30 Days</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -295,7 +295,7 @@
             <div class="col-lg-6 col-mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Product Batches Expiring in the Next - Days</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Product Batches Expiring in the Next 30 Days</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

@@ -67,7 +67,7 @@
 
                         <div class="form-group col-3">
                             <label>Date: </label>
-                            <input class="form-control" type='date' name='expiry_date' required>
+                            <input class="form-control" type='date' name='expiry_date'>
                         </div>
 
                         <div class="form-group col-2 align-self-end">
@@ -98,7 +98,13 @@
                         @forEach($batches as $key => $batch)
                                 <tr>
                                     <td> {{$key+1}} </td>
-                                    <td> {{$batch->item_name}}  </td>
+                                    <td> 
+                                        @forEach($products as $item)
+                                            @if($batch->item_id == $item->id)
+                                              {{$item->item_name}} 
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td> {{$batch->id}} </td>
                                     <td> {{$batch->batch_amount}} </td>
                                     <td> {{$batch->amt_left_batch}} </td>

@@ -87,6 +87,19 @@ class ItemController extends Controller
 
     }
 
+    public function showAll()
+    {
+        //
+        $products = DB::table('items')->get();
+
+        $stock = array();
+        foreach($products as $key => $product){
+            $stock[$key] = Batch::where('item_id', $product->id)->sum('amt_left_batch');
+        }
+
+        return view('admin.productList', compact('products', 'stock'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
