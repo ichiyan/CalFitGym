@@ -24,11 +24,11 @@ class CreatePeopleTable extends Migration
             $table->string('barangay', 50)->nullable();
             $table->string('city', 20)->nullable();
             $table->string('email_address', 50)->nullable();
-            $table->integer('phone_number')->nullable();
+            $table->string('phone_number', 20)->nullable();
             $table->string('emergency_contact_name', 50)->nullable();
-            $table->integer('emergency_contact_number')->nullable();
+            $table->string('emergency_contact_number', 20)->nullable();
             $table->string('emergency_contact_relationship', 50)->nullable();
-            $table->string('photo', 50)->nullable();
+            $table->string('photo', 200)->nullable();
             $table->foreignId('user_id')->default(0);
             // $table->integer('user_id')->unsigned();
             // $table->foreign('user_id')->references('id')->on('users');

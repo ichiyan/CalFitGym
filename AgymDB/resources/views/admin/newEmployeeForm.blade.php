@@ -21,19 +21,21 @@
             <h6 class="m-0 font-weight-bold text-primary">Create Employee Record</h6>
         </div>
         <div class="card-body">
-            <form method='' action='/admin/employee/create'>
-                {{csrf_field()}}
-                <input type='hidden' name='_method' value='PUT'>
+            <form method='post' action='/admin/employee/create' enctype="multipart/form-data">
+                @csrf
+                {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <img id="profile-pic-preview"  src="/storage/employees/default-profile.png" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="emp_image" onchange="loadFile(event)"/>
                                 </div>
                             </div>
+                            {{-- <input type="file" class="form-control-file text" name="emp_image" required> --}}
+
                         </div>
                     </div>
                     <hr>
@@ -141,5 +143,12 @@
     </div>
 </div>
 
+<script>
+
+var loadFile = function(event) {
+    document.getElementById('profile-picture-preview').src = URL.createObjectURL(event.target.files[0]);
+};
+
+</script>
 
 @endsection

@@ -80,7 +80,7 @@ Route::get('/admin/employeeList/all/{stat}', [App\Http\Controllers\EmployeeContr
 Route::get('/admin/employeeList/current', [App\Http\Controllers\EmployeeController::class, 'showCurrent']);
 Route::get('/admin/employeeList/previous', [App\Http\Controllers\EmployeeController::class, 'showPrevious']);
 Route::get('/admin/employee/{id}/detail', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employeeDetail');
-Route::get('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
+Route::post('/admin/employee/create', [App\Http\Controllers\EmployeeController::class, 'create']);
 Route::get('/admin/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employeeEdit');
 Route::put('/admin/employee/{id}/update', [App\Http\Controllers\EmployeeController::class, 'update']);
 Route::get('/admin/employee/{id}/delete', [App\Http\Controllers\EmployeeController::class, 'destroy']);
@@ -113,7 +113,7 @@ Route::get('/admin/customerList/walk_in/{stat}', [App\Http\Controllers\CustomerC
 Route::get('/admin/customerList/monthly/{stat}', [App\Http\Controllers\CustomerController::class, 'showMonthly']);
 Route::get('/admin/customerList/premium/{stat}', [App\Http\Controllers\CustomerController::class, 'showPremium']);
 Route::get('/admin/customer/{id}/detail', [App\Http\Controllers\CustomerController::class, 'show'])->name('customerDetail');
-Route::get('/admin/customer/create', [App\Http\Controllers\CustomerController::class, 'create']);
+Route::post('/admin/customer/create', [App\Http\Controllers\CustomerController::class, 'create']);
 Route::get('/admin/customer/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customerEdit');
 Route::put('/admin/customer/{id}/update', [App\Http\Controllers\CustomerController::class, 'update']);
 

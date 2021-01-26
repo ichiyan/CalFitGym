@@ -70,7 +70,7 @@
                             <input class="form-control" type='date' name='expiry_date' required>
                         </div>
 
-                        <div class="form-group col-2">
+                        <div class="form-group col-2 align-self-end">
                             <button id="check" type="submit" value="Check" class="btn btn-primary shadow-sm"><i class="fas fa-check-circle text-white-50"></i> Check</button>
                         </div>
 

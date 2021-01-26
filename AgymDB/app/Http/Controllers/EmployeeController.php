@@ -51,12 +51,25 @@ class EmployeeController extends Controller
         $today = Carbon::today();
         $now = Carbon::now();
 
+        if($request->hasFile('emp_image')){
+            $filenameWithExt = $request->file('emp_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('emp_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('emp_image')->storeAs('public/employees', $fileNameToStore);
+
+        }else{
+            $fileNameToStore = null;
+        }
+
+
         $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
                                 'birthday'=>$request->get('birthday'), 'street_address'=>$request->get('street_address'),
                                 'barangay'=>$request->get('barangay'), 'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
-                                'photo'=>NULL, 'user_id'=>0 ]);
+                                'photo'=>$fileNameToStore, 'user_id'=>0 ]);
+
         $person->save();
 
         $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
@@ -273,6 +286,16 @@ class EmployeeController extends Controller
         $person->emergency_contact_name = $request->get('emergency_contact_name');
         $person->emergency_contact_number = $request->get('emergency_contact_number');
         $person->emergency_contact_relationship = $request->get('emergency_contact_relationship');
+
+        if($request->hasFile('emp_image')){
+            $filenameWithExt = $request->file('emp_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('emp_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('emp_image')->storeAs('public/employees', $fileNameToStore);
+            $person->photo = $fileNameToStore;
+        }
+
         $person->save();
 
         return redirect()->route('employeeDetail', [$id]);

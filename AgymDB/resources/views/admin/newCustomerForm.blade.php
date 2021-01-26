@@ -21,17 +21,17 @@
             <h6 class="m-0 font-weight-bold text-primary">Create Customer Record</h6>
         </div>
         <div class="card-body">
-            <form method='' action='/admin/employee/create'>
-                {{csrf_field()}}
-                <input type='hidden' name='_method' value='PUT'>
+            <form method='post' action='/admin/customer/create' enctype="multipart/form-data">
+                @csrf
+                {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <img id="profile-pic-preview"  src="/storage/customers/default-profile.png" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="loadFile(event)"/>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Birthday: </label>
                         <div class="col-md-6">
-                            <input type='date' name='birthday' required>
+                            <input type='date' name='birthday'>
                         </div>
                     </div>
 
@@ -63,14 +63,14 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Height: </label>
                         <div class="col-md-6">
-                            <input type='number' name='height' placeholder='cm'>
+                            <input type='number' name='height'  min="91" placeholder='cm'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Weight: </label>
                         <div class="col-md-6">
-                            <input type='number' name='weight' placeholder='kg'>
+                            <input type='number' name='weight' min="10" placeholder='kg'>
                         </div>
                     </div>
 
@@ -88,35 +88,35 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Street Address: </label>
                         <div class="col-md-6">
-                            <input type='text' name='street_address' required>
+                            <input type='text' name='street_address'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Barangay: </label>
                         <div class="col-md-6">
-                            <input type='text' name='barangay' required>
+                            <input type='text' name='barangay'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> City: </label>
                         <div class="col-md-6">
-                            <input type='text' name='city' required>
+                            <input type='text' name='city'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Phone Number: </label>
                         <div class="col-md-6">
-                            <input type='tel' name='phone_number' required>
+                            <input type='tel' name='phone_number'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Email Address: </label>
                         <div class="col-md-6">
-                            <input type='email' name='email_address' required>
+                            <input type='email' name='email_address'>
                         </div>
                     </div>
                 </div>
@@ -126,34 +126,26 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Name: </label>
                         <div class="col-md-6">
-                            <input type='text' name='emergency_contact_name' required>
+                            <input type='text' name='emergency_contact_name'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Contact Number: </label>
                         <div class="col-md-6">
-                            <input type='tel' name='emergency_contact_number' required>
+                            <input type='tel' name='emergency_contact_number'>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Relationship: </label>
                         <div class="col-md-6">
-                            <input type='text' name='relationship' required>
+                            <input type='text' name='relationship'>
                         </div>
                     </div>
                 </div>
                 <hr>
-                <div>
-                    <div class="form-group-row"><div class="col-md-4 text-md-right record-heading">Additional Information</div></div>
-                    <div class="form-group row">
-                        <label class="col-md-6 col-form-label text-md-right"> Monthly Salary: </label>
-                        <div class="col-md-6">
-                            <input type='number' name='monthly_salary' required>
-                        </div>
-                    </div>
-                </div>
+
                 <hr>
                 <div class="form-row justify-content-center">
                     <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Register'></div>
