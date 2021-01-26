@@ -90,7 +90,13 @@ class InventoryLogController extends Controller
                         ->orderBy("item_id", "asc")
                         ->join('items', 'batches.item_id', 'items.id')
                         ->get();
-        } else {
+        } else if ($filter == 1){
+            $batches = Batch::where('amt_left_batch', '>', 0)
+                        ->orderBy("item_id", "asc")
+                        ->join('items', 'batches.item_id', 'items.id')
+                        ->where('category_id','<=', 2)
+                        ->get();
+        }else{
             $batches = Batch::where('amt_left_batch', '>', 0)
                         ->orderBy("item_id", "asc")
                         ->join('items', 'batches.item_id', 'items.id')
@@ -100,7 +106,8 @@ class InventoryLogController extends Controller
 
         $products = DB::table('items')->get();
 
-        return view('admin-coreUI.inventory', compact('batches', 'products'));
+        return view('admin.inventory', compact('batches', 'products'));
+       // return view('admin-coreUI.inventory', compact('batches', 'products'));
     }
 
     /**

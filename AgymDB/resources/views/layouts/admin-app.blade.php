@@ -135,6 +135,7 @@
             $('table.display').DataTable();
         } );
 
+
     </script>
 
 </body>

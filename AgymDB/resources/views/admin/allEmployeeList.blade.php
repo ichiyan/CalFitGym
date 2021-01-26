@@ -78,15 +78,15 @@
                                         <button type="button" class="btn btn-sm btn-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
                                         @if (is_null( $employee->date_separated ) )
                                             <button type="button" class="btn btn-sm btn-danger"><a href="" data-toggle="modal" data-target="#dismissEmployeeModal-{{$employee->id}}" style="color: white">Dismiss</a></button>
-                                            @if($employee->user_id == 0)
+                                            {{-- @if($employee->user_id == 0)
                                                 <div class="btn-group mr-3">
-                                                    <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Register Employee</a>
+                                                    <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Register</a>
                                                 </div>
-                                            @endif
+                                            @endif --}}
                                         @else
                                             <button type="button" class="btn btn-sm btn-warning"><a href="" data-toggle="modal" data-target="#rehireEmployeeModal-{{$employee->id}}"  style="color: white">Rehire</a></button>
                                         @endif
-                                         
+
                                     </td>
 
                                 </tr>

@@ -21,17 +21,17 @@
             <h6 class="m-0 font-weight-bold text-primary">Update Employee Record</h6>
         </div>
         <div class="card-body">
-            <form method='post' action='/admin/employee/{{$employee->id}}/update'>
+            <form method='post' action='/admin/employee/{{$employee->id}}/update' enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input type='hidden' name='_method' value='PUT'>
                 <div>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <img src="/storage/employees/{{$person->photo}}" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="emp_image" onchange="loadFile(event)"/>
                                 </div>
                             </div>
                         </div>

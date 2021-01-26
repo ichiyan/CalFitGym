@@ -98,7 +98,19 @@
                                 <option>-- Product --</option>
                                 @forEach ($products as $product)
                                     @if($batches[$product->id] > 0)
-                                        <option id="{{ $batches[$product->id] }}"  value='{{$product->id}}'> {{$product->item_name}} ( &#8369 {{ number_format( $product->price , 2, '.', ',') }} ) </option>
+                                        @if ($product->has_different_prices == 0)
+                                            <option id="{{ $batches[$product->id] }}"  value='{{$product->id}}'> {{$product->item_name}} ( &#8369 {{ number_format( $product->price , 2, '.', ',') }} ) </option>
+                                        @else
+                                            <option id="{{ $batches[$product->id] }}"  value='{{$product->id}}'> {{$product->item_name}} (
+                                            @foreach ($variations as $variation)
+                                                @foreach ($variation_category as $var_cat)
+                                                    @if ($variation->item_id == $product->id && $variation->variation_category_id == $var_cat->id && $var_cat->price_priority == 1)
+                                                          &#8369 {{ number_format( $variation->price , 2, '.', ',') }} <span style="font-size: 25px; font-weight: 700;">&#183</span>
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                             ) </option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -224,12 +236,12 @@
                                                                                             @endforeach
                                                                                         </select>
                                                                                     </div>
-                                                                                    <div class="col-3">
+                                                                                    <div class="col-4">
                                                                                         <button type="submit" class="btn btn-info shadow-sm btn-sm" value="Choose"><i class="fas fa-check-circle text-white-50"></i> Choose</button>
                                                                                         <input type='hidden' name='person_id' value='{{$person->id}}' class="form-control">
                                                                                         <input type='hidden' name='basket_item_id' value='{{$basket_item->id}}' class="form-control">
                                                                                     </div>
-
+                                                                                </div>
                                                                             </form>
                                                                              <br>
                                                                             @php  $flag= $var_cat->id + 1 @endphp
@@ -239,10 +251,11 @@
                                                             @endif
 
 
+
                                                             @forEach ($chosen_var as $c_var)
                                                                 @if($c_var->basket_id == $basket_item->id)
-                                                                        {{-- <div class="row"> --}}
-                                                                            <div class="col-3">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
                                                                             @forEach ($variation_category as $var_cat)
                                                                                 @if($var_cat->id == $c_var->variation_category_id)
                                                                                     {{$var_cat->category_name}} :
@@ -250,7 +263,7 @@
                                                                             @endforeach
                                                                             {{$c_var->name}}
                                                                             </div>
-                                                                            <div class="col-1">
+                                                                            <div class="col-6">
                                                                             <form method='post' action='/admin/order/{{$c_var->id}}/remove_variation'>
                                                                                 {{csrf_field()}}
                                                                                     <button type="submit" class=" btn btn-danger shadow-sm btn-sm"><i class="fas fa-trash-alt text-white-50"></i></button>
@@ -261,10 +274,10 @@
                                                                             </div>
                                                                         </div>
                                                                 @endif
+                                                                <br>
                                                             @endforeach
-
-
                                                         </div>
+
                                                     </td>
 
                                                         @if($product->has_different_prices == 0)

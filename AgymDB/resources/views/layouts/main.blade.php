@@ -23,6 +23,7 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{asset('css/welcome_style.css')}}" rel="stylesheet">
+        <link href="{{asset('css/index.css')}}" rel="stylesheet">
 
 
 

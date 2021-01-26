@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MemberType;
+use App\Models\Description;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberTypeController extends Controller
 {
@@ -50,8 +54,11 @@ class MemberTypeController extends Controller
 
     public function showAll()
     {
-        //
-        return view('admin.rates');
+
+        $membership_types = DB::table('member_types')->get();
+        $descriptions = DB::table('descriptions')->get();
+
+        return view( 'welcome' , compact('membership_types', 'descriptions'));
     }
 
     /**

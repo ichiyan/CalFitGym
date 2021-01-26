@@ -21,17 +21,17 @@
             <h6 class="m-0 font-weight-bold text-primary">Update Customer Record</h6>
         </div>
         <div class="card-body">
-            <form method='post' action='/admin/customer/{{$customer->id}}/update'>
+            <form method='post' action='/admin/customer/{{$customer->id}}/update' enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input type='hidden' name='_method' value='PUT'>
                 <div>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <img src="/storage/customers/{{$customer->photo}}" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="loadFile(event)"/>
                                 </div>
                             </div>
                         </div>
@@ -80,14 +80,14 @@
                         </div>
                     </div>
 
-                    @if ($customer->member_type_id == '3')
+                    {{-- @if ($customer->member_type_id == '3')
                         <div class="form-group row">
                             <label class="col-md-6 col-form-label text-md-right"> Trainer: </label>
                             <div class="col-md-6">
-                                <input type='text' name='birthday' required value='{{$trainer->fname}} {{$trainer->lname}}'>
+                                <input type='text' name='trainer' required value='{{$trainer->fname}} {{$trainer->lname}}'>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
                 <hr>
                 <div>

@@ -97,42 +97,41 @@
                                                 </div>
                                             </td>
 
-                                                @if($product->has_different_prices == 0)
-                                                    <td>{{$product->price}} </td>
-                                                    <td> {{$basket_item->quantity}} </td>
-                                                    <td> {{$product->price * $basket_item->quantity }} </td>
-                                                @else
-                                                    @forEach ($variation_category as $var_cat)
-                                                        @forEach ($chosen_var as $variation)
-                                                            @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
+                                                    @if($product->has_different_prices == 0)
+                                                        <td>{{$product->price}} </td>
+                                                        <td> {{$basket_item->quantity}} </td>
+                                                        <td> {{$product->price * $basket_item->quantity }} </td>
+                                                    @else
+                                                        @forEach ($variation_category as $var_cat)
+                                                            @forEach ($chosen_var as $variation)
+                                                                @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
                                                                     @if($var_cat->price_priority == 1)
                                                                         <td>{{$variation->price}} </td>
                                                                         <td> {{$basket_item->quantity}} </td>
                                                                         <td> {{$variation->price * $basket_item->quantity }} </td>
                                                                     @endif
-                                                            @endif
+                                                                @endif
+                                                            @endforeach
                                                         @endforeach
-                                                    @endforeach
+                                                    @endif
+                                        @endif
+                                     @endforeach
+                                @else  <!-- basket entry contains membership not product -->
+                                    @foreach($memberships as $membership)
+                                        @if($basket_item->membership_id == $membership->id)
+                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
+                                            <td>
+                                                @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
+                                                    Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
                                                 @endif
-
-                                        @else  <!-- basket entry contains membership not product -->
-
-                                            @forEach($memberships as $membership)
-                                                @if($basket_item->membership_id == $membership->id)
-                                                    <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}} </td>
-                                                    <td>
-                                                        @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
-                                                            Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
-                                                        @endif
-                                                    </td>
-                                                    <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
-                                                    <td> 1 </td>
-                                                    <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
-                                                @endif
-                                            @endforeach
-
+                                            </td>
+                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
+                                            <td> 1 </td>
+                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
                                         @endif
                                     @endforeach
+
+
                                 @endif
                             </tr>
                         @endforeach
