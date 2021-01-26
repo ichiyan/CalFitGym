@@ -57,14 +57,11 @@ class HomeController extends Controller
         $yearAgo = Carbon::today()->subYear();
 
         //for pie chart
-        $countWalkIn = DB::table('customers')->where('member_type_id', 1)->count();
-        $countMonthly = DB::table('customers')->where('member_type_id', 2)->count();
-        $countPremium = DB::table('customers')->where('member_type_id', 3)->count();
         $member_type = DB::table('member_types')->get();
         $data = [];
         foreach($member_type as $type){
             $data['label'][] = $type->member_type_name;
-            $data['data'][] = DB::table('customers')->where('member_type_id', $type->id)->count();
+            $data['data'][] = DB::table('customers')->where('member_type_id', $type->id)->where('end_date', '>', $today)->count();
         }
         $data['chart_data'] = json_encode($data);
         //end of pie chart data
@@ -98,7 +95,7 @@ class HomeController extends Controller
                         ->get();
 
         return view('admin.dashboard', compact('day_earnings', 'monthly_earnings', 'annual_earnings',
-                                                'logged_customer', 'today', 'countWalkIn', 'countMonthly', 'countPremium',
+                                                'logged_customer', 'today',
                                                 'data', 'near_expiry', 'member_type', 'log', 'batches', 'products',
                                                 'small_stock'));
     }

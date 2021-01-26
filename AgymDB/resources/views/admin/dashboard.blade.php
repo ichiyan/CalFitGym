@@ -143,7 +143,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Customer Demographics</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Active Memberships</h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -338,7 +338,11 @@
 
     </div>
     <!-- End of Page Content -->
-
+    <script type="text/javascript">
+    var chartdata = <?php echo $data['chart_data']; ?>;
+    var graphdata = <?php echo $graph['chart_data']; ?>;
+    //console.log(JSON.stringify(chartdata));
+    </script>
 @endsection
 
 
