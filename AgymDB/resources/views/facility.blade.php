@@ -34,7 +34,7 @@
 <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
     <h1>Our Facility</h1>
-    <h2>with modern quality equipment to help you get fit</h2>
+    <h2>with modern quality equipments to help you get fit</h2>
     <a href="#facility" class="btn-get-started scrollto">View Gallery</a>
     </div>
 </section><!-- End Hero -->
@@ -60,7 +60,7 @@
               <img src="{{ asset('images/facility/fac-1.jpg') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Wings/Back Build Up Section</h4>
-                <p>Tone the muscles in on of the most difficult area to tone with out state of the art equipments.</p>
+                <p>Tone the muscles found in one of the most difficult area with our state of the art equipments.</p>
               </div>
             </div>
 
@@ -76,7 +76,7 @@
               <img src="{{ asset('images/facility/fac-3.jpg') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Arm Build Up Section</h4>
-                <p>For those who want to more than just tone your upper body and increase the size of your muscles, these section is the way to go.</p>
+                <p>For those who wants to more than just a simple tone in their upper body and wishes increase the size of their muscles, these section is the way to go.</p>
               </div>
             </div>
 
@@ -115,7 +115,7 @@
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
               <img src="{{ asset('images/facility/fac-10.png') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Locker Room/h4>
+                <h4>Locker Room</h4>
                 <p>For our gym, safety and security is one of our priority. Thus, we have a locker room to put your things while you tone up and build up those muscles.</p>
               </div>
             </div>
@@ -124,7 +124,7 @@
               <img src="{{ asset('images/facility/fac-11.png') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Shower Room</h4>
-                <p>After a workout, a bath is required in order to rid yourself of those sweat and stenches.</p>
+                <p>After a workout, a bath is required in order to rid yourself of those sweat and stenches. So when you leave our gym, you are refreshed, clean and a step closer to that dream body.</p>
               </div>
             </div>
 

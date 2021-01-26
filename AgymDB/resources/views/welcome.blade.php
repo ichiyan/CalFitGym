@@ -131,7 +131,7 @@
                             <div class="text-block" data-aos="fade-left">
                                 <div class="text-lockup">
                                     <h2>Summer of Fun</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                                    <p>Summer is the season of thrill and excitement. Thus, we open and organize unending and exciting activities for our gym members. Free health screenings, fitness workshops, challenges, food and fun! To top it of, our annual Walkathon Challenge and Obstacle Course Competetion will be held right at the end of the events!</p>
                                 </div>
                             </div>
                         </div>
