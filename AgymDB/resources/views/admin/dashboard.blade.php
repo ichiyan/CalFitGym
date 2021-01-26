@@ -341,7 +341,7 @@
     <script type="text/javascript">
     var chartdata = <?php echo $data['chart_data']; ?>;
     var graphdata = <?php echo $graph['chart_data']; ?>;
-    //console.log(JSON.stringify(chartdata));
+    console.log(JSON.stringify(graphdata));
     </script>
 @endsection
 

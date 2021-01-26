@@ -68,12 +68,15 @@ class HomeController extends Controller
 
         //for line graph
         $graph = [];
-        for($x=1; $x<12; $x++){
-            $start = Carbon::today()->subMonth($x);
-            $end = Carbon::today()->subMonth($x);
-            $data['data'][] = Order::whereBetween('order_date', [$monthAgo, $today])->sum('total_price');
+        $start = Carbon::today()->subMonths(10);
+        $end = Carbon::today()->subMonths(9);
+        for($x=0; $x<12; $x++){
+            $graph['label'][$x] = $start->shortEnglishMonth;
+            $graph['data'][$x] = Order::whereBetween('order_date', [$start, $end])->sum('total_price');
+            $start = $end;
+            $end = $end->addMonth();
         }
-        $graph['chart_data'] = json_encode($data);
+        $graph['chart_data'] = json_encode($graph);
         //end of line graph data
 
         $day_earnings = Order::whereBetween('order_date', [$today, $tomorrow])->sum('total_price');

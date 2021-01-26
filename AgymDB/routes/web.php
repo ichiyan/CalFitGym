@@ -163,5 +163,6 @@ Route::get('/', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 
 // Route::get('/products/#products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
 Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
+Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll']);
 
 ?>
