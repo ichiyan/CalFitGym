@@ -66,6 +66,16 @@ class HomeController extends Controller
         $data['chart_data'] = json_encode($data);
         //end of pie chart data
 
+        //for line graph
+        $graph = [];
+        for($x=1; $x<12; $x++){
+            $start = Carbon::today()->subMonth($x);
+            $end = Carbon::today()->subMonth($x);
+            $data['data'][] = Order::whereBetween('order_date', [$monthAgo, $today])->sum('total_price');
+        }
+        $graph['chart_data'] = json_encode($data);
+        //end of line graph data
+
         $day_earnings = Order::whereBetween('order_date', [$today, $tomorrow])->sum('total_price');
         $monthly_earnings = Order::whereBetween('order_date', [$monthAgo, $today])->sum('total_price');
         $annual_earnings = Order::whereBetween('order_date', [$yearAgo, $today])->sum('total_price');
@@ -95,7 +105,7 @@ class HomeController extends Controller
                         ->get();
 
         return view('admin.dashboard', compact('day_earnings', 'monthly_earnings', 'annual_earnings',
-                                                'logged_customer', 'today',
+                                                'logged_customer', 'today', 'graph',
                                                 'data', 'near_expiry', 'member_type', 'log', 'batches', 'products',
                                                 'small_stock'));
     }
