@@ -51,8 +51,55 @@ class HomeController extends Controller
 
     public function adminHome(){
         //
-        $annual_earnings = DB::table('orders')->sum('total_price');
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+        $monthAgo = Carbon::today()->subMonth();
+        $yearAgo = Carbon::today()->subYear();
 
-        return view('admin.dashboard', compact('annual_earnings'));
+        //for pie chart
+        $countWalkIn = DB::table('customers')->where('member_type_id', 1)->count();
+        $countMonthly = DB::table('customers')->where('member_type_id', 2)->count();
+        $countPremium = DB::table('customers')->where('member_type_id', 3)->count();
+        $member_type = DB::table('member_types')->get();
+        $data = [];
+        foreach($member_type as $type){
+            $data['label'][] = $type->member_type_name;
+            $data['data'][] = DB::table('customers')->where('member_type_id', $type->id)->count();
+        }
+        $data['chart_data'] = json_encode($data);
+        //end of pie chart data
+
+        $day_earnings = Order::whereBetween('order_date', [$today, $tomorrow])->sum('total_price');
+        $monthly_earnings = Order::whereBetween('order_date', [$monthAgo, $today])->sum('total_price');
+        $annual_earnings = Order::whereBetween('order_date', [$yearAgo, $today])->sum('total_price');
+        
+        $customers = Customer::get();
+        $logged_customer = 0;
+        foreach($customers as $customer){ //to exclude entry log of employees
+            if(EntryLog::whereBetween('entry', [$today, $tomorrow])->where('person_id', $customer->id)->exists()){
+                $logged_customer++;
+            }
+        }
+
+        $near_expiry = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->get();
+        $log = array();
+        foreach ($near_expiry as $key => $customer) {
+            $log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $customer->id)->first();
+        }
+
+        $products = DB::table('items')->get();
+        $batches = Batch::where('amt_left_batch', '>', 0)
+                        ->orderBy("item_id", "asc")
+                        ->get();
+        $small_stock = Batch::where('amt_left_batch', '>', 0)
+                        ->orderBy("item_id", "asc")
+                        ->get();
+
+        return view('admin.dashboard', compact('day_earnings', 'monthly_earnings', 'annual_earnings',
+                                                'logged_customer', 'today', 'countWalkIn', 'countMonthly', 'countPremium',
+                                                'data', 'near_expiry', 'member_type', 'log', 'batches', 'products',
+                                                'small_stock'));
     }
 }

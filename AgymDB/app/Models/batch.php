@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Batch extends Model
 {
     use HasFactory;
-    
-    public $timestamps = false;
 
     protected $fillable = [
         'batch_amount', 

@@ -16,10 +16,10 @@
                     <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+                    <a href="/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
+                    <a href="/admin/inventoryList/all" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Earnings (Annual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"> &#8369 215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"> &#8369 {{$annual_earnings}} </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-money-bill fa-2x text-gray-300"></i>
@@ -52,8 +52,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"> &#8369 40,000</div>
+                                    Earnings ( {{$today->monthName}} )</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"> &#8369 {{$monthly_earnings}} </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -72,7 +72,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Earnings (Today)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">&#8369 215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">&#8369 {{$day_earnings}} </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-money-bill fa-2x text-gray-300"></i>
@@ -90,7 +90,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Logged Customers</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"> {{$logged_customer}} </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -197,14 +197,52 @@
                             <table class="table table-bordered display" id="" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Log</th>
+                                        <th></th>
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Membership</th>
-                                        <th>Activated on</th>
+                                        <th>Expiry Date</th>
+                                        <th>Days Left</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                @forEach($near_expiry as $value => $expiry)
+                                    @if($today->diffInDays($expiry->end_date, false) < 31 && $today->diffInDays($expiry->end_date, false) > 0)
+                                    <tr>
+                                        <td>
+                                        @if($today->diffInDays($expiry->end_date, false) > 0)
+                                            @if($log[$value]->exit == NULL)
+                                                <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="log-btn login" data-toggle="tooltip" data-placement="top" title="click to logout"></span></a>
+                                            @else
+                                                <a href="/admin/log/{{$expiry->id}}/create"><span class="log-btn logout" data-toggle="tooltip" data-placement="top" title="click to login"></span></a>
+                                            @endif
+                                        @else
+                                            <span class="log-btn inactive" data-toggle="tooltip" data-placement="top" title="inactive"></span>
+                                        @endif
+                                        </td>
+
+                                        <td> {{$expiry->id}} </td>
+                                        <td> {{$expiry->fname}}   {{$expiry->lname}} </td>
+
+                                        <td>
+                                        @foreach($member_type as $type)
+                                            @if($type->id == $expiry->member_type_id)
+                                                {{$type->member_type_name}}
+                                            @endif
+                                        @endforeach
+                                        </td>
+
+                                        <td> {{\Carbon\Carbon::parse($expiry->end_date)->toFormattedDateString()}} </td>
+
+                                        <td> {{$today->diffInDays($expiry->end_date, false)}} </td>
+
+                                        <td>
+                                            <button class="btn btn-sm btn-danger"><a href="#" style="color: white">Notify</a></button>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                               
                             </table>
                         </div>
                     </div>
@@ -219,7 +257,7 @@
              <div class="col-lg-6 col-mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Products with Less Than - In Stock</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Products with Less Than 15% In Stock</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -229,9 +267,25 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>In Stock</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
+                                @forEach($batches as $key => $batch)
+                                    @if(($batch->amt_left_batch/$batch->batch_amount) < 0.15)
+                                    <tr>
+                                        <td> {{$key+1}} </td>
+
+                                        <td>
+                                        @forEach($products as $item)
+                                            @if($batch->item_id == $item->id)
+                                              {{$item->item_name}} 
+                                            @endif
+                                        @endforeach
+                                        </td>
+
+                                        <td> {{$batch->amt_left_batch}} out of {{$batch->batch_amount}} </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -255,6 +309,25 @@
                                         <th>In Stock</th>
                                     </tr>
                                 </thead>
+                                @forEach($batches as $key => $batch)
+                                    @if($today->diffInDays($batch->expiry_date, false) < 31 && $today->diffInDays($batch->expiry_date, false) > 0)
+                                    <tr>
+                                        <td> {{$key+1}} </td>
+
+                                        <td>
+                                        @forEach($products as $item)
+                                            @if($batch->item_id == $item->id)
+                                              {{$item->item_name}} 
+                                            @endif
+                                        @endforeach
+                                        </td>
+
+                                        <td> {{$batch->id}} </td>
+                                        <td> {{\Carbon\Carbon::parse($batch->expiry_date)->toFormattedDateString()}} </td>
+                                        <td> {{$batch->amt_left_batch}} </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
                             </table>
                         </div>
                     </div>
