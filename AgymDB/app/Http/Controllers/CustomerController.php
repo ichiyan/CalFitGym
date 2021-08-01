@@ -124,6 +124,49 @@ class CustomerController extends Controller
         //return view('admin-coreUI.detailCustomer', compact('customer'));
     }
 
+    public function customerShow($id)
+    {
+        //
+        
+        $customer = DB::table('customers')
+                        ->join('people', 'customers.person_id', '=', 'people.id')
+                        ->where('customers.id', $id)
+                        ->first();
+        $order = DB::table('orders')
+                        ->where('orders.customer_id','=',$customer->id)
+                        ->first();
+        
+        $trainer = NULL;
+        $member_type = MemberType::all();
+        $remaining_days = Carbon::now()->diffInDays(Carbon::parse($customer->end_date));
+
+        
+
+        if(Customer::whereId($order->customer_id)->exists()){
+            $customer_details = Customer::findOrFail($order->customer_id);
+            $employee_details = NULL;
+            if(Person::whereId($customer_details->assigned_employee_id)->exists()){
+                $trainer = Person::findOrFail($customer_details->assigned_employee_id);
+            }
+        }else{
+            $employee_details = Employee::findOrFail($order->customer_id);
+            $customer_details = NULL;
+        }
+
+        $basket = Basket::where('order_id', $order->id)->get();
+        $products = DB::table('items')->get();
+        $customizations = DB::table('customizes')->get();
+        $variations = DB::table('variations')->get();
+        $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
+        $variation_category = DB::table('variation_categories')->get();
+        $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
+
+         return view('/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','order','customer_details', 'employee_details',
+                                                    'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
+                                                    'variation_category', 'memberships'));
+        //return view('admin-coreUI.detailCustomer', compact('customer'));
+    }
+
     public function showAll($filter)
     {
         //
