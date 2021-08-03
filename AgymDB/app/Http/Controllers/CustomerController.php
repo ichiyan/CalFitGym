@@ -1,6 +1,5 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php 
+    namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -137,9 +136,8 @@ class CustomerController extends Controller
                         ->first();
         
         $trainer = NULL;
-        $member_type = MemberType::all();
+        $member_type = DB::table('member_types')->get();
         $remaining_days = Carbon::now()->diffInDays(Carbon::parse($customer->end_date));
-
         
 
         if(Customer::whereId($order->customer_id)->exists()){

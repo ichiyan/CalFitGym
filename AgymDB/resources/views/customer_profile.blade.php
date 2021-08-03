@@ -30,42 +30,36 @@
 @section('hero')
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
-    <h1>Welcome Back {{$customer->fname}}!</h1>
-    <h2>with modern quality equipments to help you get fit</h2>
-    <a href="/" class="btn-get-started scrollto">View Subscription Status</a>
-    </div>
-</section><!-- End Hero -->
+<section id="hero" class="d-flex align-items-center" style="height: 300px;"></section><!-- End Hero -->
 
 @endsection
 
 @section('main')
 <main id="main">
-    <section class="portfolio">
-        <div class="container-fluid">
-            <div class="section-title">
-                <span>{{$customer->fname}} {{$customer->lname}}</span>
+        <div class="row mx-4">
+            <div class=" col-2 mr-4 " style="height: 256px; margin-top:-7%; ">
+                <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
                 <h2>{{$customer->fname}} {{$customer->lname}}</h2>
-                <p>{{$remaining_days}} days left of subscription left</p>
             </div>
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Customer Profile</h6>
-                </div>
-                <div class="card-body">
+            
+            <div class="card shadow col-9 my-4 ">
+                <div class="card-body py-4">
                     <div class="container user-profile">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="profile-img">
-                                    <img src="/storage/customers/{{$customer->photo}}" alt=""/>
-                                </div>
-                            </div>
-                            <div class="col col-md-6 align-self-center">
+                            <div class="col align-self-center">
                                 <div class="profile-head">
-                                    <h5> {{$customer->fname}} {{$customer->lname}}</h5>
-                                    {{-- <h6>{{ $member_type->member_type_name  }} Customer</h6> --}}
-                                    <p class="proile-rating">Membership:<span> {{$customer->start_date}}  -  {{$customer->end_date}}</span></p>
+                                    <h5>
+                                        @if($remaining_days > 20)
+                                            <span style="height: 15px; width: 15px; border-radius: 50%; display: inline-block; background-color:lime;}"></span>
+                                        @elseif ($remaining_days > 5)
+                                            <span style="height: 15px; width: 15px; border-radius: 50%; display: inline-block; background-color:yellow;}"></span>
+                                        @else
+                                            <span style="height: 15px; width: 15px; border-radius: 50%; display: inline-block; background-color:red;}">c</span>
+                                        @endif
+                                        {{$remaining_days}} days left of subscription left
+                                    </h5>
+                                    {{-- <h6>{{ $member_type->member_type_name}} Custome    r</h6> --}}
+                                    <p class="proile-rating">Membership:<span> {{ \Carbon\Carbon::parse($customer->start_date)->format('M d Y')}}  -  {{ \Carbon\Carbon::parse($customer->end_date)->format('M d Y')}}</span></p>
                                     @if ($customer->member_type_id != '1')
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
@@ -84,7 +78,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col col-md-2 align-self-start">
+                            <div class="align-self-start">
                                 <button class="btn btn-outline-dark"><a href='/'>Home</a></button>
                                 <button class="btn btn-danger"><a href="{{route('customerEdit', $customer->id)}}" style="color: white">Edit</a></button>
                             </div>
@@ -265,7 +259,7 @@
                                                                 @else  <!-- basket entry contains membership not product -->
                                                                     @foreach($memberships as $membership)
                                                                         @if($basket_item->membership_id == $membership->id)
-                                                                            {{-- <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td> --}}
+                                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
                                                                             <td>
                                                                                 @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
                                                                                     Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
@@ -319,7 +313,6 @@
                 </div>
             </div>
         </div>
-    </section>
 </main><!-- End #main -->
 
 @endsection
