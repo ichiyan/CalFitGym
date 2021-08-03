@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.cust-app')
 
 @section('topnav')
 
@@ -35,7 +35,7 @@
 @endsection
 
 @section('main')
-<main id="main">
+<div id="main">
         <div class="row mx-4">
             <div class=" col-2 mr-4 " style="height: 256px; margin-top:-7%; ">
                 <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
@@ -72,7 +72,7 @@
                                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#emergency-contact" role="tab" aria-controls="profile" aria-selected="false">Emergency Contact</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#purchase-history" role="tab" aria-controls="profile" aria-selected="false">Purchase History</a>
+                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#remarks" role="tab" aria-controls="profile" aria-selected="false">Remarks</a>
                                             </li>
                                         </ul>
                                     @endif
@@ -178,133 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="purchase-history" role="tabpanel" aria-labelledby="profile-tab">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <td> # </td>
-                                                            <td> Product Name </td>
-                                                            <td> Customization </td>
-                                                            <td> Price </td>
-                                                            <td> Quantity </td>
-                                                            <td> Amount</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                
-                                                        @forEach($basket as $key => $basket_item)
-                                                            <tr>
-                                                                <td> {{$key+1}} </td>
-                                                                @if($basket_item->membership_id == NULL)
-                                                                    @forEach($products as $product)
-                                                                        @if($basket_item->item_id == $product->id)
-                                                                            <td>
-                                                                                 {{$product->item_name}}
-                                                                                 @if($product->has_variations == 1)
-                                                                                    @forEach ($variations as $variation)
-                                                                                        @if($basket_item->id == $variation->item_id)
-                                                                                            @if($basket_item->variation_id == $variation->id)
-                                                                                                ( {{$variation->name}} )
-                                                                                            @endif
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            </td>
-                                
-                                                                            <td>
-                                                                                <div class="container">
-                                                                                    @if($basket_item->customize_id != NULL)
-                                                                                        @forEach($customizations as $custom)
-                                                                                            @if($basket_item->customize_id == $custom->id)
-                                                                                            Color: {{$custom->color}} <br> Message: {{$custom->message}}
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    @endif
-                                                                                    <ul>
-                                                                                        @forEach ($chosen_var as $c_var)
-                                                                                            @if($c_var->basket_id == $basket_item->id)
-                                                                                                <li>
-                                                                                                    @forEach ($variation_category as $var_cat)
-                                                                                                        @if($var_cat->id == $c_var->variation_category_id)
-                                                                                                            {{$var_cat->category_name}} :
-                                                                                                        @endif
-                                                                                                    @endforeach
-                                                                                                    {{$c_var->name}}
-                                                                                                </li>
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </td>
-                                
-                                                                                    @if($product->has_different_prices == 0)
-                                                                                        <td>{{$product->price}} </td>
-                                                                                        <td> {{$basket_item->quantity}} </td>
-                                                                                        <td> {{$product->price * $basket_item->quantity }} </td>
-                                                                                    @else
-                                                                                        @forEach ($variation_category as $var_cat)
-                                                                                            @forEach ($chosen_var as $variation)
-                                                                                                @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
-                                                                                                    @if($var_cat->price_priority == 1)
-                                                                                                        <td>{{$variation->price}} </td>
-                                                                                                        <td> {{$basket_item->quantity}} </td>
-                                                                                                        <td> {{$variation->price * $basket_item->quantity }} </td>
-                                                                                                    @endif
-                                                                                                @endif
-                                                                                            @endforeach
-                                                                                        @endforeach
-                                                                                    @endif
-                                                                        @endif
-                                                                     @endforeach
-                                                                @else  <!-- basket entry contains membership not product -->
-                                                                    @foreach($memberships as $membership)
-                                                                        @if($basket_item->membership_id == $membership->id)
-                                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
-                                                                            <td>
-                                                                                @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
-                                                                                    Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
-                                                                                @endif
-                                                                            </td>
-                                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
-                                                                            <td> 1 </td>
-                                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
-                                                                        @endif
-                                                                    @endforeach
-                                
-                                
-                                                                @endif
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                
-                                                    <tbody>
-                                                        <tr></tr>
-                                                        <tr></tr>
-                                                        <tr class="no-border">
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td colspan="2"><b>Total Price:</b></td>
-                                                            <td><b>&#8369 {{ number_format( $order->total_price , 2, '.', ',') }}</b></td>
-                                                        </tr>
-                                                        <tr class="no-border">
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td colspan="2"><b>Amount Received:</b></td>
-                                                            <td><b>&#8369 {{ number_format( $order->amount_received , 2, '.', ',') }}</b></td>
-                                                        </tr>
-                                                        <tr class="no-border">
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td colspan="2"><b>Change:</b></td>
-                                                            <td><b>&#8369 {{ number_format( $order->change, 2, '.', ',') }}</b></td>
-                                                        </tr>
-                                                    </tbody>
-                                
-                                                </table>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -312,6 +186,171 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Purchase History -->
+            <div class=" col-2 mr-4 ">
+            </div>
+
+            <div class="card shadow col-9 my-4 table-responsive p-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Purchase History</h6>
+                    </div>
+                    <!-- Accordion -->
+                    <div class="card-body" id="accordion">
+                        @php $count = 0; @endphp
+                        @forEach($orderss as $order)
+                        
+                        <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
+                            <h6 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
+                                    {{ \Carbon\Carbon::parse($order->order_date)->format('M d Y')}}
+                                </button>
+                            </h6>
+                        </div>
+                        @if($count == 0)
+                            <div   div id="collapse{{$order->id}}" class= "collapse show" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
+                            @php $count = 1; @endphp
+                        @else
+                            <div id="collapse{{$order->id}}" class= "collapse" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
+                        @endif
+                           
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td> # </td>
+                                            <td> Product Name </td>
+                                            <td> Customization </td>
+                                            <td> Price </td>
+                                            <td> Quantity </td>
+                                            <td> Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                        @forEach($basket as $key => $basket_item)
+                                            @if($order->id == $basket_item->order_id)
+                                            <tr>
+                                                <td> {{$key+1}} </td>
+                                                @if($basket_item->membership_id == NULL)
+                                                    @forEach($products as $product)
+                                                        @if($basket_item->item_id == $product->id)
+                                                            <td>
+                                                                {{$product->item_name}}
+                                                                @if($product->has_variations == 1)
+                                                                    @forEach ($variations as $variation)
+                                                                        @if($basket_item->id == $variation->item_id)
+                                                                            @if($basket_item->variation_id == $variation->id)
+                                                                                ( {{$variation->name}} )
+                                                                            @endif
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="container">
+                                                                    @if($basket_item->customize_id != NULL)
+                                                                        @forEach($customizations as $custom)
+                                                                            @if($basket_item->customize_id == $custom->id)
+                                                                            Color: {{$custom->color}} <br> Message: {{$custom->message}}
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                    <ul>
+                                                                        @forEach ($chosen_var as $c_var)
+                                                                            @if($c_var->basket_id == $basket_item->id)
+                                                                                <li>
+                                                                                    @forEach ($variation_category as $var_cat)
+                                                                                        @if($var_cat->id == $c_var->variation_category_id)
+                                                                                            {{$var_cat->category_name}} :
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                    {{$c_var->name}}
+                                                                                </li>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+
+                                                                    @if($product->has_different_prices == 0)
+                                                                        <td>{{$product->price}} </td>
+                                                                        <td> {{$basket_item->quantity}} </td>
+                                                                        <td> {{$product->price * $basket_item->quantity }} </td>
+                                                                    @else
+                                                                        @forEach ($variation_category as $var_cat)
+                                                                            @forEach ($chosen_var as $variation)
+                                                                                @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
+                                                                                    @if($var_cat->price_priority == 1)
+                                                                                        <td>{{$variation->price}} </td>
+                                                                                        <td> {{$basket_item->quantity}} </td>
+                                                                                        <td> {{$variation->price * $basket_item->quantity }} </td>
+                                                                                    @endif
+                                                                                @endif
+                                                                            @endforeach
+                                                                        @endforeach
+                                                                    @endif
+                                                        @endif
+                                                    @endforeach
+                                                @else  <!-- basket entry contains membership not product -->
+                                                    @foreach($memberships as $membership)
+                                                        @if($basket_item->membership_id == $membership->id)
+                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
+                                                            <td>
+                                                                @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
+                                                                    Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
+                                                                @endif
+                                                            </td>
+                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
+                                                            <td> 1 </td>
+                                                            <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
+                                                        @endif
+                                                    @endforeach
+
+
+                                                @endif
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                        
+                                    </tbody>
+
+                                    <tbody>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr class="no-border">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="2"><b>Total Price:</b></td>
+                                            <td><b>&#8369 {{ number_format( $order->total_price , 2, '.', ',') }}</b></td>
+                                        </tr>
+                                        <tr class="no-border">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="2"><b>Amount Received:</b></td>
+                                            <td><b>&#8369 {{ number_format( $order->amount_received , 2, '.', ',') }}</b></td>
+                                        </tr>
+                                        <tr class="no-border">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="2"><b>Change:</b></td>
+                                            <td><b>&#8369 {{ number_format( $order->change, 2, '.', ',') }}</b></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            
         </div>
 </main><!-- End #main -->
 

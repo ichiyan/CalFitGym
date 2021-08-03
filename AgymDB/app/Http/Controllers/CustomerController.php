@@ -131,35 +131,42 @@ class CustomerController extends Controller
                         ->join('people', 'customers.person_id', '=', 'people.id')
                         ->where('customers.id', $id)
                         ->first();
-        $order = DB::table('orders')
+        $orderss = DB::table('orders')
                         ->where('orders.customer_id','=',$customer->id)
-                        ->first();
+                        ->orderBy('order_date', 'desc')
+                        ->take(5)
+                        ->get();
+
         
         $trainer = NULL;
         $member_type = DB::table('member_types')->get();
         $remaining_days = Carbon::now()->diffInDays(Carbon::parse($customer->end_date));
         
 
-        if(Customer::whereId($order->customer_id)->exists()){
-            $customer_details = Customer::findOrFail($order->customer_id);
+        if(Customer::whereId($customer->id)->exists()){
+            $customer_details = Customer::findOrFail($customer->id);
             $employee_details = NULL;
             if(Person::whereId($customer_details->assigned_employee_id)->exists()){
                 $trainer = Person::findOrFail($customer_details->assigned_employee_id);
             }
         }else{
-            $employee_details = Employee::findOrFail($order->customer_id);
+            $employee_details = Employee::findOrFail($orderss->customer_id);
             $customer_details = NULL;
         }
 
-        $basket = Basket::where('order_id', $order->id)->get();
+        
+
+            $basket = DB::table('baskets')->get();
+            $memberships = DB::table('memberships')->get();
+        
         $products = DB::table('items')->get();
         $customizations = DB::table('customizes')->get();
         $variations = DB::table('variations')->get();
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
         $variation_category = DB::table('variation_categories')->get();
-        $memberships = DB::table('memberships')->where('order_id', $order->id)->get();
+        
 
-         return view('/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','order','customer_details', 'employee_details',
+         return view('/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
                                                     'variation_category', 'memberships'));
         //return view('admin-coreUI.detailCustomer', compact('customer'));
