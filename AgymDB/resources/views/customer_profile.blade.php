@@ -228,11 +228,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                        @php $index = 0; @endphp
                                         @forEach($basket as $key => $basket_item)
                                             @if($order->id == $basket_item->order_id)
+                                                
                                                 <tr>
-                                                    <td> {{$key+1}} </td>
+                                                    <td>{{++$index}}</td>
                                                     @if($basket_item->membership_id == NULL)
                                                         @forEach($products as $product)
                                                             @if($basket_item->item_id == $product->id)
