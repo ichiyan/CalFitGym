@@ -202,11 +202,11 @@
                         @forEach($orderss as $order)
                         
                         <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
-                            <h6 class="mb-0">
+                            <p class="mb-0">
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
-                                    {{ \Carbon\Carbon::parse($order->order_date)->format('M d Y')}}
+                                    {{ \Carbon\Carbon::parse($order->order_date)->format('M d Y @ h:i A')}}
                                 </button>
-                            </h6>
+                            </p>
                         </div>
                         @if($count == 0)
                             <div   div id="collapse{{$order->id}}" class= "collapse show" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
