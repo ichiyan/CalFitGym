@@ -70,28 +70,11 @@
   <script src=" {{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
   <script src=" {{ asset('vendor/aos/aos.js') }}"></script>
 
-   <!-- tables plugins -->
-   <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-   <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-   <!-- tables custom scripts -->
-   <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+  
 
   <!-- Template Main JS File -->
   <script src=" {{ asset('js/main.js') }} "></script>
-  <script>
-
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    });
-
-
-    $(document).ready(function() {
-        $('table.display').DataTable();
-    } );
-
-
-</script>
+  
 
     </body>
 </html>

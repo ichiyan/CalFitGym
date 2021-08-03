@@ -197,26 +197,27 @@
                         <h6 class="m-0 font-weight-bold text-primary">Purchase History</h6>
                     </div>
                     <!-- Accordion -->
-                    <div class="card-body" id="accordion">
+                    <div class="card-body " id="accordion">
                         @php $count = 0; @endphp
                         @forEach($orderss as $order)
                         
-                        <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
-                            <p class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
-                                    {{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y @ h:i A')}}
-                                </button>
-                            </p>
-                        </div>
-                        @if($count == 0)
-                            <div   div id="collapse{{$order->id}}" class= "collapse show" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
-                            @php $count = 1; @endphp
-                        @else
-                            <div id="collapse{{$order->id}}" class= "collapse" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
-                        @endif
+                            <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color:#FFA689;">
+                                <p class="mb-0">
+                                    <button class="btn" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
+                                        {{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y @ h:i A')}}
+                                    </button>
+                                </p>
+                            </div>
+
+                            @if($count == 0)
+                                <div   div id="collapse{{$order->id}}" class= "collapse show" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
+                                @php $count = 1; @endphp
+                            @else
+                                <div id="collapse{{$order->id}}" class= "collapse" aria-labelledby="heading{{$order->id}}" data-parent="#accordion" >
+                            @endif
                            
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <td> # </td>
@@ -343,12 +344,14 @@
                                             <td><b>&#8369 {{ number_format( $order->change, 2, '.', ',') }}</b></td>
                                         </tr>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="ml-auto mr-0">
+                    {{ $orderss->links() }}
                 </div>
             </div>
             

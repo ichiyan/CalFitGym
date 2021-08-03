@@ -134,8 +134,7 @@ class CustomerController extends Controller
         $orderss = DB::table('orders')
                         ->where('orders.customer_id','=',$customer->id)
                         ->orderBy('order_date', 'desc')
-                        ->take(5)
-                        ->get();
+                        ->simplePaginate(5);
 
         
         $trainer = NULL;
