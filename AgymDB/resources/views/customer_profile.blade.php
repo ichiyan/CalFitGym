@@ -83,7 +83,7 @@
                                 <button class="btn btn-danger"><a href="{{route('customerEdit', $customer->id)}}" style="color: white">Edit</a></button>
                             </div>
                         </div>
-                            <div class="row justify-content-end">
+                            <div class="row justify-content-center p-4">
                                 <div class="col-md-8">
                                     <div class="tab-content profile-tab" id="myTabContent">
                                         @if ($customer->member_type_id != '1')
