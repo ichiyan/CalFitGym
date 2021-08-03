@@ -80,7 +80,7 @@
                             </div>
                             <div class="align-self-start">
                                 <button class="btn btn-outline-dark"><a href='/'>Home</a></button>
-                                <button class="btn btn-danger"><a href="{{route('customerEdit', $customer->id)}}" style="color: white">Edit</a></button>
+                                <button class="btn btn-danger"><a href="/" style="color: white">Edit</a></button>
                             </div>
                         </div>
                             <div class="row justify-content-center p-4">
