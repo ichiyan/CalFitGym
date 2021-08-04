@@ -191,7 +191,7 @@
             <div class=" col-2 mr-4 ">
             </div>
 
-            <div class="card shadow col-9 my-4 table-responsive p-4">
+            <div class=" col-9 my-4" style="position: relative;">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Purchase History</h6>
@@ -201,7 +201,7 @@
                         @php $count = 0; @endphp
                         @forEach($orderss as $order)
                         
-                            <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color:#FFA689;">
+                            <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color: #C7C3D4; border-color:white; border-width: 4px;" >
                                 <p class="mb-0">
                                     <button class="btn" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
                                         {{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y @ h:i A')}}
@@ -210,35 +210,34 @@
                             </div>
 
                             @if($count == 0)
-                                <div   div id="collapse{{$order->id}}" class= "collapse show" aria-labelledby="heading{{$order->id}}" data-parent="#accordion">
+                                <div   div id="collapse{{$order->id}}" class= "collapse  show p-4" aria-labelledby="heading{{$order->id}}" data-parent="#accordion" >
                                 @php $count = 1; @endphp
                             @else
-                                <div id="collapse{{$order->id}}" class= "collapse" aria-labelledby="heading{{$order->id}}" data-parent="#accordion" >
+                                <div id="collapse{{$order->id}}" class= "collapse p-4" aria-labelledby="heading{{$order->id}}" data-parent="#accordion" >
                             @endif
                            
-                            <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <td> # </td>
-                                            <td> Product Name </td>
-                                            <td> Customization </td>
-                                            <td> Price </td>
-                                            <td> Quantity </td>
-                                            <td> Amount</td>
+                                <table class="table table-bordered table-hover" width="100%" cellspacing="0" style="border-color: black;">
+                                    <thead class="table-dark" style="border-color: black;">
+                                        <tr style="border-color: black;">
+                                            <td style="border-color: black;"> # </td>
+                                            <td style="border-color: black;"> Product Name </td>
+                                            <td style="border-color: black;"> Customization </td>
+                                            <td style="border-color: black;"> Price </td>
+                                            <td style="border-color: black;">  Quantity </td>
+                                            <td style="border-color: black;"> Amount</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="border-color: black;">
                                         @php $index = 0; @endphp
                                         @forEach($basket as $key => $basket_item)
                                             @if($order->id == $basket_item->order_id)
                                                 
-                                                <tr>
-                                                    <td>{{++$index}}</td>
+                                                <tr style="border-color: black;">
+                                                    <td style="border-color: black;">{{++$index}}</td>
                                                     @if($basket_item->membership_id == NULL)
                                                         @forEach($products as $product)
                                                             @if($basket_item->item_id == $product->id)
-                                                                <td>
+                                                                <td style="border-color: black;">
                                                                     {{$product->item_name}}
                                                                     @if($product->has_variations == 1)
                                                                         @forEach ($variations as $variation)
@@ -251,7 +250,7 @@
                                                                     @endif
                                                                 </td>
 
-                                                                <td>
+                                                                <td style="border-color: black;">
                                                                     <div class="container">
                                                                         @if($basket_item->customize_id != NULL)
                                                                             @forEach($customizations as $custom)
@@ -278,17 +277,17 @@
                                                                 </td>
 
                                                                         @if($product->has_different_prices == 0)
-                                                                            <td>{{$product->price}} </td>
-                                                                            <td> {{$basket_item->quantity}} </td>
-                                                                            <td> {{$product->price * $basket_item->quantity }} </td>
+                                                                            <td style="border-color: black;">{{$product->price}} </td>
+                                                                            <td style="border-color: black;"> {{$basket_item->quantity}} </td>
+                                                                            <td style="border-color: black;"> {{$product->price * $basket_item->quantity }} </td>
                                                                         @else
                                                                             @forEach ($variation_category as $var_cat)
                                                                                 @forEach ($chosen_var as $variation)
                                                                                     @if($var_cat->id == $variation->variation_category_id  && $basket_item->item_id == $variation->item_id)
                                                                                         @if($var_cat->price_priority == 1)
-                                                                                            <td>{{$variation->price}} </td>
-                                                                                            <td> {{$basket_item->quantity}} </td>
-                                                                                            <td> {{$variation->price * $basket_item->quantity }} </td>
+                                                                                            <td style="border-color: black;">{{$variation->price}} </td>
+                                                                                            <td style="border-color: black;"> {{$basket_item->quantity}} </td>
+                                                                                            <td style="border-color: black;"> {{$variation->price * $basket_item->quantity }} </td>
                                                                                         @endif
                                                                                     @endif
                                                                                 @endforeach
@@ -299,15 +298,15 @@
                                                     @else  <!-- basket entry contains membership not product -->
                                                         @foreach($memberships as $membership)
                                                             @if($basket_item->membership_id == $membership->id)
-                                                                <td> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
-                                                                <td>
+                                                                <td style="border-color: black;"> {{$member_type[$membership->member_type_id - 1]->member_type_name}}</td>
+                                                                <td style="border-color: black;">
                                                                     @if($member_type[$membership->member_type_id - 1]->has_trainer == 1)
                                                                         Trainer:  {{$trainer->fname}}  {{$trainer->lname}}
                                                                     @endif
                                                                 </td>
-                                                                <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
-                                                                <td> 1 </td>
-                                                                <td> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
+                                                                <td style="border-color: black;"> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
+                                                                <td style="border-color: black;"> 1 </td>
+                                                                <td style="border-color: black;"> {{$member_type[$membership->member_type_id - 1]->member_type_price}} </td>
                                                             @endif
                                                         @endforeach
 
@@ -319,39 +318,38 @@
                                         
                                     </tbody>
 
-                                    <tbody>
-                                        <tr></tr>
-                                        <tr></tr>
-                                        <tr class="no-border">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td colspan="2"><b>Total Price:</b></td>
-                                            <td><b>&#8369 {{ number_format( $order->total_price , 2, '.', ',') }}</b></td>
+                                    <tbody style="border-color: black;">
+                                        <tr style="border-color: black;"></tr>
+                                        <tr style="border-color: black;"></tr>
+                                        <tr class="no-border" style="border-color: black;">
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td colspan="2" style="border-color: black;"><b>Total Price:</b></td>
+                                            <td style="border-color: black;"><b>&#8369 {{ number_format( $order->total_price , 2, '.', ',') }}</b></td>
                                         </tr>
-                                        <tr class="no-border">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td colspan="2"><b>Amount Received:</b></td>
-                                            <td><b>&#8369 {{ number_format( $order->amount_received , 2, '.', ',') }}</b></td>
+                                        <tr class="no-border" style="border-color: black;">
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td colspan="2" style="border-color: black;"><b>Amount Received:</b></td>
+                                            <td style="border-color: black;"><b>&#8369 {{ number_format( $order->amount_received , 2, '.', ',') }}</b></td>
                                         </tr>
-                                        <tr class="no-border">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td colspan="2"><b>Change:</b></td>
-                                            <td><b>&#8369 {{ number_format( $order->change, 2, '.', ',') }}</b></td>
+                                        <tr class="no-border" style="border-color: black;">
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td style="border-color: black;"></td>
+                                            <td colspan="2" style="border-color: black;"><b>Change:</b></td>
+                                            <td style="border-color: black;"><b>&#8369 {{ number_format( $order->change, 2, '.', ',') }}</b></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
                         </div>
                         @endforeach
                     </div>
                 </div>
-                <div class="ml-auto mr-0">
-                    {{ $orderss->links() }}
+                <div class="d-flex justify-content-end pagination">
+                    {{ $orderss->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

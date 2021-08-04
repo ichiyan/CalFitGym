@@ -69,12 +69,12 @@
   <script src=" {{ asset('vendor/venobox/venobox.min.js')}}"></script>
   <script src=" {{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
   <script src=" {{ asset('vendor/aos/aos.js') }}"></script>
-
   
 
   <!-- Template Main JS File -->
   <script src=" {{ asset('js/main.js') }} "></script>
-  
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
 </html>
