@@ -165,9 +165,12 @@ Route::get('/', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
 Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll']);
 
-
-Route::get('/cust_prof', function(){
-    return view('/customer_profile');
-});
+// Customer Routes
 Route::get('/cust_prof/{id}', [App\Http\Controllers\CustomerController::class, 'customerShow']);
+Route::get('/cust_edit/{id}', [App\Http\Controllers\CustomerController::class, 'customerEdit']);
+Route::get('/customer/cust_edit', function(){
+    return view('customer.cust_edit');
+});
+
+
 ?>

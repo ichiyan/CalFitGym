@@ -165,10 +165,28 @@ class CustomerController extends Controller
         $variation_category = DB::table('variation_categories')->get();
         
 
-         return view('/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
+         return view('/customer/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
                                                     'variation_category', 'memberships'));
         //return view('admin-coreUI.detailCustomer', compact('customer'));
+    }
+
+    public function customerEdit($id)
+    {
+        //
+        $customer = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.id', $id)
+                        ->first();
+
+        $trainer = DB::table('employees')
+                        ->join('people', 'employees.id', '=', 'people.id')
+                        ->where('employees.id', $customer->assigned_employee_id)
+                        ->first();
+
+
+         return view('/customer/cust_edit', compact('customer', 'trainer'));
+        //return view('admin-coreUI.editCustomerForm', compact('customer'));
     }
 
     public function showAll($filter)

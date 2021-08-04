@@ -30,7 +30,9 @@
 @section('hero')
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center" style="height: 300px;"></section><!-- End Hero -->
+<section id="hero" class="d-flex align-items-center" style="height: 300px;">
+    <img src="/storage/customers/{{$customer->photo}}" class="container-fluid" alt="Responsive image">
+</section><!-- End Hero -->
 
 @endsection
 
@@ -38,7 +40,7 @@
 <div id="main">
         <div class="row mx-4">
             <div class=" col-2 mr-4 " style="height: 256px; margin-top:-7%; ">
-                <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" data-holder-rendered="true">
+                <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
                 <h2>{{$customer->fname}} {{$customer->lname}}</h2>
             </div>
             
@@ -201,9 +203,9 @@
                         @php $count = 0; @endphp
                         @forEach($orderss as $order)
                         
-                            <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color: #C7C3D4; border-color:white; border-width: 4px;" >
+                            <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color: #2C2E43; border-color:white; border-width: 4px;" >
                                 <p class="mb-0">
-                                    <button class="btn" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}">
+                                    <button class="btn text-white" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" >
                                         {{ \Carbon\Carbon::parse($order->order_date)->format('M d, Y @ h:i A')}}
                                     </button>
                                 </p>
@@ -217,7 +219,7 @@
                             @endif
                            
                                 <table class="table table-bordered table-hover" width="100%" cellspacing="0" style="border-color: black;">
-                                    <thead class="table-dark" style="border-color: black;">
+                                    <thead class="font-weight-bold" style="border-color: black; background-color:#C7C3D4;">
                                         <tr style="border-color: black;">
                                             <td style="border-color: black;"> # </td>
                                             <td style="border-color: black;"> Product Name </td>
