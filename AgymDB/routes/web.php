@@ -166,8 +166,9 @@ Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::cl
 Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll']);
 
 // Customer Routes
-Route::get('/cust_prof/{id}', [App\Http\Controllers\CustomerController::class, 'customerShow']);
+Route::get('/cust_prof/{id}', [App\Http\Controllers\CustomerController::class, 'customerShow'])->name('customerProf');
 Route::get('/cust_edit/{id}', [App\Http\Controllers\CustomerController::class, 'customerEdit']);
+Route::put('/cust_edit/{id}/update', [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('custUpdate');
 Route::get('/customer/cust_edit', function(){
     return view('customer.cust_edit');
 });

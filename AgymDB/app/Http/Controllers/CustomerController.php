@@ -179,14 +179,43 @@ class CustomerController extends Controller
                         ->where('customers.id', $id)
                         ->first();
 
-        $trainer = DB::table('employees')
-                        ->join('people', 'employees.id', '=', 'people.id')
-                        ->where('employees.id', $customer->assigned_employee_id)
-                        ->first();
 
-
-         return view('/customer/cust_edit', compact('customer', 'trainer'));
+         return view('/customer/cust_edit', compact('customer'));
         //return view('admin-coreUI.editCustomerForm', compact('customer'));
+    }
+
+    public function customerUpdate($id, Request $request)
+    {
+
+
+        $customer = Customer::findOrFail($id);
+        $customer->height = $request->get('height');
+        $customer->weight = $request->get('weight');
+        $customer->save();
+
+        $person = Person::findOrFail($id);
+        $person->fname = $request->get('fname');
+        $person->lname = $request->get('lname');
+        $person->birthday = $request->get('birthday');
+        $person->street_address = $request->get('street_address');
+        $person->barangay = $request->get('barangay');
+        $person->city = $request->get('city');
+        $person->email_address = $request->get('email_address');
+        $person->phone_number = $request->get('phone_number');
+
+        if($request->hasFile('cust_image')){
+            $filenameWithExt = $request->file('cust_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cust_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('cust_image')->storeAs('public/customers', $fileNameToStore);
+            $person->photo = $fileNameToStore;
+        }
+
+
+        $person->save();
+
+        return redirect()->route('customerProf',[$id]);
     }
 
     public function showAll($filter)
