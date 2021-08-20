@@ -305,11 +305,11 @@
             <div class="row" data-aos="fade-up">
 
                 <div class="col-lg-12">
-                <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=California Fitness Gym MMXVIII Elizabeth's Happy Corner Remedio Compound, 826 Gov. M. Cuenco Ave, Nasipit Tambalan, Cebu City, 6000 Cebu  &amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+
                 </div>
 
             </div>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.8615178399277!2d123.91207731461861!3d10.352956092609762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a99936f59e9e45%3A0x3669c448503e4f10!2sCalifornia%20Fitness%20Gym%20MMXVIII!5e0!3m2!1sen!2shk!4v1629216468609!5m2!1sen!2shk" width="100%" height="384px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </section><!-- End Contact Section -->
 

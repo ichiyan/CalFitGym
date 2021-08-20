@@ -73,7 +73,7 @@
                     @foreach ($products as $product)
 
                         <div class="col-xl-4 col-lg-5 col-md-7 mb-5" style="display:flex; flex-wrap:wrap;">
-                            <div class="bg-white rounded shadow-sm"><img src="/storage/items/{{$product->item_pic}}" alt="" class="img-fluid card-img-top">
+                            <div class="bg-white rounded shadow-sm"><img src="{{ asset ('storage/items/'.$product->item_pic) }}" alt="" class="img-fluid card-img-top">
                                 <div class="p-4">
                                         @if ($product->is_customizable == 1)
                                             <center><span class="badge badge-pill badge-primary" style="display: inline;">Customizable</span>

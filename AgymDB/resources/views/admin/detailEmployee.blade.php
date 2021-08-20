@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="/storage/employees/{{$employee->photo}}" alt=""/>
+                            <img src="{{ asset('storage/employees/'.$employee->photo) }}" alt=""/>
                         </div>
                     </div>
                     <div class="col col-md-6 align-self-center">

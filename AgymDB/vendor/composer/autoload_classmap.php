@@ -50,7 +50,6 @@ return array(
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Variation' => $baseDir . '/app/Models/Variation.php',
     'App\\Models\\VariationCategory' => $baseDir . '/app/Models/VariationCategory.php',
-    'App\\Models\\basketVariations' => $baseDir . '/app/Models/basketVariations.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
