@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('pre_existing_conditions', 200)->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->default(NULL)->nullable();
-            $table->foreignId('member_type_id')->default(0)->constrained('member_types', 'id');
+            $table->foreignId('member_type_id')->default(NULL)->nullable()->constrained('member_types', 'id');
             // $table->integer('member_type_id')->unsigned();
             // $table->foreign('member_type_id')->references('id')->on('member_types');
             $table->foreignId('assigned_employee_id')->default(NULL)->nullable()->constrained('employees', 'id');

@@ -65,7 +65,7 @@ class CustomerController extends Controller
                                 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
-                                'photo'=>$fileNameToStore, 'user_id'=>0 ]);
+                                'photo'=>$fileNameToStore]);
         $person->save();
 
         $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
