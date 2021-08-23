@@ -21,7 +21,6 @@
             @endauth
 
         @endif
-
     </ul>
 </nav>
 

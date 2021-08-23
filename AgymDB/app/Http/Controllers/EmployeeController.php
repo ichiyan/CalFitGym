@@ -51,6 +51,13 @@ class EmployeeController extends Controller
         $today = Carbon::today();
         $now = Carbon::now();
 
+        $user = User::create([
+            'name' => $request->get('fname'),
+            'email' => $request->get('email_address'),
+            'password' => bcrypt('p@ssw0rd'),
+        ]);
+        $user->attachRole('employee');
+
         if($request->hasFile('emp_image')){
             $filenameWithExt = $request->file('emp_image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -68,7 +75,7 @@ class EmployeeController extends Controller
                                 'barangay'=>$request->get('barangay'), 'city'=>$request->get('city'), 'email_address'=>$request->get('email_address'),
                                 'phone_number'=>$request->get('phone_number'), 'emergency_contact_name'=>$request->get('emergency_contact_name'),
                                 'emergency_contact_number'=>$request->get('emergency_contact_number'), 'emergency_contact_relationship'=>$request->get('emergency_contact_relationship'),
-                                'photo'=>$fileNameToStore, 'user_id'=>0 ]);
+                                'photo'=>$fileNameToStore, 'user_id'=> null ]);
 
         $person->save();
 
@@ -83,6 +90,11 @@ class EmployeeController extends Controller
         $logger = DB::table('people')->where('user_id', $user_id)->first();
         $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger->id]);
         $init_log->save();
+
+        $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
+        $person = Person::where('email_address', $user->email)->first();
+        $person->user_id = $user->id;
+        $person->save();
 
         return redirect('/admin/employeeList/all/all');
     }

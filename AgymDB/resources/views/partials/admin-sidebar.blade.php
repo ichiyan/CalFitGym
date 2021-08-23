@@ -27,13 +27,15 @@
         Manage
     </div>
 
-    <!-- Nav Item - Employees -->
-    <li class="nav-item  @if (str_contains(url()->current(), 'admin/employeeList')) active @endif ">
-        <a class="nav-link collapsed" href="{{ url('/admin/employeeList/all/all') }}">
-            <i class="fas fa-fw fa-user-tie"></i>
-            <span>Employees</span>
-        </a>
-    </li>
+    @if (Auth::user()->hasRole('admin'))
+        <!-- Nav Item - Employees -->
+        <li class="nav-item  @if (str_contains(url()->current(), 'admin/employeeList')) active @endif ">
+            <a class="nav-link collapsed" href="{{ url('/admin/employeeList/all/all') }}">
+                <i class="fas fa-fw fa-user-tie"></i>
+                <span>Employees</span>
+            </a>
+        </li>
+    @endif
 
     <!-- Nav Item - Customers -->
     <li class="nav-item  @if (str_contains(url()->current(), 'admin/customerList')) active @endif  ">
