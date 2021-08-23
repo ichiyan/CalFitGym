@@ -153,11 +153,25 @@ class HomeController extends Controller
             $small_stock = Batch::where('amt_left_batch', '>', 0)
                             ->orderBy("item_id", "asc")
                             ->get();
+            
+            //FOR EMPLOYEE
+            $user_id = Auth::id();
+            $logger = DB::table('people')->where('user_id', $user_id)->first();
+
+            $employee = DB::table('employees')
+                        ->join('people', 'employees.id', '=', 'people.id')
+                        ->where('employees.id', '=', $logger->id)
+                        ->first();
+            $trainees = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.assigned_employee_id', $logger->id)
+                        ->get();
+            //END OF FOR EMPLOYEE
 
             return view('admin.dashboard', compact('day_earnings', 'monthly_earnings', 'annual_earnings',
                                                     'logged_customer', 'today', 'graph',
                                                     'data', 'near_expiry', 'member_type', 'log', 'batches', 'products',
-                                                    'small_stock'));
+                                                    'small_stock', 'employee', 'trainees'));
         }
     }
 }

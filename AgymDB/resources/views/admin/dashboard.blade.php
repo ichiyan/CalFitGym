@@ -103,6 +103,57 @@
         <!-- End of Content Row -->
 
          <!-- Content Row -->
+         <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Trainees</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                    @forEach($trainees as $trainee)
+                                    <tr>
+                                        <td>
+                                         @if($today->diffInDays($trainee->end_date, false) > 0)
+                                            @if($log[$value]->exit == NULL)
+                                                <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="log-btn login" data-toggle="tooltip" data-placement="top" title="click to logout"></span></a>
+                                            @else
+                                                <a href="/admin/log/{{$trainee->id}}/create"><span class="log-btn logout" data-toggle="tooltip" data-placement="top" title="click to login"></span></a>
+                                            @endif
+                                        @else
+                                            <span class="log-btn inactive" data-toggle="tooltip" data-placement="top" title="inactive"></span>
+                                        @endif   
+                                        </td>
+                                        
+                                        <td> {{$trainee->id}} </td>
+                                        <td> {{$trainee->fname}}   {{$trainee->lname}} </td>
+
+                                        <td>
+                                            <button class="btn btn-sm btn-danger"><a href="#" style="color: white">Add remark</a></button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End of Content Row -->
+
+        <!-- Content Row -->
 
          <div class="row">
 
