@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\User;
+
 class CreateUsersTable extends Migration
 {
     /**
@@ -29,38 +31,41 @@ class CreateUsersTable extends Migration
                 ['name' => 'Gabriela',
                 'email' => "admin@gmail.com",
                 'password' => bcrypt('p@ssw0rd'),
-                'user_type' => 'admin'],
+                ],
 
                 ['name' => 'Bona',
                 'email' => "bona@admin.com",
                 'password' => bcrypt('adminadmin'),
-                'user_type' => 'admin'],
-                
+                ],
+
                 ['name' => 'Anne',
                 'email' => "anne@gmail.com",
                 'password' => bcrypt('adminpass'),
-                'user_type' => 'admin']
+               ]
             )
         );
 
-        // DB::table('users')->insert(
-        //     array(
-        //         'name' => 'Gabriela',
-        //         'email' => "admin@gmail.com",
-        //         'password' => bcrypt('p@ssw0rd'),
-        //         'user_type' => 'admin'
-        //     )
-        // );
+        // $admin1 = User::create([
+        //     'name' => 'Bona',
+        //     'email' => "bona@admin.com",
+        //     'password' => bcrypt('adminadmin'),
+        // ]);
 
-        // DB::table('users')->insert(
-        //     array(
-        //         'name' => 'Anne',
-        //         'email' => "anne@gmail.com",
-        //         'password' => bcrypt('adminpass'),
-        //         'user_type' => 'admin'
-        //     )
-        // );
+        // $admin2 = User::create([
+        //     'name' => 'Gabriela',
+        //     'email' => "admin@gmail.com",
+        //     'password' => bcrypt('p@ssw0rd'),
+        // ]);
 
+        // $admin3 = User::create([
+        //     'name' => 'Anne',
+        //     'email' => "anne@gmail.com",
+        //     'password' => bcrypt('adminpass'),
+        // ]);
+
+        // $admin1->attachRole('admin');
+        // $admin2->attachRole('admin');
+        // $admin3->attachRole('admin');
     }
 
     /**

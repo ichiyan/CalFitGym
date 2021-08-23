@@ -188,6 +188,21 @@ class OrderController extends Controller
         $order->total_price = $order->total_price + ($membership_type->member_type_price * $new_basket->quantity);
         $order->save();
 
+        $mem_type = $request->get('membership_type_id');
+        if($mem_type == 2 ||  $mem_type == 3){
+            $user = User::create([
+                'name' => $customer->fname,
+                'email' => $customer->email_address,
+                'password' => bcrypt('p@ssw0rd'),
+            ]);
+            $user->attachRole('customer');
+
+            $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
+            $person = Person::where('email_address', $user->email)->first();
+            $person->user_id = $user->id;
+            $person->save();
+        }
+
         return redirect()->route('orderForm', [$customer->id]);
     }
 
