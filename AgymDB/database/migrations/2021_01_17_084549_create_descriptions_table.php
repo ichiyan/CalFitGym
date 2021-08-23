@@ -16,7 +16,7 @@ class CreateDescriptionsTable extends Migration
         Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
             $table->string('description', 500);
-            $table->foreignId('member_type_id');
+            $table->foreignId('member_type_id')->constrained('member_types', 'id');
         });
 
         DB::table('descriptions')->insert(

@@ -17,8 +17,8 @@ class CreateEntryLogsTable extends Migration
             $table->id();
             $table->dateTime('entry');
             $table->dateTime('exit')->nullable()->default(null);
-            $table->foreignId('person_id');
-            $table->foreignId('logger_id');
+            $table->foreignId('person_id')->constrained('people', 'id');
+            $table->foreignId('logger_id')->constrained('people', 'id');
         });
     }
 

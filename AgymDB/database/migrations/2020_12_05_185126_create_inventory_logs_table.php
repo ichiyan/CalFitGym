@@ -18,7 +18,7 @@ class CreateInventoryLogsTable extends Migration
             $table->dateTime('checking_date');
             $table->integer('amount_left');
             $table->integer('amount_sold');
-            $table->foreignId('item_id');
+            $table->foreignId('item_id')->constrained('items', 'id');
         });
     }
 

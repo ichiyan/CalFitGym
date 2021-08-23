@@ -18,8 +18,8 @@ class CreateVariationsTable extends Migration
             $table->string('name', 100);
             $table->integer('price')->nullable();
             $table->string('description', 500)->nullable();
-            $table->foreignId('item_id');
-            $table->foreignId('variation_category_id');
+            $table->foreignId('item_id')->constrained('items', 'id');
+            $table->foreignId('variation_category_id')->constrained('variation_categories', 'id');
         });
 
         DB::table('variations')->insert(

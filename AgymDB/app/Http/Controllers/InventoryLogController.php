@@ -88,15 +88,18 @@ class InventoryLogController extends Controller
         if($filter == 'all'){
             $batches = Batch::where('amt_left_batch', '>', 0)
                         ->orderBy("item_id", "asc")
+                        ->join('items', 'batches.item_id', 'items.id')
                         ->get();
         } else if ($filter == 1){
             $batches = Batch::where('amt_left_batch', '>', 0)
                         ->orderBy("item_id", "asc")
+                        ->join('items', 'batches.item_id', 'items.id')
                         ->where('category_id','<=', 2)
                         ->get();
         }else{
             $batches = Batch::where('amt_left_batch', '>', 0)
                         ->orderBy("item_id", "asc")
+                        ->join('items', 'batches.item_id', 'items.id')
                         ->where('category_id', $filter)
                         ->get();
         }

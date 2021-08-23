@@ -16,11 +16,11 @@ class CreateBasketsTable extends Migration
         Schema::create('baskets', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->foreignId('order_id');
-            $table->foreignId('item_id')->nullable();
-            $table->foreignId('batch_id')->nullable();
-            $table->foreignId('customize_id')->nullable();
-            $table->foreignId('membership_id')->nullable();
+            $table->foreignId('order_id')->constrained('orders', 'id');
+            $table->foreignId('item_id')->nullable()->constrained('items', 'id');
+            $table->foreignId('batch_id')->nullable()->constrained('batches', 'id');
+            $table->foreignId('customize_id')->nullable()->constrained('customizes', 'id');
+            $table->foreignId('membership_id')->nullable()->constrained('memberships', 'id');
         });
     }
 

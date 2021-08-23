@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
             $table->string('measurement', 200)->nullable();
             $table->string('weight_volume', 200)->nullable();
             $table->string('item_pic', 100);
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->constrained('categories', 'id');
         });
 
         DB::table('items')->insert(

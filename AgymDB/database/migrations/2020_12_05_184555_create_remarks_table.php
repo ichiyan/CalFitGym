@@ -17,8 +17,9 @@ class CreateRemarksTable extends Migration
             $table->id();
             $table->string('content', 500);
             $table->dateTime('remark_date');
-            $table->foreignId('employee_id');
-            $table->foreignId('customer_id');
+            $table->boolean('showToCustomer')->default(0);
+            $table->foreignId('employee_id')->constrained('people', 'id');
+            $table->foreignId('customer_id')->constrained('people', 'id');
         });
     }
 

@@ -20,8 +20,8 @@ class CreateBatchesTable extends Migration
             $table->dateTime('expiry_date')->nullable();
             $table->dateTime('date_received');
             //$table->dateTime('updated_at')->nullable();
-            $table->foreignId('item_id');
-            $table->foreignId('employee_id');
+            $table->foreignId('item_id')->constrained('items', 'id');
+            $table->foreignId('employee_id')->constrained('employees', 'id');
             $table->timestamps();
         });
     }

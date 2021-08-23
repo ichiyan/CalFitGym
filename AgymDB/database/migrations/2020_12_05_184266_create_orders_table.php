@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->integer('total_price');
             $table->integer('change');
             $table->dateTime('order_date');
-            $table->foreignId('customer_id');
-            $table->foreignId('employee_id');
+            $table->foreignId('customer_id')->constrained('customers', 'id');
+            $table->foreignId('employee_id')->constrained('employees', 'id');
         });
     }
 
