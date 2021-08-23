@@ -60,6 +60,9 @@
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     <div id="preloader"></div>
 
+    <!-- Logout Modal-->
+    @include('partials.logout-modal')
+
   <!-- Vendor JS Files -->
   <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src=" {{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -69,7 +72,7 @@
   <script src=" {{ asset('vendor/venobox/venobox.min.js')}}"></script>
   <script src=" {{ asset('vendor/owl.carousel/owl.carousel.min.js') }}"></script>
   <script src=" {{ asset('vendor/aos/aos.js') }}"></script>
-  
+
 
   <!-- Template Main JS File -->
   <script src=" {{ asset('js/main.js') }} "></script>

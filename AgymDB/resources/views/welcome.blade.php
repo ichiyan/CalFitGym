@@ -13,11 +13,11 @@
         <li><a href="/#contact">Contact</a></li>
         @if (Route::has('login'))
             @auth
-                <li><a href="{{ url('/home') }}">My Account</a></li>
-                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                <li><a href="{{ url('/dashboard') }}">My Account</a></li>
+                <li><a href="" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
             @else
             <li><a href="{{ route('login') }}">Log In</a></li>
-            <li><a href="{{ route('register') }}">Register</a></li><!-- Here for testing. Remove later -->
+            <li><a href="{{ url('/registration') }}">Register</a></li><!-- Here for testing. Remove later -->
             @endauth
 
         @endif

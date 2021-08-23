@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -55,17 +56,18 @@ use App\Models\User;
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//test registration
+Route::view('/registration', 'auth.register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])
+                ->middleware('guest');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome']);
-
-Route::get('/dashboard1', function(){
-    return view('admin-coreUI.dashboard');
+//direct to different pages according to user type after logging in
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'home']);
 });
 
-Route::get('/dashboard2', function(){
-    return view('admin.dashboard');
-});
+// Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'adminHome']);
+
 
 Route::view('/admin/employeeList', 'admin.employeeList');
 Route::view('/facility', 'facility');
@@ -73,7 +75,7 @@ Route::view('/admin-test/customerList', 'admin.customerList');
 
 
 /* test */
-Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');
+//Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin-dashboard')->middleware('is_admin');
 
 // Route::resource('/admin/employeeList/', EmployeeController::class);
 Route::get('/admin/employeeList/all/{stat}', [App\Http\Controllers\EmployeeController::class, 'showAll'])->name('employees');
@@ -94,17 +96,19 @@ Route::get('/new/form/customer', function(){
     return view('admin.newCustomerForm');
 });
 
-Route::get('/new/form', function(){ //after submitting the registration, this redirects it to the next form
-    $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
-    $person = Person::where('email_address', $user->email)->first();
-    $person->user_id = $user->id;
-    $person->save();
+Route::get('/new/form', function(){
+    //after submitting the registration, this redirects it to the next form
+    // $user = DB::table('users')->orderBy("id", "desc")->first(); //getting the newly added user
+    // $person = Person::where('email_address', $user->email)->first();
+    // $person->user_id = $user->id;
+    // $person->save();
 
-    if($user->user_type == 'customer'){
-        return redirect('/admin/customerList/all/all');
-    } else {
-        return redirect('/admin/employeeList/all/all');
-    }
+    // if($user->user_type == 'customer'){
+    //     return redirect('/admin/customerList/all/all');
+    // } else {
+    //     return redirect('/admin/employeeList/all/all');
+    // }
+    return redirect('/');
 });
 
 //Route::resource('/admin/customerList', CustomerController::class);

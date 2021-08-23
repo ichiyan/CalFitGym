@@ -14,7 +14,7 @@
         @if (Route::has('login'))
             @auth
                 <li><a href="{{ url('/home') }}">My Account</a></li>
-                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                <li><a href="" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
             @else
             <li><a href="{{ route('login') }}">Log In</a></li>
             <li><a href="{{ route('register') }}">Register</a></li><!-- Here for testing. Remove later -->
@@ -43,7 +43,7 @@
                 <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
                 <h2>{{$customer->fname}} {{$customer->lname}}</h2>
             </div>
-            
+
             <div class="card shadow col-9 my-4 ">
                 <div class="card-body py-4">
                     <div class="container user-profile">
@@ -152,7 +152,7 @@
                                             </div>
                                             @endif
                                         </div>
-        
+
                                         <div class="tab-pane fade" id="emergency-contact" role="tabpanel" aria-labelledby="profile-tab">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -180,7 +180,7 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="purchase-history" role="tabpanel" aria-labelledby="profile-tab">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                     <div class="card-body " id="accordion">
                         @php $count = 0; @endphp
                         @forEach($orderss as $order)
-                        
+
                             <div class="card-header" id="heading{{$order->id}}" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" style="background-color: #2C2E43; border-color:white; border-width: 4px;" >
                                 <p class="mb-0">
                                     <button class="btn text-white" data-toggle="collapse" data-target="#collapse{{$order->id}}" aria-expanded="true" aria-controls="collapse{{$order->id}}" >
@@ -217,7 +217,7 @@
                             @else
                                 <div id="collapse{{$order->id}}" class= "collapse p-4" aria-labelledby="heading{{$order->id}}" data-parent="#accordion" >
                             @endif
-                           
+
                                 <table class="table table-bordered table-hover" width="100%" cellspacing="0" style="border-color: black;">
                                     <thead class="font-weight-bold" style="border-color: black; background-color:#C7C3D4;">
                                         <tr style="border-color: black;">
@@ -233,7 +233,7 @@
                                         @php $index = 0; @endphp
                                         @forEach($basket as $key => $basket_item)
                                             @if($order->id == $basket_item->order_id)
-                                                
+
                                                 <tr style="border-color: black;">
                                                     <td style="border-color: black;">{{++$index}}</td>
                                                     @if($basket_item->membership_id == NULL)
@@ -317,7 +317,7 @@
                                                 </tr>
                                             @endif
                                         @endforeach
-                                        
+
                                     </tbody>
 
                                     <tbody style="border-color: black;">
@@ -354,7 +354,7 @@
                     {{ $orderss->links('pagination::bootstrap-4') }}
                 </div>
             </div>
-            
+
         </div>
 </main><!-- End #main -->
 
