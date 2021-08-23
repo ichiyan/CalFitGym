@@ -97,7 +97,7 @@ class HomeController extends Controller
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
                                                     'variation_category', 'memberships'));
 
-        }elseif(Auth::user()->hasRole('admin')){
+        }elseif(Auth::user()->hasRole(['admin', 'employee'])){
             $today = Carbon::today();
             $tomorrow = Carbon::tomorrow();
             $monthAgo = Carbon::today()->subMonth();
@@ -153,7 +153,7 @@ class HomeController extends Controller
             $small_stock = Batch::where('amt_left_batch', '>', 0)
                             ->orderBy("item_id", "asc")
                             ->get();
-            
+
             //FOR EMPLOYEE
             $user_id = Auth::id();
             $logger = DB::table('people')->where('user_id', $user_id)->first();

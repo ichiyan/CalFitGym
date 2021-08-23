@@ -3,9 +3,14 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
 use App\Models\Person;
+use App\Models\Employee;
+use App\Models\EntryLog;
 
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +35,22 @@ class DatabaseSeeder extends Seeder
                                 'emergency_contact_number'=> ' ', 'emergency_contact_relationship'=> ' ',
                                 'photo'=> 'default-profile.png', 'user_id'=> $admin->id ]);
             $person->save();
+
+            $person_id = DB::table('people')->orderBy("id", "desc")->first()->id;
+
+            $employee = new Employee(['id'=>$person_id, 'date_hired'=>'2021-08-08',
+                                    'date_separated'=>NULL, 'monthly_salary'=>'40000',
+                                    'no_of_trainees'=>0, 'person_id'=>$person_id ]);
+
+            $employee->save();
+
+            $user_id = 1;
+            $now = Carbon::now();
+
+            $logger = DB::table('people')->where('user_id', $user_id)->first();
+            $init_log = new EntryLog(['entry'=>$now, 'exit'=>$now, 'person_id'=>$person_id, 'logger_id'=>$logger->id]);
+            $init_log->save();
+
         }
     }
 }
