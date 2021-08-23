@@ -66,7 +66,7 @@ class EmployeeController extends Controller
             $path = $request->file('emp_image')->storeAs('public/employees', $fileNameToStore);
 
         }else{
-            $fileNameToStore = null;
+            $fileNameToStore = 'default-profile.png';
         }
 
 

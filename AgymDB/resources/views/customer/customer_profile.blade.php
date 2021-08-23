@@ -30,7 +30,11 @@
 
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center" style="height: 300px;">
-    <img src="/storage/customers/{{$customer->photo}}" class="container-fluid" alt="Responsive image">
+    @if ($customer->photo != 'default-profile.png')
+         <img src="/storage/customers/{{$customer->photo}}" class="container-fluid" alt="Responsive image">
+    @else
+        <img src="{{ asset('images/gym-guy.jpg') }}" class="container-fluid" alt="Responsive image">
+    @endif
 </section><!-- End Hero -->
 
 @endsection
@@ -80,8 +84,8 @@
                                 </div>
                             </div>
                             <div class="align-self-start">
-                                <button class="btn btn-outline-dark"><a href='/'>Home</a></button>
-                                <button class="btn btn-danger"><a href="/cust_edit/{{$customer->id}}" style="color: white">Edit</a></button>
+                                {{-- <button class="btn btn-outline-dark"><a href='/'>Home</a></button> --}}
+                                <button class="btn btn-primary"><a href="/cust_edit/{{$customer->id}}" style="color: white">Edit</a></button>
                             </div>
                         </div>
                             <div class="row justify-content-center p-4">

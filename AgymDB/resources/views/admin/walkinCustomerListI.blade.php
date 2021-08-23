@@ -19,7 +19,7 @@
         </div> -->
         <div class="btn-toolbar">
             <div class="btn-group mr-3">
-                <a href="/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer </a>
+                <a href="{{ route('newCustomer') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer </a>
             </div>
         </div>
     </div><!-- End of Page Heading  -->

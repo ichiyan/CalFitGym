@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('user_type', ['admin', 'employee', 'customer']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -44,28 +43,6 @@ class CreateUsersTable extends Migration
                ]
             )
         );
-
-        // $admin1 = User::create([
-        //     'name' => 'Bona',
-        //     'email' => "bona@admin.com",
-        //     'password' => bcrypt('adminadmin'),
-        // ]);
-
-        // $admin2 = User::create([
-        //     'name' => 'Gabriela',
-        //     'email' => "admin@gmail.com",
-        //     'password' => bcrypt('p@ssw0rd'),
-        // ]);
-
-        // $admin3 = User::create([
-        //     'name' => 'Anne',
-        //     'email' => "anne@gmail.com",
-        //     'password' => bcrypt('adminpass'),
-        // ]);
-
-        // $admin1->attachRole('admin');
-        // $admin2->attachRole('admin');
-        // $admin3->attachRole('admin');
     }
 
     /**

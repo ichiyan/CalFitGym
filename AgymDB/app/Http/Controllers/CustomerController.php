@@ -1,4 +1,4 @@
-<?php 
+<?php
     namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -56,7 +56,7 @@ class CustomerController extends Controller
             $path = $request->file('cust_image')->storeAs('public/customers', $fileNameToStore);
 
         }else{
-            $fileNameToStore = null;
+            $fileNameToStore = 'default-profile.png';
         }
 
         $person = new Person(['fname'=>$request->get('fname'), 'lname'=>$request->get('lname'),
@@ -130,7 +130,7 @@ class CustomerController extends Controller
     public function customerShow($id)
     {
         //
-        
+
         $customer = DB::table('customers')
                         ->join('people', 'customers.person_id', '=', 'people.id')
                         ->where('customers.id', $id)
@@ -140,15 +140,16 @@ class CustomerController extends Controller
                         ->orderBy('order_date', 'desc')
                         ->paginate(5);
 
-        
+
         $trainer = NULL;
         $member_type = DB::table('member_types')->get();
         $remaining_days = Carbon::now()->diffInDays(Carbon::parse($customer->end_date));
-        
+
         $remarks = DB::table('remarks')
                         ->where('customer_id', $id)
                         ->where('showToCustomer', 1)
                         ->get();
+
 
         if(Customer::whereId($customer->id)->exists()){
             $customer_details = Customer::findOrFail($customer->id);
@@ -161,17 +162,17 @@ class CustomerController extends Controller
             $customer_details = NULL;
         }
 
-        
+
 
             $basket = DB::table('baskets')->get();
             $memberships = DB::table('memberships')->get();
-        
+
         $products = DB::table('items')->get();
         $customizations = DB::table('customizes')->get();
         $variations = DB::table('variations')->get();
         $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
         $variation_category = DB::table('variation_categories')->get();
-        
+
 
          return view('/customer/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
