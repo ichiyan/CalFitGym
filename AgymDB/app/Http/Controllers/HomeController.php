@@ -92,10 +92,15 @@ class HomeController extends Controller
             $chosen_var = DB::table('variations')->join('basket_variation', 'variations.id', 'basket_variation.variation_id')->get();
             $variation_category = DB::table('variation_categories')->get();
 
+            $remarks = DB::table('remarks')
+                        ->where('customer_id', $customer->id)
+                        ->where('showToCustomer', 1)
+                        ->get();
+
 
             return view('/customer/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
-                                                    'variation_category', 'memberships'));
+                                                    'variation_category', 'memberships', 'remarks'));
 
         }elseif(Auth::user()->hasRole(['admin', 'employee'])){
             $today = Carbon::today();

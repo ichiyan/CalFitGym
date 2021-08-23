@@ -178,8 +178,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="purchase-history" role="tabpanel" aria-labelledby="profile-tab">
-
+                                        <div class="tab-pane fade" id="remarks" role="tabpanel" aria-labelledby="profile-tab">
+                                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th> # </th>
+                                                        <th> Date </th>
+                                                        <th> Content </th>
+                                                    </tr>
+                                                </thead>
+                                                @forEach($remarks as $remark)
+                                                <tr>
+                                                    <td> 1 </td>
+                                                    <td> {{$remark->remark_date}} </td>
+                                                    <td> {{$remark->content}} </td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

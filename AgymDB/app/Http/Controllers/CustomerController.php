@@ -118,8 +118,12 @@ class CustomerController extends Controller
 
         $member_type = DB::table('member_types')->where('member_types.id', $customer->member_type_id)->first();
 
+        $remarks = DB::table('remarks')
+                        ->where('customer_id', $id)
+                        ->where('showToCustomer', 1)
+                        ->get();
 
-         return view('admin.detailCustomer', compact('customer', 'trainer', 'member_type'));
+         return view('admin.detailCustomer', compact('customer', 'trainer', 'member_type', 'remarks'));
         //return view('admin-coreUI.detailCustomer', compact('customer'));
     }
 
@@ -141,6 +145,10 @@ class CustomerController extends Controller
         $member_type = DB::table('member_types')->get();
         $remaining_days = Carbon::now()->diffInDays(Carbon::parse($customer->end_date));
         
+        $remarks = DB::table('remarks')
+                        ->where('customer_id', $id)
+                        ->where('showToCustomer', 1)
+                        ->get();
 
         if(Customer::whereId($customer->id)->exists()){
             $customer_details = Customer::findOrFail($customer->id);
@@ -167,7 +175,7 @@ class CustomerController extends Controller
 
          return view('/customer/customer_profile', compact(  'customer', 'trainer', 'member_type','remaining_days','orderss','customer_details', 'employee_details',
                                                     'basket', 'products', 'trainer','customizations', 'variations', 'chosen_var',
-                                                    'variation_category', 'memberships'));
+                                                    'variation_category', 'memberships', 'remarks'));
         //return view('admin-coreUI.detailCustomer', compact('customer'));
     }
 

@@ -57,7 +57,7 @@
                         <div class=" form-group col-4">
                             <label>First Name:</label>
                             <select class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name="fname">
-                                <option>-- Last Name --</option>
+                                <option>-- First Name --</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->fname }}">{{ $customer->fname }}</option>
                                 @endforeach
@@ -67,7 +67,7 @@
                         <div class="form-group col-4">
                             <label>Last Name:</label>
                             <select class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name="lname">
-                            <option>-- First Name --</option>
+                            <option>-- Last Name --</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->lname }}">{{ $customer->lname }}</option>
                                 @endforeach
@@ -97,6 +97,7 @@
                             <select  id="select-product" onchange="getMaxQuantity()"  class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name='product_id' required>
                                 <option>-- Product --</option>
                                 @forEach ($products as $product)
+                                here
                                     @if($batches[$product->id] > 0)
                                         @if ($product->has_different_prices == 0)
                                             <option id="{{ $batches[$product->id] }}"  value='{{$product->id}}'> {{$product->item_name}} ( &#8369 {{ number_format( $product->price , 2, '.', ',') }} ) </option>
