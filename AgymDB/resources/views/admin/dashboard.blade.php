@@ -126,11 +126,11 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                        @forEach($trainees as $trainee)
+                                        @forEach($trainees as $value =>$trainee)
                                         <tr>
                                             <td>
                                             @if($today->diffInDays($trainee->end_date, false) > 0)
-                                                @if($log[$value]->exit == NULL)
+                                                @if($trainee_log[$value]->exit == NULL)
                                                     <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="log-btn login" data-toggle="tooltip" data-placement="top" title="click to logout"></span></a>
                                                 @else
                                                     <a href="/admin/log/{{$trainee->id}}/create"><span class="log-btn logout" data-toggle="tooltip" data-placement="top" title="click to login"></span></a>
