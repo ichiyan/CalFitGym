@@ -50,9 +50,41 @@ class ItemController extends Controller
     {
         //
         $date = Carbon::today();
-        
+        $category = 0;
+        $category = Category::findOrFail($request->get('category'))->id;
 
-        return redirect()->route('orderForm', [$customer->id]);
+        if($request->hasFile('prod_image')){
+            $filenameWithExt = $request->file('prod_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('prod_image')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('prod_image')->storeAs('public/items', $fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'default-profile.png'; //CHANGE TO DEFAULT PRODUCT PIC
+        }
+
+        $newItem = new Item (['item_name'=>$request->get('item_name'),
+                            'is_customizable'=>$request->get('customizable'),
+                            'has_variations'=>$request->get('variations'),
+                            'has_different_prices'=>$request->get('diff_prices'),
+                            'price'=>$request->get('price'),
+                            'description'=>$request->get('description'),
+                            'measurement'=>$request->get('measurement'),
+                            'weight_volume'=>$request->get('weight_volume'),
+                            'category_id'=>$category,
+                            'item_pic'=>$fileNameToStore,
+                            ]);
+        $newItem->save();
+
+        $itemID = DB::table('items')->orderBy("id", "desc")->first()->id;
+
+        if($request->get('variations') == 1){
+            return redirect()->route('productVarForm', [$itemID]);
+        }else{
+            return redirect()->route('allProducts');
+        }
+        
     }
 
     /**
@@ -68,11 +100,25 @@ class ItemController extends Controller
 
     public function form()
     {
+        $categories = DB::table('categories')->get();
+        return view('admin.newProductForm' , compact('categories'));
+    }
+
+    public function varForm($id)
+    {
+        $variation_categories = DB::table('variation_categories')->get();
+        $item = Item::findOrFail($id);
+        $variations = DB::table('variations')->get();
+        return view('admin.newProductVarForm' , compact('variation_categories', 'item', 'variations'));
+    }
+
+    public function var()
+    {
         $variations = DB::table('variations')->get();
         $variation_category = DB::table('variation_categories')->get();
         $categories = DB::table('categories')->get();
 
-        return view('admin.newProductForm' , compact('variations', 'variation_category', 'categories'));
+        return redirect()->route('allProducts');
     }
 
     /**

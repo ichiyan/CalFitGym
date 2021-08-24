@@ -18,7 +18,8 @@ class Item extends Model
         'has_different_prices',
         'price', 
         'description', 
-        'item_pic'
+        'item_pic', 
+        'category_id'
     ];
 
 }
