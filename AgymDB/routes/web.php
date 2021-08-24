@@ -148,6 +148,7 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'role:employee']]
 
 
 Route::group(['middleware' => ['auth', 'role:customer']], function(){
+    Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'changePass'])->name('changePassword');
     Route::get('/cust_prof/{id}', [App\Http\Controllers\CustomerController::class, 'customerShow'])->name('customerProf');
     Route::get('/cust_edit/{id}', [App\Http\Controllers\CustomerController::class, 'customerEdit']);
     Route::put('/cust_edit/{id}/update', [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('custUpdate');
