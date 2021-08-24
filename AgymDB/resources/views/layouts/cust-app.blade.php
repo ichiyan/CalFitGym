@@ -24,6 +24,9 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{asset('css/welcome_style.css')}}" rel="stylesheet">
         <link href="{{asset('css/index.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/dashboard_style.css') }}" rel="stylesheet">
+
+
 
 
 
@@ -79,5 +82,20 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profile-pic-preview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
+
     </body>
 </html>

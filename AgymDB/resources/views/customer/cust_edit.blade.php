@@ -8,12 +8,12 @@
         <li><a href="/#about">About</a></li>
         <li><a href="/#services">Services</a></li>
         <li><a href="/facility">Facility</a></li>
-        <li class="active" ><a href="/products/1">Products</a></li>
+        <li><a href="/products/1">Products</a></li>
         <li><a href="/#rates">Rates</a></li>
         <li><a href="/#contact">Contact</a></li>
         @if (Route::has('login'))
             @auth
-                <li><a href="{{ url('/home') }}">My Account</a></li>
+                <li class="active" ><a href="{{ url('/home') }}">My Account</a></li>
                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
             @else
             <li><a href="{{ route('login') }}">Log In</a></li>
@@ -51,16 +51,19 @@
                 {{csrf_field()}}
                 <input type='hidden' name='_method' value='PUT'>
                 <div>
+
                     <div class="row justify-content-center">
-                        <div class="col-md-4 align-items-center">
-                            <div class="col-12 mr-auto ml-2 center" >
-                                <img src="/storage/customers/{{$customer->photo}}" class="img-thumbnail  z-depth-2 mb-4" alt="Responsive image"/>
-                                <div class="file btn btn-sm">
-                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="loadFile(event)"/>                                    
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <img id="profile-pic-preview"  src="/storage/customers/{{$customer->photo}}" alt=""/>
+                                <div class="file btn btn-lg btn-primary">
+                                    Change Photo
+                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="readURL(this)"/>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <hr>
                     <div class="form-group-row"><div class="col-md-4 text-md-right record-heading">Customer Information</div></div>
                     <div class="form-group row">
@@ -98,9 +101,9 @@
                         </div>
                     </div>
 
-                    
 
-                  
+
+
                 </div>
                 <hr>
                 <div>
@@ -140,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr>
                 <div class="form-row justify-content-center">
                     <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Update'></div>

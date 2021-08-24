@@ -28,7 +28,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="/storage/customers/{{$customer->photo}}" alt=""/>
+                                <img id="profile-pic-preview" src="/storage/customers/{{$customer->photo}}" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
                                     <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="readURL(this)"/>
@@ -160,6 +160,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection
