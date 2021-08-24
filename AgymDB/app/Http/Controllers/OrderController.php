@@ -489,7 +489,9 @@ class OrderController extends Controller
                 $trainer->save();
             }
 
-            Membership::destroy($basket_item->membership_id);
+            $del_membership_id = $basket_item->membership_id;
+            Basket::destroy($id);
+            Membership::destroy($del_membership_id);
 
             //Reverting to previous values for member_type and trainer_id
             if(DB::table('memberships')->where('customer_id', $request->get('person_id'))->exists()){
@@ -512,8 +514,7 @@ class OrderController extends Controller
                 $customer_details->assigned_employee_id = NULL;
             }
         }
-        Basket::destroy($id);
-
+        
         return redirect()->route('orderForm', [$customer->id]);
     }
 
@@ -560,7 +561,9 @@ class OrderController extends Controller
                     $trainer->save();
                 }
 
-                Membership::destroy($basket_entry->membership_id);
+                $del_membership_id = $basket_entry->membership_id;
+                Basket::destroy($basket_entry->id);
+                Membership::destroy($del_membership_id);
 
                 //Reverting to previous values for member_type and trainer_id
                 if(DB::table('memberships')->where('customer_id', $request->get('person_id'))->exists()){
