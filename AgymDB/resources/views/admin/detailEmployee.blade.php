@@ -48,7 +48,9 @@
                     </div>
                     <div class="col col-md-2 align-self-start">
                         <button class="btn-rounded-light"><a href='{{ url()->previous() }}'>Back</a></button>
-                        <button class="btn btn-rounded-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
+                        @if (Auth::user()->hasRole('admin'))
+                            <button class="btn btn-rounded-primary"><a href="{{route('employeeEdit', $employee->id)}}" style="color: white">Edit</a></button>
+                        @endif
                     </div>
                 </div>
                     <div class="row justify-content-end">

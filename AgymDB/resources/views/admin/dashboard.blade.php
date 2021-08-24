@@ -16,7 +16,7 @@
                     <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="admin/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+                    <a href= " {{ route ('newCustomer') }} " class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
                 </div>
                 <div class="btn-group mr-3">
                     <a href="/admin/inventoryList/all" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
@@ -107,10 +107,10 @@
 
         <!-- Content Row -->
         <div class="row">
-            @if (Auth::user()->hasRole('employee'))
+            {{-- @if (Auth::user()->hasRole('employee')) --}}
 
                 <!-- Area Chart -->
-                <div class="col-xl-8 col-lg-7">
+                <div class="col-12">
                     <div class="card shadow mb-4">
                     <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Trainees</h6>
@@ -154,7 +154,7 @@
                     </div>
                 </div>
 
-            @elseif (Auth::user()->hasRole('admin'))
+            {{-- @elseif (Auth::user()->hasRole('admin')) --}}
 
                 <!-- Area Chart -->
                 <div class="col-xl-8 col-lg-7">
@@ -187,7 +187,7 @@
                     </div>
                 </div>
 
-            @endif
+            {{-- @endif --}}
 
              <!-- Pie Chart -->
              <div class="col-xl-4 col-lg-5">
@@ -257,7 +257,6 @@
                                         <th>Membership</th>
                                         <th>Expiry Date</th>
                                         <th>Days Left</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 @forEach($near_expiry as $value => $expiry)
@@ -290,9 +289,6 @@
 
                                         <td> {{$today->diffInDays($expiry->end_date, false)}} </td>
 
-                                        <td>
-                                            <button class="btn btn-sm btn-danger"><a href="#" style="color: white">Notify</a></button>
-                                        </td>
                                     </tr>
                                     @endif
                                 @endforeach

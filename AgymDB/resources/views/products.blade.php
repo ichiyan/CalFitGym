@@ -17,7 +17,7 @@
                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
             @else
             <li><a href="{{ route('login') }}">Log In</a></li>
-            <li><a href="{{ route('register') }}">Register</a></li><!-- Here for testing. Remove later -->
+            {{-- <li><a href="{{ route('register') }}">Register</a></li><!-- Here for testing. Remove later --> --}}
             @endauth
 
         @endif

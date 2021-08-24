@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin-order')
 
 @section('menu')
     @include('admin.adminmenu')
@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-header">
                             <form method='' action='/admin/order/find'>
-                                
+
                                 <label>Customer ID: <input type="text" name="id" ></label>
                                 <label>Customer First Name: <input type="text" name="fname" ></label>
                                 <label>Customer Last Name: <input type="text" name="lname" ></label>
@@ -80,7 +80,7 @@
                                                             @endif
                                                         @endif
                                                         </td>
-                                                        
+
                                                         <td>
                                                         <form method='post' action='/admin/order/{{$item->id}}/delete'>
                                                             {{csrf_field()}}
@@ -198,7 +198,7 @@
                                     <div class="col-md-4 col-form-label text-md-right"> Total Price:  </div>
                                     <div class="col-md-6 col-form-label text-md-right"> {{$total_price}} </div>
                             </div>
-                            <div class="form-group row"><form method='' action='/admin/order/pay' >
+                            <div class="form-group row"><form method='' action='{{ route('completeTransaction') }}' >
                                     <input type='hidden' name='person_id' value='{{$customer->id}}'>
                                     <input type='hidden' name='order_id' value='{{$order_id}}'>
                                     Amount Recieved: <input type='text' name='payment' required>
@@ -206,10 +206,10 @@
                             </form></div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </main>
-    </div>            
+    </div>
 </div>
 
 <script>

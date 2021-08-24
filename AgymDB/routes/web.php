@@ -123,7 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|employee
     Route::get('order/customize', [App\Http\Controllers\OrderController::class, 'customize']);
     Route::get('order/variation', [App\Http\Controllers\OrderController::class, 'variation']);
     Route::get('order/trainer', [App\Http\Controllers\OrderController::class, 'trainer']);
-    Route::get('order/pay', [App\Http\Controllers\OrderController::class, 'pay']);
+    Route::get('order/pay', [App\Http\Controllers\OrderController::class, 'pay'])->name('completeTransaction');
     Route::get('order/find', [App\Http\Controllers\OrderController::class, 'find']);
     Route::get('order/{id}/form', [App\Http\Controllers\OrderController::class, 'form'])->name('orderForm');
     Route::get('order/{id}/show', [App\Http\Controllers\OrderController::class, 'show'])->name('orderDetail');
@@ -140,6 +140,10 @@ Route::group(['middleware' => ['auth', 'role:admin|employee']], function(){
     Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll']);
     Route::get('/products/new/form', [App\Http\Controllers\ItemController::class, 'form'])->name('productForm');
     Route::get('/products/new/create', [App\Http\Controllers\ItemController::class, 'create']);
+});
+
+Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'role:employee']], function(){
+    Route::get('profile', [App\Http\Controllers\EmployeeController::class, 'showProfile'])->name('employeeProfile');
 });
 
 
