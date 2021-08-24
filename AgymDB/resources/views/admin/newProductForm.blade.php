@@ -112,7 +112,7 @@
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right"> Description: </label>
                         <div class="col-md-6">
-                            <input type='text' name='description'>
+                            <input type='text' name='description' required>
                         </div>
                     </div>
 
