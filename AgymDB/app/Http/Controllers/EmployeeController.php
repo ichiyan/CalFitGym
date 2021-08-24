@@ -132,6 +132,24 @@ class EmployeeController extends Controller
         //return view('admin-coreUI.detailEmployee', compact('employee'));
     }
 
+    public function showProfile()
+    {
+
+        $id = Person::where('user_id', Auth::user()->id)->pluck('id');
+
+        $employee = DB::table('employees')
+                        ->join('people', 'employees.id', '=', 'people.id')
+                        ->where('employees.id', '=', $id)
+                        ->first();
+        $trainees = DB::table('customers')
+                        ->join('people', 'customers.id', '=', 'people.id')
+                        ->where('customers.assigned_employee_id', $id)
+                        ->get();
+
+        return view('admin.detailEmployee', compact('employee', 'trainees'));
+        //return view('admin-coreUI.detailEmployee', compact('employee'));
+    }
+
 
     public function showAll($filter)
     {

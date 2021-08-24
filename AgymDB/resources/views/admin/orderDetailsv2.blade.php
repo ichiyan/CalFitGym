@@ -1,4 +1,4 @@
-@extends('layouts.admin-order')
+@extends('layouts.admin-app')
 
 @section('sidebar')
 

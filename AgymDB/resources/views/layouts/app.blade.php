@@ -31,6 +31,9 @@
             <main>
                 {{ $slot }}
             </main>
+
+            @include('partials.logout-modal')
+
         </div>
     </body>
 </html>

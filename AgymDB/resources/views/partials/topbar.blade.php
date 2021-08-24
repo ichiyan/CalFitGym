@@ -58,7 +58,8 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item"  @if ( Auth::user()->hasRole('admin') ) href="/admin/employee/{{Auth::user()->id}}/detail"
+                                        @elseif ( Auth::user()->hasRole('employee') ) href = "{{ route('employeeProfile') }}" @endif>
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>

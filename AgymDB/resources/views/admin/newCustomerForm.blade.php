@@ -31,7 +31,7 @@
                                 <img id="profile-pic-preview"  src="/storage/customers/default-profile.png" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="loadFile(event)"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="readURL(this)"/>
                                 </div>
                             </div>
                         </div>
@@ -156,5 +156,20 @@
     </div>
 </div>
 
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#profile-pic-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
 
 @endsection
+
+

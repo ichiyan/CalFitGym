@@ -31,7 +31,7 @@
                                 <img src="/storage/customers/{{$customer->photo}}" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="loadFile(event)"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="readURL(this)"/>
                                 </div>
                             </div>
                         </div>

@@ -17,7 +17,7 @@
                 <li><a href="" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
             @else
             <li><a href="{{ route('login') }}">Log In</a></li>
-            <li><a href="{{ url('/registration') }}">Register</a></li><!-- Here for testing. Remove later -->
+            {{-- <li><a href="{{ url('/registration') }}">Register</a></li><!-- Here for testing. Remove later --> --}}
             @endauth
 
         @endif

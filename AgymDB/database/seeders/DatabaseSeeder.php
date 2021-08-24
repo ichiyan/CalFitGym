@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
                                 'birthday'=> '2000-08-08', 'street_address'=> ' ',
                                 'barangay'=> ' ','city'=> ' ',
                                 'email_address'=>$admin->email,
-                                'phone_number'=> ' ', 'emergency_contact_name'=> ' ',
+                                'phone_number'=> '09345678910', 'emergency_contact_name'=> ' ',
                                 'emergency_contact_number'=> ' ', 'emergency_contact_relationship'=> ' ',
                                 'photo'=> 'default-profile.png', 'user_id'=> $admin->id ]);
             $person->save();

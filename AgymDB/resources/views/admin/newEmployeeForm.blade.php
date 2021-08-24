@@ -31,7 +31,7 @@
                                 <img id="profile-pic-preview"  src="/storage/employees/default-profile.png" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input id="profile-pic"  type="file" accept="image/*" name="emp_image" onchange="loadFile(event)"/>
+                                    <input id="profile-pic"  type="file" accept="image/*" name="emp_image" onchange="readURL(this)"/>
                                 </div>
                             </div>
                             {{-- <input type="file" class="form-control-file text" name="emp_image" required> --}}
@@ -142,13 +142,5 @@
         </div>
     </div>
 </div>
-
-<script>
-
-var loadFile = function(event) {
-    document.getElementById('profile-picture-preview').src = URL.createObjectURL(event.target.files[0]);
-};
-
-</script>
 
 @endsection
