@@ -76,9 +76,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#emergency-contact" role="tab" aria-controls="profile" aria-selected="false">Emergency Contact</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#remarks" role="tab" aria-controls="profile" aria-selected="false">Remarks</a>
-                                            </li>
+                                            
                                         </ul>
                                     @endif
                                 </div>
@@ -183,24 +181,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="remarks" role="tabpanel" aria-labelledby="profile-tab">
-                                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th> # </th>
-                                                        <th> Date </th>
-                                                        <th> Content </th>
-                                                    </tr>
-                                                </thead>
-                                                @forEach($remarks as $remark)
-                                                <tr>
-                                                    <td> 1 </td>
-                                                    <td> {{$remark->remark_date}} </td>
-                                                    <td> {{$remark->content}} </td>
-                                                </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -208,6 +189,56 @@
                 </div>
             </div>
 
+                <!-- Accordion Remarks -->
+                <div class=" col-2 mr-4 "></div>
+                <div class=" col-9 my-4" style="position: relative;">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
+                        </div>
+                    <div class="card-body " id="accordion">
+                        @php $count = 0; @endphp
+                        @forEach($remarks as $remark)
+
+                            <div class="card-header" id="heading{{$remark->id}}" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" style="background-color: #2C2E43; border-color:white; border-width: 4px;" >
+                                <p class="mb-0">
+                                    <button class="btn text-white" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" >
+                                        {{ \Carbon\Carbon::parse($remark->remark_date)->format('M d, Y @ h:i A')}}
+                                    </button>
+                                </p>
+                            </div>
+
+                            @if($count == 0)
+                                <div   div id="collapse{{$remark->id}}" class= "collapse  show p-4" aria-labelledby="heading{{$remark->id}}" data-parent="#accordion" >
+                                @php $count = 1; @endphp
+                            @else
+                                <div id="collapse{{$remark->id}}" class= "collapse p-4" aria-labelledby="heading{{$remark->id}}" data-parent="#accordion" >
+                            @endif
+                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th> Date </th>
+                                        <th> Content </th>
+                                    </tr>
+                                </thead>
+                                @forEach($remarks as $remark)
+                                    <tr>
+                                        <td> 1 </td>
+                                        <td> {{$remark->remark_date}} </td>
+                                        <td> {{$remark->content}} </td>
+                                    </tr>
+                                @endforeach
+                            
+                            </table>
+                        </div>
+                        @endforeach
+                        <div class="d-flex justify-content-end pagination">
+                            {{ $orderss->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div>
+                </div>
+                    </div>
             <!-- Purchase History -->
             <div class=" col-2 mr-4 ">
             </div>
@@ -217,6 +248,7 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Purchase History</h6>
                     </div>
+
                     <!-- Accordion -->
                     <div class="card-body " id="accordion">
                         @php $count = 0; @endphp
@@ -367,6 +399,7 @@
                                 </table>
                         </div>
                         @endforeach
+                    </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end pagination">

@@ -148,7 +148,7 @@ class CustomerController extends Controller
         $remarks = DB::table('remarks')
                         ->where('customer_id', $id)
                         ->where('showToCustomer', 1)
-                        ->get();
+                        ->paginate(5);
 
 
         if(Customer::whereId($customer->id)->exists()){
