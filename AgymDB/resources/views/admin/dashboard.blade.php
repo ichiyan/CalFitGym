@@ -16,7 +16,7 @@
                     <a href="/admin/order/new" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Order</a>
                 </div>
                 <div class="btn-group mr-3">
-                    <a href="/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
+                    <a href="admin/new/form/customer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Customer</a>
                 </div>
                 <div class="btn-group mr-3">
                     <a href="/admin/inventoryList/all" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product Batch</a>
@@ -126,11 +126,11 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                        @forEach($trainees as $trainee)
+                                        @forEach($trainees as $value =>$trainee)
                                         <tr>
                                             <td>
                                             @if($today->diffInDays($trainee->end_date, false) > 0)
-                                                @if($log[$value]->exit == NULL)
+                                                @if($trainee_log[$value]->exit == NULL)
                                                     <a href="/admin/log/{{$log[$value]->id}}/edit"><span class="log-btn login" data-toggle="tooltip" data-placement="top" title="click to logout"></span></a>
                                                 @else
                                                     <a href="/admin/log/{{$trainee->id}}/create"><span class="log-btn logout" data-toggle="tooltip" data-placement="top" title="click to login"></span></a>

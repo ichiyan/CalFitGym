@@ -171,12 +171,17 @@ class HomeController extends Controller
                         ->join('people', 'customers.id', '=', 'people.id')
                         ->where('customers.assigned_employee_id', $logger->id)
                         ->get();
+                        
+            $trainee_log = array();
+            foreach ($trainees as $key => $trainee) {
+                $trainee_log[$key] = DB::table('entry_logs')->orderBy('id', 'desc')->where('person_id', $trainee->id)->first();
+            }
             //END OF FOR EMPLOYEE
 
             return view('admin.dashboard', compact('day_earnings', 'monthly_earnings', 'annual_earnings',
                                                     'logged_customer', 'today', 'graph',
                                                     'data', 'near_expiry', 'member_type', 'log', 'batches', 'products',
-                                                    'small_stock', 'employee', 'trainees'));
+                                                    'small_stock', 'employee', 'trainees', 'trainee_log'));
         }
     }
 }

@@ -471,6 +471,8 @@ class OrderController extends Controller
             if($basket_item->customize_id != NULL){
                 Customize::destroy($basket_item->customize_id);
             }
+            Basket::destroy($basket_item->id);
+
         } else if($basket_item->membership_id != NULL){ //order contained a membership
             $membership = Membership::findOrFail($basket_item->membership_id);
             $mem_type = MemberType::findOrFail($membership->member_type_id);
@@ -490,7 +492,7 @@ class OrderController extends Controller
             }
 
             $del_membership_id = $basket_item->membership_id;
-            Basket::destroy($id);
+            Basket::destroy($basket_item->id);
             Membership::destroy($del_membership_id);
 
             //Reverting to previous values for member_type and trainer_id
@@ -546,6 +548,8 @@ class OrderController extends Controller
                 if($basket_entry->customize_id != NULL){
                     Customize::destroy($basket_entry->customize_id);
                 }
+                Basket::destroy($basket_entry->id);
+
             } else if($basket_entry->membership_id != NULL){ //order contained a membership
                 $membership = Membership::findOrFail($basket_entry->membership_id);
                 $mem_type = MemberType::findOrFail($membership->member_type_id);
@@ -587,7 +591,6 @@ class OrderController extends Controller
                     $customer_details->save();
                 }
             }
-            Basket::destroy($basket_entry->id);
         }
 
         //no basket entries for this order anymore

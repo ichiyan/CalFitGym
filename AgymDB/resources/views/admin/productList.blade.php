@@ -13,9 +13,14 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Product List</h1>
+        <!-- <div class="btn-toolbar">
+            <div class="btn-group mr-3">
+                <button href="{{ route('productForm') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product</button>
+            </div>
+        </div> -->
         <div class="btn-toolbar">
             <div class="btn-group mr-3">
-                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product</button>
+                <a href="{{ route('productForm') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> New Product </a>
             </div>
         </div>
     </div><!-- End of Page Heading  -->

@@ -9,11 +9,25 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
 
+use App\Models\Basket;
+use App\Models\Batch;
 use App\Models\Category;
+use App\Models\Customer;
+use App\Models\Customize;
+use App\Models\Description;
+use App\Models\Employee;
+use App\Models\EntryLog;
+use App\Models\Event;
+use App\Models\InventoryLog;
 use App\Models\Item;
+use App\Models\Membership;
+use App\Models\MemberType;
+use App\Models\Order;
+use App\Models\Person;
+use App\Models\Remark;
+use App\Models\User;
 use App\Models\Variation;
 use App\Models\VariationCategory;
-use App\Models\Batch;
 
 class ItemController extends Controller
 {
@@ -32,9 +46,13 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $date = Carbon::today();
+        
+
+        return redirect()->route('orderForm', [$customer->id]);
     }
 
     /**
@@ -46,6 +64,15 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function form()
+    {
+        $variations = DB::table('variations')->get();
+        $variation_category = DB::table('variation_categories')->get();
+        $categories = DB::table('categories')->get();
+
+        return view('admin.newProductForm' , compact('variations', 'variation_category', 'categories'));
     }
 
     /**
@@ -66,7 +93,6 @@ class ItemController extends Controller
         }
 
         $variations = DB::table('variations')->get();
-
 
         $variation_category = DB::table('variation_categories')->get();
 
