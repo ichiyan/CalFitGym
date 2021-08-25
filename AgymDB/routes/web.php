@@ -145,6 +145,7 @@ Route::group(['middleware' => ['auth', 'role:admin|employee']], function(){
     Route::get('/products/new/varForm/{id}', [App\Http\Controllers\ItemController::class, 'varForm'])->name('productVarForm');
     Route::post('/products/new/var', [App\Http\Controllers\ItemController::class, 'var'])->name('productVar');
     Route::post('/products/new/create', [App\Http\Controllers\ItemController::class, 'create']);
+    Route::post('/remark/new/create', [App\Http\Controllers\RemarkController::class, 'create'])->name('addRemark');
 });
 
 Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'role:employee']], function(){
