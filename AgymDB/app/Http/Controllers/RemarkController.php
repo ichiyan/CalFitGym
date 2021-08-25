@@ -52,6 +52,7 @@ class RemarkController extends Controller
         $remark = new Remark(['content'=>$request->get('content'), 
                                 'remark_date'=>$today, 
                                 'employee_id'=>$logger->id, 
+                                'showToCustomer'=>$request->get('showToCustomer'),
                                 'customer_id'=>$request->get('customer_id') ]);
         $remark->save();
         return redirect()->back();

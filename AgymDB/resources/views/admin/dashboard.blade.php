@@ -144,7 +144,7 @@
                                             <td> {{$trainee->fname}}   {{$trainee->lname}} </td>
 
                                             <td>
-                                                <button class="btn btn-sm btn-danger"><a href="#" style="color: white">Add remark</a></button>
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#addRemarkForm"><a href="#addRemarkForm" style="color: white"  >Add remark</a></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -153,6 +153,49 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Modal for Add Remarks --}}
+                <div class="modal fade" id="addRemarkForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               
+                
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Remarks</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/remark/new/create" method="post">
+                            @csrf
+                        <div class="modal-body mx-3">
+                            <div class="form-group md-form mb-5 ">
+                                <i class="fas fa-user prefix grey-text"></i>
+                            
+                                <label  label data-error="wrong" data-success="right" for="orangeForm-name">Remark</label>
+                                <input type="text" id="content" class="form-control validate" name="content">
+                            </div>
+
+                            <div class=" form-group md-form mb-4 ">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <label for="showToCustomer">Show to Trainee:</label>
+                                    <select class="form-group form-control" id="select-Product" name="showToCustomer" data-live-search="true" data-live-search-style="startsWith">
+                                        <option value = 1>YES</option>
+                                        <option value = 0>NO</option> 
+                                    </select>
+                            </div>
+                        
+
+                        </div>
+                        <input type="hidden" id="customer_id"  name="customer_id" value={{$trainee->id}}>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-primary">Add Remark</button>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+
 
             {{-- @elseif (Auth::user()->hasRole('admin')) --}}
 

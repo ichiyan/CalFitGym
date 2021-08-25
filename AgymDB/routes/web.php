@@ -179,4 +179,9 @@ Route::get('/admin/events/{id}/edit', [App\Http\Controllers\EventController::cla
 Route::put('/admin/events/{id}/update', [App\Http\Controllers\EventController::class, 'update']);
 Route::delete('/admin/events/{id}/delete', [App\Http\Controllers\EventController::class, 'destroy']);
 
+
+Route::group(['middleware' => ['auth', 'role:admin|employee']], function(){
+    Route::post('/remark/new/create', [App\Http\Controllers\RemarkController::class, 'create']);
+});
+
 ?>
