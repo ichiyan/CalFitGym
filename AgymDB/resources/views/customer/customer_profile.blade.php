@@ -31,7 +31,7 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center" style="height: 300px;">
     @if ($customer->photo != 'default-profile.png')
-         <img src="/storage/customers/{{$customer->photo}}" class="container-fluid" alt="Responsive image">
+         <img src="/storage/customers/{{$customer->photo}}" class="img-responsive" width="100%" alt="Responsive image">
     @else
         <img src="{{ asset('images/gym-guy.jpg') }}" class="container-fluid" alt="Responsive image">
     @endif
@@ -43,7 +43,7 @@
 <div id="main">
         <div class="row mx-4">
             <div class=" col-2 mr-4 " style="height: 256px; margin-top:-7%; ">
-                <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
+                <img class="rounded-circle z-depth-2 mb-4 img-responsive" width="100%" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
                 <h2>{{$customer->fname}} {{$customer->lname}}</h2>
                 <br>
                 <button class="btn btn-secondary"><a href="" data-toggle="modal" data-target="#changePassModal" style="color: white">Password Settings</a></button>
@@ -145,9 +145,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#emergency-contact" role="tab" aria-controls="profile" aria-selected="false">Emergency Contact</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#remarks" role="tab" aria-controls="profile" aria-selected="false">Remarks</a>
-                                            </li>
+                                            
                                         </ul>
                                     @endif
                                 </div>
@@ -251,24 +249,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="remarks" role="tabpanel" aria-labelledby="profile-tab">
-                                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th> # </th>
-                                                        <th> Date </th>
-                                                        <th> Content </th>
-                                                    </tr>
-                                                </thead>
-                                                @forEach($remarks as $remark)
-                                                <tr>
-                                                    <td> 1 </td>
-                                                    <td> {{$remark->remark_date}} </td>
-                                                    <td> {{$remark->content}} </td>
-                                                </tr>
-                                                @endforeach
-                                            </table>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -276,6 +257,55 @@
                 </div>
             </div>
 
+                <!-- Accordion Remarks -->
+                <div class=" col-2 mr-4 "></div>
+                <div class=" col-9 my-4" style="position: relative;">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" >Remarks</h6>
+                        </div>
+                    <div class="card-body " id="accordion">
+                        @php $count = 0; @endphp
+                        @forEach($remarks as $remark)
+
+                            <div class="card-header" id="heading{{$remark->id}}" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" style="background-color: #1B663E; border-color:white; border-width: 4px;" >
+                                <p class="mb-0">
+                                    <button class="btn text-white" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" >
+                                        {{ \Carbon\Carbon::parse($remark->remark_date)->format('M d, Y @ h:i A')}}
+                                    </button>
+                                </p>
+                            </div>
+
+                            @if($count == 0)
+                                <div   div id="collapse{{$remark->id}}" class= "collapse  show p-4" aria-labelledby="heading{{$remark->id}}" data-parent="#accordion" >
+                                @php $count = 1; @endphp
+                            @else
+                                <div id="collapse{{$remark->id}}" class= "collapse p-4" aria-labelledby="heading{{$remark->id}}" data-parent="#accordion" >
+                            @endif
+                            <table class="table table-bordered display" id="" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th> Date </th>
+                                        <th> Content </th>
+                                    </tr>
+                                </thead>
+                                @forEach($remarks as $remark)
+                                    <tr>
+                                        <td> 1 </td>
+                                        <td> {{$remark->remark_date}} </td>
+                                        <td> {{$remark->content}} </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                        @endforeach
+                        <div class="d-flex justify-content-end pagination">
+                            {{ $remarks->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div>
+                </div>
+                    </div>
             <!-- Purchase History -->
             <div class=" col-2 mr-4 ">
             </div>
@@ -285,6 +315,7 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Purchase History</h6>
                     </div>
+
                     <!-- Accordion -->
                     <div class="card-body " id="accordion">
                         @php $count = 0; @endphp
@@ -435,6 +466,7 @@
                                 </table>
                         </div>
                         @endforeach
+                    </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end pagination">
