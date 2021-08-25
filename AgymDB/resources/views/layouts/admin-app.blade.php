@@ -69,7 +69,6 @@
         <!-- End of Page Wrapper -->
     {{-- </div> --}}
 
-
     <!-- Logout Modal-->
      @include('partials.logout-modal')
 
