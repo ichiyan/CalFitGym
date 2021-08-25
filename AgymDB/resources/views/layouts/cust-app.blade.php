@@ -14,6 +14,8 @@
 
 
         <!-- Styles -->
+        
+
         <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
@@ -25,10 +27,6 @@
         <link href="{{asset('css/welcome_style.css')}}" rel="stylesheet">
         <link href="{{asset('css/index.css')}}" rel="stylesheet">
         <link href="{{ asset('css/dashboard_style.css') }}" rel="stylesheet">
-
-
-
-
 
     </head>
     <body>
@@ -63,8 +61,9 @@
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     <div id="preloader"></div>
 
-    <!-- Logout Modal-->
+    <!-- Modals -->
     @include('partials.logout-modal')
+    @include('partials.change-password-modal')
 
   <!-- Vendor JS Files -->
   <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -95,7 +94,17 @@
         }
     </script>
 
+    <script>
+     window.onload = function() {
+        document.getElementById('changePass').style.display = "none";
+        document.getElementById('spacer').style.display = "none";
+    }
 
+    function showChangePass(){
+        document.getElementById('changePass').style.display = "block";
+        document.getElementById('spacer').style.display = "block";
+    }
+    </script>
 
     </body>
 </html>

@@ -31,7 +31,7 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center" style="height: 300px;">
     @if ($customer->photo != 'default-profile.png')
-         <img src="/storage/customers/{{$customer->photo}}" class="container-fluid" alt="Responsive image">
+         <img src="/storage/customers/{{$customer->photo}}" class="img-responsive" width="100%" alt="Responsive image">
     @else
         <img src="{{ asset('images/gym-guy.jpg') }}" class="container-fluid" alt="Responsive image">
     @endif
@@ -43,8 +43,77 @@
 <div id="main">
         <div class="row mx-4">
             <div class=" col-2 mr-4 " style="height: 256px; margin-top:-7%; ">
-                <img class="rounded-circle z-depth-2 img-fluid mb-4" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
+                <img class="rounded-circle z-depth-2 mb-4 img-responsive" width="100%" alt="70x70" src="/storage/customers/{{$customer->photo}}" data-holder-rendered="true">
                 <h2>{{$customer->fname}} {{$customer->lname}}</h2>
+                <br>
+                <button class="btn btn-secondary"><a href="" data-toggle="modal" data-target="#changePassModal" style="color: white">Password Settings</a></button>
+                {{-- <button class="btn btn-secondary" onclick="showChangePass()"><a href="" style="color: white">Password Settings</a></button> --}}
+            </div>
+
+            <div id="changePass" class="card shadow col-9 my-4 ">
+                <div class="card-body py-4">
+                    <form action="{{route('changePassword')}}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                        @csrf
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3  card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <h4>Change Password</h4>
+                                        </h4>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group mt-3">
+                                                    <label for="current_password">Old password</label>
+                                                    <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" required
+                                                        placeholder="Enter current password">
+                                                    @error('current_password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mt-3">
+                                                    <label for="new_password ">new password</label>
+                                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required
+                                                        placeholder="Enter the new password">
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mt-3">
+                                                    <label for="confirm_password">confirm password</label>
+                                                    <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror"required placeholder="Enter same password">
+                                                    @error('confirm_password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-first mt-4 ml-2">
+                                                <button type="submit" class="btn btn-primary"
+                                                    id="formSubmit">change password</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div  id="spacer" class=" col-2 mr-4 ">
             </div>
 
             <div class="card shadow col-9 my-4 ">
@@ -84,7 +153,6 @@
                             <div class="align-self-start">
                                 {{-- <button class="btn btn-outline-dark"><a href='/'>Home</a></button> --}}
                                 <button class="btn btn-primary"><a href="/cust_edit/{{$customer->id}}" style="color: white">Edit</a></button>
-                                <button class="btn btn-warning"><a href="" style="color: white">Edit</a></button>
                             </div>
                         </div>
                             <div class="row justify-content-center p-4">
@@ -194,13 +262,13 @@
                 <div class=" col-9 my-4" style="position: relative;">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
+                            <h6 class="m-0 font-weight-bold text-primary" >Remarks</h6>
                         </div>
                     <div class="card-body " id="accordion">
                         @php $count = 0; @endphp
                         @forEach($remarks as $remark)
 
-                            <div class="card-header" id="heading{{$remark->id}}" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" style="background-color: #2C2E43; border-color:white; border-width: 4px;" >
+                            <div class="card-header" id="heading{{$remark->id}}" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" style="background-color: #1B663E; border-color:white; border-width: 4px;" >
                                 <p class="mb-0">
                                     <button class="btn text-white" data-toggle="collapse" data-target="#collapse{{$remark->id}}" aria-expanded="true" aria-controls="collapse{{$remark->id}}" >
                                         {{ \Carbon\Carbon::parse($remark->remark_date)->format('M d, Y @ h:i A')}}
@@ -229,12 +297,11 @@
                                         <td> {{$remark->content}} </td>
                                     </tr>
                                 @endforeach
-                            
                             </table>
                         </div>
                         @endforeach
                         <div class="d-flex justify-content-end pagination">
-                            {{ $orderss->links('pagination::bootstrap-4') }}
+                            {{ $remarks->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
@@ -406,9 +473,20 @@
                     {{ $orderss->links('pagination::bootstrap-4') }}
                 </div>
             </div>
-
         </div>
 </main><!-- End #main -->
+
+<script>
+    //  window.onload = function() {
+    //     document.getElementById('changePass').style.display = "none";
+    //     document.getElementById('spacer').style.display = "none";
+    // }
+
+    function showChangePass(){
+        // document.getElementById('changePass').style.display=="none"?"block":"none";
+        // document.getElementById('spacer').style.display = "block";
+    }
+</script>
 
 @endsection
 

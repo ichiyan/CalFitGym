@@ -59,6 +59,10 @@ Auth::routes();
 
 Route::view('/admin/employeeList', 'admin.employeeList');
 Route::view('/facility', 'facility');
+Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
+
+
+
 Route::get('/', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 
 
@@ -136,7 +140,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|employee
 
 
 Route::group(['middleware' => ['auth', 'role:admin|employee']], function(){
-    Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
+    // Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
     Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll'])->name('allProducts');
     Route::get('/products/new/form', [App\Http\Controllers\ItemController::class, 'form'])->name('productForm');
     Route::get('/products/new/varForm/{id}', [App\Http\Controllers\ItemController::class, 'varForm'])->name('productVarForm');
@@ -150,6 +154,7 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'role:employee']]
 
 
 Route::group(['middleware' => ['auth', 'role:customer']], function(){
+    Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'changePass'])->name('changePassword');
     Route::get('/cust_prof/{id}', [App\Http\Controllers\CustomerController::class, 'customerShow'])->name('customerProf');
     Route::get('/cust_edit/{id}', [App\Http\Controllers\CustomerController::class, 'customerEdit']);
     Route::put('/cust_edit/{id}/update', [App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('custUpdate');
