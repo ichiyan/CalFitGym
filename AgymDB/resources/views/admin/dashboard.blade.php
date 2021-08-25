@@ -147,17 +147,11 @@
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#addRemarkForm"><a href="#addRemarkForm" style="color: white"  >Add remark</a></button>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                {{-- Modal for Add Remarks --}}
+                                             {{-- Modal for Add Remarks --}}
                 <div class="modal fade" id="addRemarkForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-               
-                
+
+
                     <div class="modal-dialog" >
                         <div class="modal-content">
                         <div class="modal-header text-center">
@@ -171,7 +165,7 @@
                         <div class="modal-body mx-3">
                             <div class="form-group md-form mb-5 ">
                                 <i class="fas fa-user prefix grey-text"></i>
-                            
+
                                 <label  label data-error="wrong" data-success="right" for="orangeForm-name">Remark</label>
                                 <input type="text" id="content" class="form-control validate" name="content">
                             </div>
@@ -181,10 +175,10 @@
                                 <label for="showToCustomer">Show to Trainee:</label>
                                     <select class="form-group form-control" id="select-Product" name="showToCustomer" data-live-search="true" data-live-search-style="startsWith">
                                         <option value = 1>YES</option>
-                                        <option value = 0>NO</option> 
+                                        <option value = 0>NO</option>
                                     </select>
                             </div>
-                        
+
 
                         </div>
                         <input type="hidden" id="customer_id"  name="customer_id" value={{$trainee->id}}>
@@ -195,6 +189,16 @@
                     </div>
                 </form>
                 </div>
+
+
+                                        @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
 
             {{-- @elseif (Auth::user()->hasRole('admin')) --}}

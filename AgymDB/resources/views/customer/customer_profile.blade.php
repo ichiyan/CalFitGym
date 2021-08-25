@@ -145,7 +145,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#emergency-contact" role="tab" aria-controls="profile" aria-selected="false">Emergency Contact</a>
                                             </li>
-                                            
+
                                         </ul>
                                     @endif
                                 </div>
@@ -249,7 +249,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -300,9 +300,9 @@
                             </table>
                         </div>
                         @endforeach
-                        <div class="d-flex justify-content-end pagination">
+                        {{-- <div class="d-flex justify-content-end pagination">
                             {{ $remarks->links('pagination::bootstrap-4') }}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                     </div>
