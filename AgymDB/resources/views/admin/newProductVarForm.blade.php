@@ -19,7 +19,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Add Product Variations</h6>
         </div>
         <div class="card-body">
-            <form method='post' action='/products/new/var' enctype="multipart/form-data">
+            <form method='post' action='{{ route('productVar') }}' enctype="multipart/form-data">
                 @csrf
                 {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
@@ -37,7 +37,7 @@
                         <label class="col-md-6 col-form-label text-md-right">Item ID:</label>
                         <div class="col-md-6"> {{$item->price}} </div>
                     </div>
-                    
+
                     <hr>
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right">Category: </label>
@@ -102,11 +102,11 @@
                             <tr>
                                 <td> {{$var->id}} </td>
                                 <td> {{$var->name}} </td>
-                                <td> 
+                                <td>
                                     @if($var->price == NULL)
                                         same as product
                                     @else
-                                        {{$var->price}} 
+                                        {{$var->price}}
                                     @endif
                                 </td>
                                 <td> {{$var->description}} </td>

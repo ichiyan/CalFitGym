@@ -24,16 +24,26 @@
                 {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
                     <div class="row justify-content-center">
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="profile-img">
                                 <img id="profile-pic-preview"  src="/storage/customers/default-profile.png" alt=""/>
-                                <!-- CHANGE DEFAULT PHOTO OF PRODUCT -->
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
                                     <input id="profile-pic"  type="file" accept="image/*" name="prod_image" onchange="loadFile(event)"/>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img id="profile-pic-preview" src="/storage/items/default-item.png" alt=""/>
+                                    <div class="file btn btn-lg btn-primary">
+                                        Change Photo
+                                        <input id="profile-pic"  type="file" accept="image/*" name="cust_image" onchange="readURL(this)"/>
+                                    </div>
+                                </div>
+                            </div>
+
                     </div>
                     <hr>
                     <div class="form-group row">
