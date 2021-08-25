@@ -61,7 +61,7 @@ class ItemController extends Controller
             $path = $request->file('prod_image')->storeAs('public/items', $fileNameToStore);
 
         }else{
-            $fileNameToStore = 'default-profile.png'; //CHANGE TO DEFAULT PRODUCT PIC
+            $fileNameToStore = 'default-item.png';
         }
 
         $newItem = new Item (['item_name'=>$request->get('item_name'),
@@ -84,7 +84,7 @@ class ItemController extends Controller
         }else{
             return redirect()->route('allProducts');
         }
-        
+
     }
 
     /**

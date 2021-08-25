@@ -62,7 +62,6 @@ Route::view('/facility', 'facility');
 Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
 
 
-
 Route::get('/', [App\Http\Controllers\MemberTypeController::class, 'showAll']);
 
 

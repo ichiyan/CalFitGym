@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <td> # </td>
+                            {{-- <td>Image</td> --}}
                             <td> Name </td>
                             <td> Stock </td>
                             <td> Price </td>
@@ -45,8 +46,14 @@
                         @forEach($products as $key => $product)
                                 <tr>
                                     <td> {{$key+1}} </td>
-                                    <td> {{$product->item_name}}  </td>
-
+                                    <td>
+                                        @if($product->item_pic != "default-item.png")
+                                            <img src="/storage/items/{{$product->item_pic}}" alt="" style="width: 50px">
+                                        @else
+                                            <img src="/storage/items/default-item.png" alt="" style="width: 50px">
+                                        @endif
+                                        {{$product->item_name}}
+                                    </td>
                                     <td> {{$stock[$key]}} </td>
 
                                     <td>
