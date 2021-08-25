@@ -141,6 +141,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin|employee
 Route::group(['middleware' => ['auth', 'role:admin|employee']], function(){
     // Route::get('/products/{item_category}', [App\Http\Controllers\ItemController::class, 'show']);
     Route::get('/productsList/all', [App\Http\Controllers\ItemController::class, 'showAll'])->name('allProducts');
+    Route::post('/products/new/create', [App\Http\Controllers\ItemController::class, 'create']);
     Route::get('/products/new/form', [App\Http\Controllers\ItemController::class, 'form'])->name('productForm');
     Route::get('/products/new/varForm/{id}', [App\Http\Controllers\ItemController::class, 'varForm'])->name('productVarForm');
     Route::post('/products/new/var', [App\Http\Controllers\ItemController::class, 'var'])->name('productVar');

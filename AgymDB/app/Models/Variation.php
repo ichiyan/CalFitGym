@@ -12,7 +12,7 @@ class Variation extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'price', 'description', 'item_id'
+        'name', 'price', 'description', 'item_id', 'variation_category_id'
     ];
     
     public function chosenProduct(){
