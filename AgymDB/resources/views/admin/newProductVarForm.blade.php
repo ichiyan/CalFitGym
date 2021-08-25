@@ -19,7 +19,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Add Product Variations</h6>
         </div>
         <div class="card-body">
-            <form method='post' action='/products/new/var' enctype="multipart/form-data">
+            <form method='post' action="{{ route ('productVar') }}" enctype="multipart/form-data">
                 @csrf
                 {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
