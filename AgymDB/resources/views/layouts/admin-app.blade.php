@@ -69,10 +69,8 @@
         <!-- End of Page Wrapper -->
     {{-- </div> --}}
 
-
     <!-- Logout Modal-->
      @include('partials.logout-modal')
-     @include('partials.add-remark-modal')
 
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
