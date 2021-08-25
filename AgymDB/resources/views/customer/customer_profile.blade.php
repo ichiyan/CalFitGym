@@ -229,12 +229,11 @@
                                         <td> {{$remark->content}} </td>
                                     </tr>
                                 @endforeach
-                            
                             </table>
                         </div>
                         @endforeach
                         <div class="d-flex justify-content-end pagination">
-                            {{ $orderss->links('pagination::bootstrap-4') }}
+                            {{ $remark->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
