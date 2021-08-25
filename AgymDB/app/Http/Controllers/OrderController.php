@@ -189,7 +189,7 @@ class OrderController extends Controller
         $order->save();
 
         $mem_type = $request->get('membership_type_id');
-        if( $customer_details->member_type_id ==null && ($mem_type == 2 ||  $mem_type == 3)){
+        if( $customer_details->member_type_id == null && ($mem_type == 2 ||  $mem_type == 3)){
             $user = User::create([
                 'name' => $customer->fname,
                 'email' => $customer->email_address,

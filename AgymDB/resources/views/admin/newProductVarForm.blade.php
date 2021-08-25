@@ -23,19 +23,11 @@
                 @csrf
                 {{-- <input type='hidden' name='_method' value='PUT'> --}}
                 <div>
-                    <div class="form-group row">
-                        <label class="col-md-6 col-form-label text-md-right">Item ID:</label>
-                        <div class="col-md-6"> {{$item->id}} </div>
-                    </div>
 
                     <div class="form-group row">
-                        <label class="col-md-6 col-form-label text-md-right">Item Name:</label>
-                        <div class="col-md-6"> {{$item->item_name}} </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-md-6 col-form-label text-md-right">Item ID:</label>
-                        <div class="col-md-6"> {{$item->price}} </div>
+                        <div class="col-md-2 col-form-label text-md-right"> Item ID: {{$item->id}} </div>
+                        <div class="col-md-4 col-form-label text-md-right"> Item Name: {{$item->item_name}} </div>
+                        <div class="col-md-4 col-form-label text-md-right"> Item Price: {{$item->price}} </div>
                     </div>
 
                     <hr>
@@ -75,13 +67,15 @@
                     </div>
 
                 </div>
-
+                <hr>
                 <div class="form-row justify-content-center">
                     <input type='hidden' name='item_id' value='{{$item->id}}'>
                     <div class="col-md-2"><input type='submit' class="btn btn-rounded-primary" value='Add'></div>
                     <div class="col-md-2"><button class="btn btn-rounded-light"><a href="{{ route ('allProducts') }}">Cancel</a></button></div>
                 </div>
             </form>
+
+            <br><br><br>
 
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Existing Product Variations</h6>
