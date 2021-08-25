@@ -38,7 +38,7 @@
                     <hr>
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right">Category: </label>
-                        <div class="col-md-6">
+                        <div><!-- class="col-md-6" -->
                             <select  id="select-product" class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name='category' required>
                                     <option> -- </option>
                                     @forEach ($categories as $category)
@@ -64,7 +64,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right">Does it have variations? </label>
-                        <div class="col-md-6">
+                        <div><!-- class="col-md-6" -->
                             <select  id="select-product" class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name='variations' required>
                                     <option> -- </option>
                                     <option value=0> NO </option>
@@ -75,7 +75,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right">Does the variations have different prices? </label>
-                        <div class="col-md-6">
+                        <div><!-- class="col-md-6" -->
                             <select  id="select-product" class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name='diff_prices' required>
                                     <option> -- </option>
                                     <option value=0> NO </option>
@@ -86,7 +86,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-6 col-form-label text-md-right">Is the product customizable? </label>
-                        <div class="col-md-6">
+                        <div><!-- class="col-md-6" -->
                             <select  id="select-product" class="form-control selectpicker" data-live-search="true" data-live-search-style="startsWith" name='customizable' required>
                                     <option> -- </option>
                                     <option value=0> NO </option>

@@ -112,13 +112,27 @@ class ItemController extends Controller
         return view('admin.newProductVarForm' , compact('variation_categories', 'item', 'variations'));
     }
 
-    public function var()
+    public function var(Request $request)
     {
-        $variations = DB::table('variations')->get();
-        $variation_category = DB::table('variation_categories')->get();
-        $categories = DB::table('categories')->get();
+        $item = Item::findOrFail($request->get('item_id'));
+        $variation_categories_id = VariationCategory::findOrFail('variation_categories')->id;
 
-        return redirect()->route('allProducts');
+        if($item->has_different_prices == 1){
+            $price = $request->get('price');
+        }else{
+            $price = NULL;
+        }
+        
+
+        $newVar = new Variation ([ 'name'=>$request->get('var_name'),
+                                    'price'=>$price,
+                                    'description'=>$request->get('description'),
+                                    'item_id'=>$item->id,
+                                    'variation_category_id'=>$variation_categories_id,
+                                ]);
+        $newVar->save();
+
+        return redirect()->route('productVarForm', [$item->id]);
     }
 
     /**
