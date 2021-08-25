@@ -19,8 +19,8 @@ class ChangePasswordController extends Controller
 
         $request->validate([
             'current_password' => 'required',
-            'password' => 'required|same:confirm_password|min:6',
-            'confirm_password' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
         ]);
 
         if (!Hash::check($request->current_password, $userPassword)) {
