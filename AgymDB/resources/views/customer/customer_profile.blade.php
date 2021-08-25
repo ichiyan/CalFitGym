@@ -233,7 +233,7 @@
                         </div>
                         @endforeach
                         <div class="d-flex justify-content-end pagination">
-                            {{ $remark->links('pagination::bootstrap-4') }}
+                            {{ $remarks->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
