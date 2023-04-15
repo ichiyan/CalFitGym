@@ -36,43 +36,35 @@
     ```
     php artisan migrate
     ```
-9. Seed the database.
+10. Seed the database.
 
     ```
     php artisan db:seed
     ```
     
-10. Optional: Add dummy data found in ```root > DummyData``` to database. 
+11. Optional: Add dummy data found in ```root > DummyData``` to database. 
 
-11. Link storage.
+12. Link storage.
 
     ```
     php artisan storage:link
     ```
     
-12. Run the application. 
+13. Run the application. 
   
     ```
     php artisan serve
     ```
-    
+
+## Sample Login Credentials
+
+| | | 
+|:-------------------------:|:-------------------------:|
+| **email address** | **password** |
+| admin@gmail.com | p@ssw0rd |
+| anne@gmail.com  | adminpass |
+
 ## Screenshots
-
-<!-- <p float="left">
-<img src="https://user-images.githubusercontent.com/74673566/231273258-91e85e04-3eab-49e5-ab05-2622d279b075.png" height="1000"> 
-<img src="https://user-images.githubusercontent.com/74673566/231272376-94dde005-ad0f-40a4-b64f-d37a1fa2dce2.png" height="1000"> 
-<img src="https://user-images.githubusercontent.com/74673566/231272396-8c8ad4f9-62e4-4349-ad41-d1d38afefb80.png" height="1000"> 
-</p>
-
-<p float="left">
-<img src="https://user-images.githubusercontent.com/74673566/231272430-d94325bc-9c79-4d2e-a9dc-efcab4bbb917.png" height="400"> 
-</p>
-
-<p float="left">
-<img src="https://user-images.githubusercontent.com/74673566/231274586-2e8812c2-1133-42d3-b465-eeeaccba91fa.png" height="500"> 
-<img src="https://user-images.githubusercontent.com/74673566/231274756-446db4a7-634d-4ffb-9460-12b78ecf5fd2.png" height="500">
-<img src="https://user-images.githubusercontent.com/74673566/231274770-6f86f692-2ab4-4077-a406-9872b19a67b7.png" height="500">
-</p> -->
 
 | | | 
 |:-------------------------:|:-------------------------:|
